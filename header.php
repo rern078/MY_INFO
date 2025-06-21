@@ -96,19 +96,170 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
             border-radius: 2px;
       }
 
+      /* Hamburger Menu Styles */
+      .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            padding: 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+      }
+
+      .hamburger-menu:hover {
+            background: rgba(255, 255, 255, 0.2);
+      }
+
+      .hamburger-line {
+            width: 18px;
+            height: 2px;
+            background-color: white;
+            margin: 2.5px 0;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+      }
+
+      .hamburger-menu.active .hamburger-line:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+      }
+
+      .hamburger-menu.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+      }
+
+      .hamburger-menu.active .hamburger-line:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+      }
+
+      .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+      }
+
+      .mobile-nav.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+      }
+
+      .mobile-nav .btn {
+            margin: 15px 0;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 30px;
+            min-width: 250px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+      }
+
+      .mobile-nav .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      .mobile-nav .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+      }
+
+      .mobile-nav .btn:hover::before {
+            left: 100%;
+      }
+
+      .mobile-nav .btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+      }
+
+      .mobile-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+      }
+
+      .mobile-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+      }
+
+      .mobile-close::before,
+      .mobile-close::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+      }
+
+      .mobile-close::before {
+            transform: rotate(45deg);
+      }
+
+      .mobile-close::after {
+            transform: rotate(-45deg);
+      }
+
       @media (max-width: 768px) {
-            .user-header .row {
-                  text-align: center;
+            .nav-buttons {
+                  display: none;
             }
 
-            .user-header .col-md-6:last-child {
-                  margin-top: 10px;
+            .hamburger-menu {
+                  display: flex;
             }
 
-            .nav-buttons .btn {
-                  display: block;
-                  width: 100%;
-                  margin: 5px 0;
+            .mobile-nav {
+                  display: none;
+            }
+
+            .mobile-nav.active {
+                  display: flex;
+            }
+      }
+
+      @media (min-width: 769px) {
+            .hamburger-menu {
+                  display: none;
+            }
+
+            .mobile-nav {
+                  display: none !important;
             }
       }
 </style>
@@ -117,8 +268,8 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
 <?php if ($isLoggedIn): ?>
       <div class="user-header bg-primary text-white py-3 mb-4">
             <div class="container">
-                  <div class="row align-items-center">
-                        <div class="col-md-6">
+                  <div class="row align-items-center justify-content-between">
+                        <div class="col-auto">
                               <div class="d-flex align-items-center">
                                     <i class="fas fa-user-circle me-3 fs-3"></i>
                                     <div>
@@ -127,8 +278,14 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
                                     </div>
                               </div>
                         </div>
-                        <div class="col-md-6 text-end">
+                        <div class="col-auto">
                               <div class="d-flex justify-content-end align-items-center">
+                                    <!-- Hamburger Menu for Mobile -->
+                                    <div class="hamburger-menu me-3" id="hamburgerMenu">
+                                          <div class="hamburger-line"></div>
+                                          <div class="hamburger-line"></div>
+                                          <div class="hamburger-line"></div>
+                                    </div>
                                     <a href="?logout=1" class="btn btn-outline-light btn-sm">
                                           <i class="fas fa-sign-out-alt me-1"></i>Logout
                                     </a>
@@ -138,7 +295,33 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
             </div>
       </div>
 
-      <!-- Navigation for logged in users -->
+      <!-- Mobile Navigation Menu -->
+      <div class="mobile-nav" id="mobileNav">
+            <div class="mobile-close" id="mobileClose"></div>
+            <a href="index.php" class="btn <?php echo ($current_page === 'index') ? 'active' : 'btn-outline-primary'; ?>">
+                  <i class="fas fa-file-alt me-2"></i>View SR1
+            </a>
+            <a href="cover-letter.php" class="btn <?php echo ($current_page === 'cover-letter') ? 'active' : 'btn-outline-primary'; ?>">
+                  <i class="fas fa-envelope me-2"></i>View SR2
+            </a>
+            <a href="certificates.php" class="btn <?php echo ($current_page === 'certificates') ? 'active' : 'btn-outline-success'; ?>">
+                  <i class="fas fa-certificate me-2"></i>View Certificates
+            </a>
+            <a href="generate_pdf.php?type=cv" class="btn btn-outline-success">
+                  <i class="fas fa-download me-2"></i>Download PDF
+            </a>
+            <?php if ($username === 'chamrern'): ?>
+                  <a href="admin.php" class="btn <?php echo ($current_page === 'admin') ? 'active' : 'btn-outline-primary'; ?>">
+                        <i class="fas fa-cog me-2"></i>Admin Panel
+                  </a>
+            <?php else: ?>
+                  <a href="user_dashboard.php" class="btn <?php echo ($current_page === 'user_dashboard') ? 'active' : 'btn-outline-primary'; ?>">
+                        <i class="fas fa-user me-2"></i>Dashboard
+                  </a>
+            <?php endif; ?>
+      </div>
+
+      <!-- Desktop Navigation for logged in users -->
       <div class="container mb-4">
             <div class="nav-buttons text-center">
                   <a href="index.php" class="btn <?php echo ($current_page === 'index') ? 'active' : 'btn-outline-primary'; ?>">
@@ -177,3 +360,49 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
             </div>
       </div>
 <?php endif; ?>
+
+<script>
+      document.addEventListener('DOMContentLoaded', function() {
+            const hamburgerMenu = document.getElementById('hamburgerMenu');
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileClose = document.getElementById('mobileClose');
+
+            if (hamburgerMenu && mobileNav && mobileClose) {
+                  // Open mobile menu
+                  hamburgerMenu.addEventListener('click', function() {
+                        hamburgerMenu.classList.add('active');
+                        mobileNav.classList.add('active');
+                        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                  });
+
+                  // Close mobile menu
+                  function closeMobileMenu() {
+                        hamburgerMenu.classList.remove('active');
+                        mobileNav.classList.remove('active');
+                        document.body.style.overflow = ''; // Restore scrolling
+                  }
+
+                  mobileClose.addEventListener('click', closeMobileMenu);
+
+                  // Close menu when clicking on a link
+                  const mobileNavLinks = mobileNav.querySelectorAll('a');
+                  mobileNavLinks.forEach(link => {
+                        link.addEventListener('click', closeMobileMenu);
+                  });
+
+                  // Close menu when clicking outside
+                  mobileNav.addEventListener('click', function(e) {
+                        if (e.target === mobileNav) {
+                              closeMobileMenu();
+                        }
+                  });
+
+                  // Close menu on escape key
+                  document.addEventListener('keydown', function(e) {
+                        if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+                              closeMobileMenu();
+                        }
+                  });
+            }
+      });
+</script>
