@@ -1,16 +1,16 @@
 <?php
 // Database configuration
 // Local development settings (commented out for live server)
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'cv_portfolio');
+// define('DB_SERVER', 'localhost');
+// define('DB_USERNAME', 'root');
+// define('DB_PASSWORD', '');
+// define('DB_NAME', 'cv_portfolio');
 
 // Live server settings (InfinityFree)
-// define('DB_SERVER', 'sql107.infinityfree.com');
-// define('DB_USERNAME', 'if0_39279429');
-// define('DB_PASSWORD', 'o0yt6R9MGyCh');
-// define('DB_NAME', 'if0_39279429_cv_portfolio');
+define('DB_SERVER', 'sql107.infinityfree.com');
+define('DB_USERNAME', 'if0_39279429');
+define('DB_PASSWORD', 'o0yt6R9MGyCh');
+define('DB_NAME', 'if0_39279429_cv_portfolio');
 
 
 // Enable error logging
