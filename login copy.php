@@ -2,28 +2,21 @@
 session_start();
 require_once 'config.php';
 
-// Variables to store saved credentials
-$saved_username = '';
-$saved_password = '';
-$remember_checked = false;
-
 // Check for remember me cookie
 if (!isset($_SESSION['user_id']) && isset($_COOKIE['remember_user'])) {
       $cookie_data = json_decode($_COOKIE['remember_user'], true);
       if ($cookie_data && isset($cookie_data['username']) && isset($cookie_data['password'])) {
-            $saved_username = sanitize_input($cookie_data['username']);
-            $saved_password = $cookie_data['password'];
-            $remember_checked = true;
+            $username = sanitize_input($cookie_data['username']);
+            $password = $cookie_data['password'];
 
-            // Auto-login if credentials are valid
             $sql = "SELECT id, username, password FROM users WHERE username = ?";
             $stmt = mysqli_prepare($conn, $sql);
-            mysqli_stmt_bind_param($stmt, "s", $saved_username);
+            mysqli_stmt_bind_param($stmt, "s", $username);
             mysqli_stmt_execute($stmt);
             $result = mysqli_stmt_get_result($stmt);
 
             if ($user = mysqli_fetch_assoc($result)) {
-                  if (password_verify($saved_password, $user['password'])) {
+                  if (password_verify($password, $user['password'])) {
                         $_SESSION['user_id'] = $user['id'];
                         $_SESSION['username'] = $user['username'];
 
@@ -79,11 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
       }
       $error = "Invalid username or password";
-
-      // If login failed, preserve the entered values
-      $saved_username = $username;
-      $saved_password = $password;
-      $remember_checked = $remember_me;
 }
 ?>
 
@@ -138,6 +126,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body class="bg-light">
+      <?php include 'header.php'; ?>
+
       <div class="container py-5">
             <div class="row justify-content-center">
                   <div class="col-md-6 col-lg-4">
@@ -152,16 +142,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <form method="POST" action="">
                                           <div class="mb-3">
                                                 <label class="form-label">Username</label>
-                                                <input type="text" class="form-control" name="username" value="<?php echo htmlspecialchars($saved_username); ?>" required>
+                                                <input type="text" class="form-control" name="username" required>
                                           </div>
                                           <div class="mb-3">
                                                 <label class="form-label">Password</label>
-                                                <input type="password" class="form-control" name="password" value="<?php echo htmlspecialchars($saved_password); ?>" required>
+                                                <input type="password" class="form-control" name="password" required>
                                           </div>
 
                                           <div class="remember-me-container">
                                                 <div class="form-check">
-                                                      <input class="form-check-input" type="checkbox" name="remember_me" id="rememberMe" <?php echo $remember_checked ? 'checked' : ''; ?>>
+                                                      <input class="form-check-input" type="checkbox" name="remember_me" id="rememberMe">
                                                       <label class="form-check-label" for="rememberMe">
                                                             <i class="fas fa-user-check me-1"></i>
                                                             Remember Me

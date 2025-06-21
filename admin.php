@@ -668,29 +668,12 @@ if (empty($courses)) {
 </head>
 
 <body class="bg-light">
+      <?php include 'header.php'; ?>
+
       <div class="container">
             <div class="row justify-content-center">
                   <div class="col-lg-12">
                         <h1 class="text-center mb-4">School Management</h1>
-
-                        <!-- Navigation -->
-                        <div class="nav-buttons text-center mb-4">
-                              <a href="index.php" class="btn btn-outline-primary">
-                                    <i class="fas fa-file-alt me-2"></i>View SR1
-                              </a>
-                              <a href="cover-letter.php" class="btn btn-outline-primary">
-                                    <i class="fas fa-envelope me-2"></i>View SR2
-                              </a>
-                              <a href="certificates.php" class="btn btn-outline-success">
-                                    <i class="fas fa-certificate me-2"></i>View Certificates
-                              </a>
-                              <a href="admin.php" class="btn btn-primary">
-                                    <i class="fas fa-cog me-2"></i>Admin Panel
-                              </a>
-                              <a href="?logout=1" class="btn btn-outline-danger">
-                                    <i class="fas fa-sign-out-alt me-2"></i>Logout
-                              </a>
-                        </div>
 
                         <!-- Alert Messages -->
                         <?php if (!empty($success_message)): ?>

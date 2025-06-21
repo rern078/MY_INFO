@@ -59,37 +59,11 @@ $hasData = $personalInfo && $companyInfo && $coverLetter;
 </head>
 
 <body class="bg-light">
+      <?php include 'header.php'; ?>
+
       <div class="container">
             <div class="row justify-content-center">
                   <div class="col-lg-12">
-                        <!-- Navigation -->
-                        <div class="nav-buttons text-center">
-                              <a href="index.php" class="btn btn-outline-primary">
-                                    <i class="fas fa-file-alt me-2"></i>View SR1
-                              </a>
-                              <a href="cover-letter.php" class="btn btn-primary">
-                                    <i class="fas fa-envelope me-2"></i>View SR2
-                              </a>
-                              <a href="certificates.php" class="btn btn-outline-success">
-                                    <i class="fas fa-certificate me-2"></i>View Certificates
-                              </a>
-                              <a href="generate_pdf.php?type=cover-letter" class="btn btn-outline-success">
-                                    <i class="fas fa-download me-2"></i>Download PDF
-                              </a>
-                              <?php if ($_SESSION['username'] === 'chamrern'): ?>
-                                    <a href="admin.php" class="btn btn-outline-primary">
-                                          <i class="fas fa-cog me-2"></i>Admin Panel
-                                    </a>
-                              <?php else: ?>
-                                    <a href="user_dashboard.php" class="btn btn-outline-primary">
-                                          <i class="fas fa-user me-2"></i>Dashboard
-                                    </a>
-                              <?php endif; ?>
-                              <a href="?logout=1" class="btn btn-outline-danger">
-                                    <i class="fas fa-sign-out-alt me-2"></i>Logout
-                              </a>
-                        </div>
-
                         <?php if (!$hasData): ?>
                               <div class="alert alert-warning mt-4">
                                     <i class="fas fa-exclamation-triangle me-2"></i>

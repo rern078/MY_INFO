@@ -418,34 +418,9 @@ while ($row = mysqli_fetch_assoc($certificates_result)) {
 </head>
 
 <body class="bg-light">
+      <?php include 'header.php'; ?>
+
       <div class="container">
-            <!-- Navigation -->
-            <div class="nav-buttons">
-                  <a href="index.php" class="btn btn-outline-primary me-2 mb-2">
-                        <i class="fas fa-file-alt me-2"></i>View SR1
-                  </a>
-                  <a href="cover-letter.php" class="btn btn-outline-primary me-2 mb-2">
-                        <i class="fas fa-envelope me-2"></i>View SR2
-                  </a>
-                  <a href="certificates.php" class="btn btn-success me-2 mb-2">
-                        <i class="fas fa-certificate me-2"></i>View Certificates
-                  </a>
-                  <a href="generate_pdf.php?type=cv" class="btn btn-outline-success me-2 mb-2">
-                        <i class="fas fa-download me-2"></i>Download PDF
-                  </a>
-                  <?php if (isset($_SESSION['username']) && $_SESSION['username'] === 'chamrern'): ?>
-                        <a href="admin.php" class="btn btn-outline-primary ms-2 mb-2">
-                              <i class="fas fa-cog me-2"></i>Admin Panel
-                        </a>
-                  <?php else: ?>
-                        <a href="user_dashboard.php" class="btn btn-outline-primary ms-2 mb-2">
-                              <i class="fas fa-user me-2"></i>Dashboard
-                        </a>
-                  <?php endif; ?>
-                  <a href="?logout=1" class="btn btn-outline-danger ms-2 mb-2">
-                        <i class="fas fa-sign-out-alt me-2"></i>Logout
-                  </a>
-            </div>
             <div class="row justify-content-center">
                   <div class="col-lg-12">
                         <div class="card shadow-sm">

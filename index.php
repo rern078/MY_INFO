@@ -179,47 +179,9 @@ $hasData = $personalInfo;
 </head>
 
 <body>
-      <div class="container">
-            <?php if ($isLoggedIn): ?>
-                  <!-- Navigation Buttons -->
-                  <div class="nav-buttons">
-                        <a href="index.php" class="btn btn-primary">
-                              <i class="fas fa-file-alt me-2"></i>View SR1
-                        </a>
-                        <a href="cover-letter.php" class="btn btn-outline-primary">
-                              <i class="fas fa-envelope me-2"></i>View SR2
-                        </a>
-                        <a href="certificates.php" class="btn btn-outline-success">
-                              <i class="fas fa-certificate me-2"></i>View Certificates
-                        </a>
-                        <a href="generate_pdf.php?type=cv" class="btn btn-outline-success">
-                              <i class="fas fa-download me-2"></i>Download PDF
-                        </a>
-                        <?php if (isset($_SESSION['username']) && $_SESSION['username'] === 'chamrern'): ?>
-                              <a href="admin.php" class="btn btn-outline-primary">
-                                    <i class="fas fa-cog me-2"></i>Admin Panel
-                              </a>
-                        <?php else: ?>
-                              <a href="user_dashboard.php" class="btn btn-outline-primary">
-                                    <i class="fas fa-user me-2"></i>Dashboard
-                              </a>
-                        <?php endif; ?>
-                        <a href="?logout=1" class="btn btn-outline-danger">
-                              <i class="fas fa-sign-out-alt me-2"></i>Logout
-                        </a>
-                  </div>
-            <?php else: ?>
-                  <!-- Public Access Navigation -->
-                  <div class="nav-buttons">
-                        <a href="login.php" class="btn btn-primary">
-                              <i class="fas fa-sign-in-alt me-2"></i>Login
-                        </a>
-                        <a href="register.php" class="btn btn-outline-primary">
-                              <i class="fas fa-user-plus me-2"></i>Register
-                        </a>
-                  </div>
-            <?php endif; ?>
+      <?php include 'header.php'; ?>
 
+      <div class="container">
             <?php if (!$hasData): ?>
                   <div class="alert alert-warning fade-in">
                         <i class="fas fa-exclamation-triangle"></i>

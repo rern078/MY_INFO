@@ -38,6 +38,8 @@ $user = mysqli_fetch_assoc($result);
 </head>
 
 <body class="bg-light">
+      <?php include 'header.php'; ?>
+
       <div class="container py-5">
             <div class="row justify-content-center">
                   <div class="col-lg-8">
