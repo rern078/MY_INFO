@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Portfolio API Tester</title>
+      <style>
+            * {
+                  margin: 0;
+                  padding: 0;
+                  box-sizing: border-box;
+            }
+
+            body {
+                  font-family: Arial, sans-serif;
+                  line-height: 1.6;
+                  background-color: #f4f4f4;
+                  padding: 20px;
+            }
+
+            .container {
+                  max-width: 1200px;
+                  margin: 0 auto;
+                  background: white;
+                  padding: 20px;
+                  border-radius: 8px;
+                  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            }
+
+            h1 {
+                  text-align: center;
+                  color: #333;
+                  margin-bottom: 30px;
+            }
+
+            .endpoint-group {
+                  margin-bottom: 30px;
+                  border: 1px solid #ddd;
+                  border-radius: 5px;
+                  padding: 20px;
+            }
+
+            .endpoint-group h2 {
+                  color: #2c3e50;
+                  margin-bottom: 15px;
+                  padding-bottom: 10px;
+                  border-bottom: 2px solid #3498db;
+            }
+
+            .method {
+                  display: inline-block;
+                  padding: 5px 10px;
+                  border-radius: 3px;
+                  color: white;
+                  font-weight: bold;
+                  margin-right: 10px;
+            }
+
+            .get {
+                  background-color: #27ae60;
+            }
+
+            .post {
+                  background-color: #3498db;
+            }
+
+            .put {
+                  background-color: #f39c12;
+            }
+
+            .delete {
+                  background-color: #e74c3c;
+            }
+
+            .endpoint {
+                  margin-bottom: 15px;
+                  padding: 15px;
+                  background-color: #f8f9fa;
+                  border-radius: 5px;
+            }
+
+            .endpoint-header {
+                  display: flex;
+                  align-items: center;
+                  margin-bottom: 10px;
+            }
+
+            .endpoint-url {
+                  font-family: monospace;
+                  background-color: #e9ecef;
+                  padding: 5px 10px;
+                  border-radius: 3px;
+                  flex-grow: 1;
+            }
+
+            .test-btn {
+                  background-color: #007bff;
+                  color: white;
+                  border: none;
+                  padding: 8px 15px;
+                  border-radius: 3px;
+                  cursor: pointer;
+                  margin-left: 10px;
+            }
+
+            .test-btn:hover {
+                  background-color: #0056b3;
+            }
+
+            .form-group {
+                  margin-bottom: 10px;
+            }
+
+            .form-group label {
+                  display: block;
+                  margin-bottom: 5px;
+                  font-weight: bold;
+            }
+
+            .form-group input,
+            .form-group textarea,
+            .form-group select {
+                  width: 100%;
+                  padding: 8px;
+                  border: 1px solid #ddd;
+                  border-radius: 3px;
+                  font-family: inherit;
+            }
+
+            .form-group textarea {
+                  height: 80px;
+                  resize: vertical;
+            }
+
+            .response {
+                  margin-top: 15px;
+                  padding: 10px;
+                  background-color: #f8f9fa;
+                  border: 1px solid #dee2e6;
+                  border-radius: 3px;
+                  font-family: monospace;
+                  white-space: pre-wrap;
+                  max-height: 300px;
+                  overflow-y: auto;
+            }
+
+            .success {
+                  border-color: #28a745;
+                  background-color: #d4edda;
+            }
+
+            .error {
+                  border-color: #dc3545;
+                  background-color: #f8d7da;
+            }
+
+            .hidden {
+                  display: none;
+            }
+
+            .toggle-form {
+                  background-color: #6c757d;
+                  color: white;
+                  border: none;
+                  padding: 5px 10px;
+                  border-radius: 3px;
+                  cursor: pointer;
+                  margin-left: 10px;
+            }
+
+            .toggle-form:hover {
+                  background-color: #545b62;
+            }
+      </style>
+</head>
+
+<body>
+      <div class="container">
+            <h1>Portfolio API Tester</h1>
+
+            <!-- Users -->
+            <div class="endpoint-group">
+                  <h2>Users Management</h2>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method get">GET</span>
+                              <span class="endpoint-url">/api/api_submitter.php/users</span>
+                              <button class="test-btn" onclick="testGet('users')">Test</button>
+                        </div>
+                        <div class="response hidden" id="response-users-get"></div>
+                  </div>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method get">GET</span>
+                              <span class="endpoint-url">/api/api_submitter.php/users?id=1</span>
+                              <button class="test-btn" onclick="testGetById('users', 1)">Test</button>
+                        </div>
+                        <div class="response hidden" id="response-users-get-id"></div>
+                  </div>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method post">POST</span>
+                              <span class="endpoint-url">/api/api_submitter.php/users</span>
+                              <button class="toggle-form" onclick="toggleForm('users-form')">Show Form</button>
+                              <button class="test-btn" onclick="testPost('users', 'users-form')">Test</button>
+                        </div>
+                        <div class="hidden" id="users-form">
+                              <div class="form-group">
+                                    <label>Username:</label>
+                                    <input type="text" id="users-username" value="testuser">
+                              </div>
+                              <div class="form-group">
+                                    <label>Email:</label>
+                                    <input type="email" id="users-email" value="test@example.com">
+                              </div>
+                              <div class="form-group">
+                                    <label>Password:</label>
+                                    <input type="password" id="users-password" value="password123">
+                              </div>
+                        </div>
+                        <div class="response hidden" id="response-users-post"></div>
+                  </div>
+            </div>
+
+            <!-- Personal Info -->
+            <div class="endpoint-group">
+                  <h2>Personal Information</h2>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method get">GET</span>
+                              <span class="endpoint-url">/api/api_submitter.php/personal_info</span>
+                              <button class="test-btn" onclick="testGet('personal_info')">Test</button>
+                        </div>
+                        <div class="response hidden" id="response-personal_info-get"></div>
+                  </div>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method post">POST</span>
+                              <span class="endpoint-url">/api/api_submitter.php/personal_info</span>
+                              <button class="toggle-form" onclick="toggleForm('personal_info-form')">Show Form</button>
+                              <button class="test-btn"
+                                    onclick="testPost('personal_info', 'personal_info-form')">Test</button>
+                        </div>
+                        <div class="hidden" id="personal_info-form">
+                              <div class="form-group">
+                                    <label>Name:</label>
+                                    <input type="text" id="personal_info-name" value="John Doe">
+                              </div>
+                              <div class="form-group">
+                                    <label>Title:</label>
+                                    <input type="text" id="personal_info-title" value="Software Developer">
+                              </div>
+                              <div class="form-group">
+                                    <label>Email:</label>
+                                    <input type="email" id="personal_info-email" value="john@example.com">
+                              </div>
+                              <div class="form-group">
+                                    <label>Phone:</label>
+                                    <input type="text" id="personal_info-phone" value="+1234567890">
+                              </div>
+                              <div class="form-group">
+                                    <label>Height:</label>
+                                    <input type="text" id="personal_info-height" value="175 cm">
+                              </div>
+                              <div class="form-group">
+                                    <label>Weight:</label>
+                                    <input type="text" id="personal_info-weight" value="70 kg">
+                              </div>
+                              <div class="form-group">
+                                    <label>Date of Birth:</label>
+                                    <input type="date" id="personal_info-date_of_birth" value="1990-01-01">
+                              </div>
+                              <div class="form-group">
+                                    <label>Gender:</label>
+                                    <input type="text" id="personal_info-gender" value="Male">
+                              </div>
+                              <div class="form-group">
+                                    <label>Nationality:</label>
+                                    <input type="text" id="personal_info-nationality" value="American">
+                              </div>
+                              <div class="form-group">
+                                    <label>Marital Status:</label>
+                                    <input type="text" id="personal_info-marital_status" value="Single">
+                              </div>
+                              <div class="form-group">
+                                    <label>Religion:</label>
+                                    <input type="text" id="personal_info-religion" value="None">
+                              </div>
+                              <div class="form-group">
+                                    <label>Address:</label>
+                                    <input type="text" id="personal_info-address" value="123 Main St">
+                              </div>
+                              <div class="form-group">
+                                    <label>City:</label>
+                                    <input type="text" id="personal_info-city" value="New York">
+                              </div>
+                              <div class="form-group">
+                                    <label>State:</label>
+                                    <input type="text" id="personal_info-state" value="NY">
+                              </div>
+                              <div class="form-group">
+                                    <label>ZIP:</label>
+                                    <input type="text" id="personal_info-zip" value="10001">
+                              </div>
+                              <div class="form-group">
+                                    <label>Country:</label>
+                                    <input type="text" id="personal_info-country" value="USA">
+                              </div>
+                              <div class="form-group">
+                                    <label>Location:</label>
+                                    <input type="text" id="personal_info-location" value="New York, USA">
+                              </div>
+                        </div>
+                        <div class="response hidden" id="response-personal_info-post"></div>
+                  </div>
+            </div>
+
+            <!-- Experience -->
+            <div class="endpoint-group">
+                  <h2>Work Experience</h2>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method get">GET</span>
+                              <span class="endpoint-url">/api/api_submitter.php/experience</span>
+                              <button class="test-btn" onclick="testGet('experience')">Test</button>
+                        </div>
+                        <div class="response hidden" id="response-experience-get"></div>
+                  </div>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method post">POST</span>
+                              <span class="endpoint-url">/api/api_submitter.php/experience</span>
+                              <button class="toggle-form" onclick="toggleForm('experience-form')">Show Form</button>
+                              <button class="test-btn" onclick="testPost('experience', 'experience-form')">Test</button>
+                        </div>
+                        <div class="hidden" id="experience-form">
+                              <div class="form-group">
+                                    <label>User ID:</label>
+                                    <input type="number" id="experience-user_id" value="1">
+                              </div>
+                              <div class="form-group">
+                                    <label>Title:</label>
+                                    <input type="text" id="experience-title" value="Senior Developer">
+                              </div>
+                              <div class="form-group">
+                                    <label>Company:</label>
+                                    <input type="text" id="experience-company" value="Tech Corp">
+                              </div>
+                              <div class="form-group">
+                                    <label>Start Date:</label>
+                                    <input type="date" id="experience-start_date" value="2020-01-01">
+                              </div>
+                              <div class="form-group">
+                                    <label>End Date:</label>
+                                    <input type="date" id="experience-end_date" value="2023-01-01">
+                              </div>
+                              <div class="form-group">
+                                    <label>Is Current:</label>
+                                    <select id="experience-is_current">
+                                          <option value="0">No</option>
+                                          <option value="1">Yes</option>
+                                    </select>
+                              </div>
+                              <div class="form-group">
+                                    <label>Description:</label>
+                                    <textarea
+                                          id="experience-description">Led development team and implemented new features.</textarea>
+                              </div>
+                              <div class="form-group">
+                                    <label>Achievements:</label>
+                                    <textarea id="experience-achievements">Improved efficiency by 40%</textarea>
+                              </div>
+                        </div>
+                        <div class="response hidden" id="response-experience-post"></div>
+                  </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="endpoint-group">
+                  <h2>Skills</h2>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method get">GET</span>
+                              <span class="endpoint-url">/api/api_submitter.php/skills</span>
+                              <button class="test-btn" onclick="testGet('skills')">Test</button>
+                        </div>
+                        <div class="response hidden" id="response-skills-get"></div>
+                  </div>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method post">POST</span>
+                              <span class="endpoint-url">/api/api_submitter.php/skills</span>
+                              <button class="toggle-form" onclick="toggleForm('skills-form')">Show Form</button>
+                              <button class="test-btn" onclick="testPost('skills', 'skills-form')">Test</button>
+                        </div>
+                        <div class="hidden" id="skills-form">
+                              <div class="form-group">
+                                    <label>User ID:</label>
+                                    <input type="number" id="skills-user_id" value="1">
+                              </div>
+                              <div class="form-group">
+                                    <label>Skill Name:</label>
+                                    <input type="text" id="skills-skill_name" value="JavaScript">
+                              </div>
+                              <div class="form-group">
+                                    <label>Proficiency Level:</label>
+                                    <input type="text" id="skills-proficiency_level" value="Expert">
+                              </div>
+                              <div class="form-group">
+                                    <label>Category:</label>
+                                    <input type="text" id="skills-category" value="Programming Languages">
+                              </div>
+                        </div>
+                        <div class="response hidden" id="response-skills-post"></div>
+                  </div>
+            </div>
+
+            <!-- Social Media -->
+            <div class="endpoint-group">
+                  <h2>Social Media</h2>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method get">GET</span>
+                              <span class="endpoint-url">/api/api_submitter.php/social_media</span>
+                              <button class="test-btn" onclick="testGet('social_media')">Test</button>
+                        </div>
+                        <div class="response hidden" id="response-social_media-get"></div>
+                  </div>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method post">POST</span>
+                              <span class="endpoint-url">/api/api_submitter.php/social_media</span>
+                              <button class="toggle-form" onclick="toggleForm('social_media-form')">Show Form</button>
+                              <button class="test-btn"
+                                    onclick="testPost('social_media', 'social_media-form')">Test</button>
+                        </div>
+                        <div class="hidden" id="social_media-form">
+                              <div class="form-group">
+                                    <label>User ID:</label>
+                                    <input type="number" id="social_media-user_id" value="1">
+                              </div>
+                              <div class="form-group">
+                                    <label>Platform:</label>
+                                    <input type="text" id="social_media-platform" value="LinkedIn">
+                              </div>
+                              <div class="form-group">
+                                    <label>Username:</label>
+                                    <input type="text" id="social_media-username" value="john-doe">
+                              </div>
+                              <div class="form-group">
+                                    <label>URL:</label>
+                                    <input type="url" id="social_media-url" value="https://linkedin.com/in/john-doe">
+                              </div>
+                              <div class="form-group">
+                                    <label>Is Active:</label>
+                                    <select id="social_media-is_active">
+                                          <option value="1">Yes</option>
+                                          <option value="0">No</option>
+                                    </select>
+                              </div>
+                              <div class="form-group">
+                                    <label>Display Order:</label>
+                                    <input type="number" id="social_media-display_order" value="1">
+                              </div>
+                              <div class="form-group">
+                                    <label>Icon Class:</label>
+                                    <input type="text" id="social_media-icon_class" value="fab fa-linkedin">
+                              </div>
+                        </div>
+                        <div class="response hidden" id="response-social_media-post"></div>
+                  </div>
+            </div>
+
+            <!-- Certificates -->
+            <div class="endpoint-group">
+                  <h2>Certificates</h2>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method get">GET</span>
+                              <span class="endpoint-url">/api/api_submitter.php/certificates</span>
+                              <button class="test-btn" onclick="testGet('certificates')">Test</button>
+                        </div>
+                        <div class="response hidden" id="response-certificates-get"></div>
+                  </div>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method post">POST</span>
+                              <span class="endpoint-url">/api/api_submitter.php/certificates</span>
+                              <button class="toggle-form" onclick="toggleForm('certificates-form')">Show Form</button>
+                              <button class="test-btn"
+                                    onclick="testPost('certificates', 'certificates-form')">Test</button>
+                        </div>
+                        <div class="hidden" id="certificates-form">
+                              <div class="form-group">
+                                    <label>Title:</label>
+                                    <input type="text" id="certificates-title"
+                                          value="AWS Certified Solutions Architect">
+                              </div>
+                              <div class="form-group">
+                                    <label>Issuing Organization:</label>
+                                    <input type="text" id="certificates-issuing_organization"
+                                          value="Amazon Web Services">
+                              </div>
+                              <div class="form-group">
+                                    <label>Issue Date:</label>
+                                    <input type="date" id="certificates-issue_date" value="2023-06-15">
+                              </div>
+                              <div class="form-group">
+                                    <label>Expiry Date:</label>
+                                    <input type="date" id="certificates-expiry_date" value="2026-06-15">
+                              </div>
+                              <div class="form-group">
+                                    <label>Credential ID:</label>
+                                    <input type="text" id="certificates-credential_id" value="AWS-123456789">
+                              </div>
+                              <div class="form-group">
+                                    <label>Credential URL:</label>
+                                    <input type="url" id="certificates-credential_url"
+                                          value="https://aws.amazon.com/verification">
+                              </div>
+                              <div class="form-group">
+                                    <label>File Path:</label>
+                                    <input type="text" id="certificates-file_path"
+                                          value="uploads/certificates/cert.pdf">
+                              </div>
+                              <div class="form-group">
+                                    <label>File Type:</label>
+                                    <select id="certificates-file_type">
+                                          <option value="pdf">PDF</option>
+                                          <option value="image">Image</option>
+                                    </select>
+                              </div>
+                              <div class="form-group">
+                                    <label>Description:</label>
+                                    <textarea
+                                          id="certificates-description">Professional level certification for designing distributed systems on AWS</textarea>
+                              </div>
+                        </div>
+                        <div class="response hidden" id="response-certificates-post"></div>
+                  </div>
+            </div>
+
+            <!-- Education -->
+            <div class="endpoint-group">
+                  <h2>Education</h2>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method get">GET</span>
+                              <span class="endpoint-url">/api/api_submitter.php/education</span>
+                              <button class="test-btn" onclick="testGet('education')">Test</button>
+                        </div>
+                        <div class="response hidden" id="response-education-get"></div>
+                  </div>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method post">POST</span>
+                              <span class="endpoint-url">/api/api_submitter.php/education</span>
+                              <button class="toggle-form" onclick="toggleForm('education-form')">Show Form</button>
+                              <button class="test-btn" onclick="testPost('education', 'education-form')">Test</button>
+                        </div>
+                        <div class="hidden" id="education-form">
+                              <div class="form-group">
+                                    <label>User ID:</label>
+                                    <input type="number" id="education-user_id" value="1">
+                              </div>
+                              <div class="form-group">
+                                    <label>Degree:</label>
+                                    <input type="text" id="education-degree" value="Bachelor of Science">
+                              </div>
+                              <div class="form-group">
+                                    <label>Field of Study:</label>
+                                    <input type="text" id="education-field_of_study" value="Computer Science">
+                              </div>
+                              <div class="form-group">
+                                    <label>School:</label>
+                                    <input type="text" id="education-school" value="University of Technology">
+                              </div>
+                              <div class="form-group">
+                                    <label>Start Date:</label>
+                                    <input type="date" id="education-start_date" value="2016-09-01">
+                              </div>
+                              <div class="form-group">
+                                    <label>End Date:</label>
+                                    <input type="date" id="education-end_date" value="2020-05-31">
+                              </div>
+                              <div class="form-group">
+                                    <label>Is Current:</label>
+                                    <select id="education-is_current">
+                                          <option value="0">No</option>
+                                          <option value="1">Yes</option>
+                                    </select>
+                              </div>
+                              <div class="form-group">
+                                    <label>GPA:</label>
+                                    <input type="number" id="education-gpa" value="3.85" step="0.01" min="0" max="4">
+                              </div>
+                              <div class="form-group">
+                                    <label>Achievements:</label>
+                                    <textarea id="education-achievements">Dean's List, Graduated with honors</textarea>
+                              </div>
+                        </div>
+                        <div class="response hidden" id="response-education-post"></div>
+                  </div>
+            </div>
+
+            <!-- Languages -->
+            <div class="endpoint-group">
+                  <h2>Languages</h2>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method get">GET</span>
+                              <span class="endpoint-url">/api/api_submitter.php/languages</span>
+                              <button class="test-btn" onclick="testGet('languages')">Test</button>
+                        </div>
+                        <div class="response hidden" id="response-languages-get"></div>
+                  </div>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method post">POST</span>
+                              <span class="endpoint-url">/api/api_submitter.php/languages</span>
+                              <button class="toggle-form" onclick="toggleForm('languages-form')">Show Form</button>
+                              <button class="test-btn" onclick="testPost('languages', 'languages-form')">Test</button>
+                        </div>
+                        <div class="hidden" id="languages-form">
+                              <div class="form-group">
+                                    <label>Name:</label>
+                                    <input type="text" id="languages-name" value="English">
+                              </div>
+                              <div class="form-group">
+                                    <label>Proficiency (1-5):</label>
+                                    <input type="number" id="languages-proficiency" value="5" min="1" max="5">
+                              </div>
+                        </div>
+                        <div class="response hidden" id="response-languages-post"></div>
+                  </div>
+            </div>
+
+            <!-- Interests -->
+            <div class="endpoint-group">
+                  <h2>Interests</h2>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method get">GET</span>
+                              <span class="endpoint-url">/api/api_submitter.php/interests</span>
+                              <button class="test-btn" onclick="testGet('interests')">Test</button>
+                        </div>
+                        <div class="response hidden" id="response-interests-get"></div>
+                  </div>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method post">POST</span>
+                              <span class="endpoint-url">/api/api_submitter.php/interests</span>
+                              <button class="toggle-form" onclick="toggleForm('interests-form')">Show Form</button>
+                              <button class="test-btn" onclick="testPost('interests', 'interests-form')">Test</button>
+                        </div>
+                        <div class="hidden" id="interests-form">
+                              <div class="form-group">
+                                    <label>Name:</label>
+                                    <input type="text" id="interests-name" value="Reading">
+                              </div>
+                              <div class="form-group">
+                                    <label>Icon Class:</label>
+                                    <input type="text" id="interests-icon_class" value="fas fa-book">
+                              </div>
+                        </div>
+                        <div class="response hidden" id="response-interests-post"></div>
+                  </div>
+            </div>
+
+            <!-- Company Info -->
+            <div class="endpoint-group">
+                  <h2>Company Information</h2>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method get">GET</span>
+                              <span class="endpoint-url">/api/api_submitter.php/company_info</span>
+                              <button class="test-btn" onclick="testGet('company_info')">Test</button>
+                        </div>
+                        <div class="response hidden" id="response-company_info-get"></div>
+                  </div>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method post">POST</span>
+                              <span class="endpoint-url">/api/api_submitter.php/company_info</span>
+                              <button class="toggle-form" onclick="toggleForm('company_info-form')">Show Form</button>
+                              <button class="test-btn"
+                                    onclick="testPost('company_info', 'company_info-form')">Test</button>
+                        </div>
+                        <div class="hidden" id="company_info-form">
+                              <div class="form-group">
+                                    <label>Name:</label>
+                                    <input type="text" id="company_info-name" value="Tech Solutions Co., Ltd.">
+                              </div>
+                              <div class="form-group">
+                                    <label>Position:</label>
+                                    <input type="text" id="company_info-position" value="Senior Software Developer">
+                              </div>
+                              <div class="form-group">
+                                    <label>Hiring Manager:</label>
+                                    <input type="text" id="company_info-hiring_manager" value="Mr. John Manager">
+                              </div>
+                              <div class="form-group">
+                                    <label>Street:</label>
+                                    <input type="text" id="company_info-street" value="456 Business Ave">
+                              </div>
+                              <div class="form-group">
+                                    <label>City:</label>
+                                    <input type="text" id="company_info-city" value="New York">
+                              </div>
+                              <div class="form-group">
+                                    <label>State:</label>
+                                    <input type="text" id="company_info-state" value="NY">
+                              </div>
+                              <div class="form-group">
+                                    <label>ZIP:</label>
+                                    <input type="text" id="company_info-zip" value="10001">
+                              </div>
+                        </div>
+                        <div class="response hidden" id="response-company_info-post"></div>
+                  </div>
+            </div>
+
+            <!-- Cover Letter -->
+            <div class="endpoint-group">
+                  <h2>Cover Letter</h2>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method get">GET</span>
+                              <span class="endpoint-url">/api/api_submitter.php/cover_letter</span>
+                              <button class="test-btn" onclick="testGet('cover_letter')">Test</button>
+                        </div>
+                        <div class="response hidden" id="response-cover_letter-get"></div>
+                  </div>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method post">POST</span>
+                              <span class="endpoint-url">/api/api_submitter.php/cover_letter</span>
+                              <button class="toggle-form" onclick="toggleForm('cover_letter-form')">Show Form</button>
+                              <button class="test-btn"
+                                    onclick="testPost('cover_letter', 'cover_letter-form')">Test</button>
+                        </div>
+                        <div class="hidden" id="cover_letter-form">
+                              <div class="form-group">
+                                    <label>Introduction:</label>
+                                    <textarea
+                                          id="cover_letter-introduction">I am writing to express my strong interest in the position...</textarea>
+                              </div>
+                              <div class="form-group">
+                                    <label>Body:</label>
+                                    <textarea
+                                          id="cover_letter-body">Throughout my career, I have developed expertise in...</textarea>
+                              </div>
+                              <div class="form-group">
+                                    <label>Closing:</label>
+                                    <textarea
+                                          id="cover_letter-closing">Thank you for considering my application...</textarea>
+                              </div>
+                        </div>
+                        <div class="response hidden" id="response-cover_letter-post"></div>
+                  </div>
+            </div>
+
+            <!-- Courses -->
+            <div class="endpoint-group">
+                  <h2>Courses</h2>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method get">GET</span>
+                              <span class="endpoint-url">/api/api_submitter.php/courses</span>
+                              <button class="test-btn" onclick="testGet('courses')">Test</button>
+                        </div>
+                        <div class="response hidden" id="response-courses-get"></div>
+                  </div>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method post">POST</span>
+                              <span class="endpoint-url">/api/api_submitter.php/courses</span>
+                              <button class="toggle-form" onclick="toggleForm('courses-form')">Show Form</button>
+                              <button class="test-btn" onclick="testPost('courses', 'courses-form')">Test</button>
+                        </div>
+                        <div class="hidden" id="courses-form">
+                              <div class="form-group">
+                                    <label>User ID:</label>
+                                    <input type="number" id="courses-user_id" value="1">
+                              </div>
+                              <div class="form-group">
+                                    <label>Education ID:</label>
+                                    <input type="number" id="courses-education_id" value="1">
+                              </div>
+                              <div class="form-group">
+                                    <label>Course Code:</label>
+                                    <input type="text" id="courses-course_code" value="CS101">
+                              </div>
+                              <div class="form-group">
+                                    <label>Course Name:</label>
+                                    <input type="text" id="courses-course_name" value="Introduction to Programming">
+                              </div>
+                              <div class="form-group">
+                                    <label>Course Description:</label>
+                                    <textarea
+                                          id="courses-course_description">Basic programming concepts and fundamentals</textarea>
+                              </div>
+                              <div class="form-group">
+                                    <label>Credits:</label>
+                                    <input type="number" id="courses-credits" value="3">
+                              </div>
+                              <div class="form-group">
+                                    <label>Grade:</label>
+                                    <input type="text" id="courses-grade" value="A">
+                              </div>
+                              <div class="form-group">
+                                    <label>Semester:</label>
+                                    <input type="text" id="courses-semester" value="Fall">
+                              </div>
+                              <div class="form-group">
+                                    <label>Academic Year:</label>
+                                    <input type="text" id="courses-academic_year" value="2020-2021">
+                              </div>
+                              <div class="form-group">
+                                    <label>Instructor:</label>
+                                    <input type="text" id="courses-instructor" value="Dr. Smith">
+                              </div>
+                              <div class="form-group">
+                                    <label>Course Type:</label>
+                                    <select id="courses-course_type">
+                                          <option value="Core">Core</option>
+                                          <option value="Elective">Elective</option>
+                                          <option value="General Education">General Education</option>
+                                          <option value="Thesis">Thesis</option>
+                                          <option value="Project">Project</option>
+                                          <option value="Internship">Internship</option>
+                                    </select>
+                              </div>
+                        </div>
+                        <div class="response hidden" id="response-courses-post"></div>
+                  </div>
+            </div>
+      </div>
+
+      <script>
+            const API_BASE = 'api_submitter.php';
+
+            function toggleForm(formId) {
+                  const form = document.getElementById(formId);
+                  form.classList.toggle('hidden');
+            }
+
+            function showResponse(endpoint, method, data, isError = false) {
+                  const responseId = `response-${endpoint}-${method}`;
+                  const responseDiv = document.getElementById(responseId);
+
+                  if (responseDiv) {
+                        responseDiv.textContent = JSON.stringify(data, null, 2);
+                        responseDiv.classList.remove('hidden', 'success', 'error');
+                        responseDiv.classList.add(isError ? 'error' : 'success');
+                  }
+            }
+
+            async function testGet(endpoint) {
+                  try {
+                        const response = await fetch(`${API_BASE}?table=${endpoint}`);
+                        const data = await response.json();
+                        showResponse(endpoint, 'get', data, !response.ok);
+                  } catch (error) {
+                        showResponse(endpoint, 'get', { error: error.message }, true);
+                  }
+            }
+
+            async function testGetById(endpoint, id) {
+                  try {
+                        const response = await fetch(`${API_BASE}?table=${endpoint}&id=${id}`);
+                        const data = await response.json();
+                        showResponse(endpoint, 'get-id', data, !response.ok);
+                  } catch (error) {
+                        showResponse(endpoint, 'get-id', { error: error.message }, true);
+                  }
+            }
+
+            async function testPost(endpoint, formId) {
+                  try {
+                        const form = document.getElementById(formId);
+                        const inputs = form.querySelectorAll('input, textarea, select');
+                        const data = {};
+
+                        inputs.forEach(input => {
+                              const fieldName = input.id.replace(`${endpoint}-`, '');
+                              data[fieldName] = input.value;
+                        });
+
+                        const response = await fetch(`${API_BASE}?table=${endpoint}`, {
+                              method: 'POST',
+                              headers: {
+                                    'Content-Type': 'application/json',
+                              },
+                              body: JSON.stringify(data)
+                        });
+
+                        const responseData = await response.json();
+                        showResponse(endpoint, 'post', responseData, !response.ok);
+                  } catch (error) {
+                        showResponse(endpoint, 'post', { error: error.message }, true);
+                  }
+            }
+
+            async function testPut(endpoint, id, data) {
+                  try {
+                        const response = await fetch(`${API_BASE}?table=${endpoint}&id=${id}`, {
+                              method: 'PUT',
+                              headers: {
+                                    'Content-Type': 'application/json',
+                              },
+                              body: JSON.stringify(data)
+                        });
+
+                        const responseData = await response.json();
+                        showResponse(endpoint, 'put', responseData, !response.ok);
+                  } catch (error) {
+                        showResponse(endpoint, 'put', { error: error.message }, true);
+                  }
+            }
+
+            async function testDelete(endpoint, id) {
+                  try {
+                        const response = await fetch(`${API_BASE}?table=${endpoint}&id=${id}`, {
+                              method: 'DELETE'
+                        });
+
+                        const data = await response.json();
+                        showResponse(endpoint, 'delete', data, !response.ok);
+                  } catch (error) {
+                        showResponse(endpoint, 'delete', { error: error.message }, true);
+                  }
+            }
+      </script>
+</body>
+
+</html>
