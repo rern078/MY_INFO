@@ -1,0 +1,7 @@
+=== CV Portfolio Error Log ===
+Started: 2025-01-27 12:00:00
+
+This file will contain error messages from the CV Portfolio application.
+Errors will be automatically logged here when they occur.
+
+=== End of Header === 
