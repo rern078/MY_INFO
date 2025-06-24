@@ -184,7 +184,7 @@ $hasData = $personalInfo;
             <?php else: ?>
                   <div class="cv-header fade-in">
                         <h1><?php echo htmlspecialchars($personalInfo['name']); ?></h1>
-                        <div class="title"><?php echo htmlspecialchars($personalInfo['title']); ?></div>
+                        <!-- <div class="title"><?php echo htmlspecialchars($personalInfo['title']); ?></div> -->
                         <div class="contact-details">
                               <div class="contact-item">
                                     <i class="fas fa-envelope"></i>

@@ -12,7 +12,7 @@
 /* Khmer Font Import - Kh Fasthand */
 @font-face {
       font-family: 'Khmer OS Fasthand';
-      src: url('font/KhmerOSDangrek.ttf') format('truetype');
+      src: url('font/Kh Writhand Regular.ttf') format('truetype');
       font-weight: normal;
       font-style: normal;
       font-display: swap;
@@ -46,7 +46,7 @@
       --font-custom: 'Guavine', 'Brush Script MT', cursive, serif;
 
       /* Khmer font */
-      --font-khmer: 'Khmer OS Dangrek';
+      --font-khmer: 'Kh Writhand Regular';
 }
 
 * {
@@ -284,7 +284,7 @@ html[lang="km"] .alert p {
       margin-bottom: 0.5rem;
       letter-spacing: -0.025em;
       position: relative;
-      z-index: 1;
+      /* z-index: 1; */
 }
 
 .cv-header .title {
@@ -293,7 +293,7 @@ html[lang="km"] .alert p {
       margin-bottom: 1.5rem;
       opacity: 0.9;
       position: relative;
-      z-index: 1;
+      /* z-index: 1; */
 }
 
 .contact-details {
@@ -302,7 +302,7 @@ html[lang="km"] .alert p {
       gap: 2rem;
       flex-wrap: wrap;
       position: relative;
-      z-index: 1;
+      /* z-index: 1; */
 }
 
 .contact-item {
@@ -1064,8 +1064,8 @@ html[lang="km"] .alert p {
             box-sizing: border-box;
       }
 
-      html[lang="km"] .hamburger-menu,
-      html[lang="km"] .language-switcher {
+      .hamburger-menu,
+      .language-switcher {
             margin-right: .5rem !important;
       }
 

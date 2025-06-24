@@ -338,6 +338,12 @@ $available_langs = getAvailableLanguages();
       }
 
       @media (max-width: 768px) {
+
+            .btn-login,
+            .btn-logout {
+                  display: none;
+            }
+
             .nav-buttons {
                   display: none;
             }
@@ -423,7 +429,7 @@ $available_langs = getAvailableLanguages();
                                           <div class="hamburger-line"></div>
                                           <div class="hamburger-line"></div>
                                     </div>
-                                    <a href="login.php?logout=1" class="btn btn-outline-light btn-sm">
+                                    <a href="login.php?logout=1" class="btn btn-outline-light btn-sm btn-logout">
                                           <i class="fas fa-sign-out-alt me-1"></i><?php echo t('logout'); ?>
                                     </a>
                               </div>
@@ -456,6 +462,9 @@ $available_langs = getAvailableLanguages();
                         <i class="fas fa-user me-2"></i><?php echo t('dashboard'); ?>
                   </a>
             <?php endif; ?>
+            <a href="login.php?logout=1" class="btn btn-outline-light btn-sm">
+                  <i class="fas fa-sign-out-alt me-1"></i><?php echo t('logout'); ?>
+            </a>
       </div>
 
       <!-- Desktop Navigation for logged in users -->
@@ -528,7 +537,7 @@ $available_langs = getAvailableLanguages();
                                           <div class="hamburger-line"></div>
                                           <div class="hamburger-line"></div>
                                     </div>
-                                    <a href="login.php" class="btn btn-outline-light btn-sm">
+                                    <a href="login.php" class="btn btn-outline-light btn-sm btn-login">
                                           <i class="fas fa-sign-in-alt me-1"></i><?php echo t('login'); ?>
                                     </a>
                               </div>
