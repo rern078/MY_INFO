@@ -409,8 +409,117 @@ INSERT INTO `users` (`id`, `username`, `password`, `email`, `created_at`) VALUES
 (2, 'users', '$2y$10$VNwGPnIiL3QeaGwra419vOklc9WqVlce5J7BIbc/IFzOMMfAlCL.u', 'user@gmail.com', '2025-06-17 01:36:43'),
 (3, 'users1', '$2y$10$a/jbEKibIruaCqvmRSyko.GzP8cAZyMEcDZ9DfIFutGUsOvN7R1VK', 'user2@gmail.com', '2025-06-20 02:52:17'),
 (4, 'users2', '$2y$10$TRNhPrvkVw8M4FS86pt.6Op6BQ75EazKYwLVsz24d29mHJSJLZgD.', 'user4@gmail.com', '2025-06-20 10:35:04');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `seo_metadata`
+--
+
+DROP TABLE IF EXISTS `seo_metadata`;
+CREATE TABLE IF NOT EXISTS `seo_metadata` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `page_url` varchar(500) NOT NULL,
+  `page_title` varchar(200) NOT NULL,
+  `meta_description` text NOT NULL,
+  `meta_keywords` text,
+  `meta_author` varchar(100) DEFAULT NULL,
+  `og_title` varchar(200) DEFAULT NULL,
+  `og_description` text,
+  `og_image` varchar(500) DEFAULT NULL,
+  `og_type` varchar(50) DEFAULT 'website',
+  `og_site_name` varchar(100) DEFAULT 'Portfolio System',
+  `og_locale` varchar(10) DEFAULT 'en_US',
+  `twitter_card` varchar(50) DEFAULT 'summary_large_image',
+  `twitter_title` varchar(200) DEFAULT NULL,
+  `twitter_description` text,
+  `twitter_image` varchar(500) DEFAULT NULL,
+  `twitter_site` varchar(100) DEFAULT '@portfoliosystem',
+  `canonical_url` varchar(500) DEFAULT NULL,
+  `robots` varchar(100) DEFAULT 'index, follow',
+  `language` varchar(10) DEFAULT 'en',
+  `theme_color` varchar(7) DEFAULT '#007bff',
+  `is_active` tinyint(1) DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `page_url` (`page_url`),
+  KEY `is_active` (`is_active`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+--
+-- Dumping data for table `seo_metadata`
+--
+
+INSERT INTO `seo_metadata` (`id`, `page_url`, `page_title`, `meta_description`, `meta_keywords`, `meta_author`, `og_title`, `og_description`, `og_image`, `og_type`, `og_site_name`, `og_locale`, `twitter_card`, `twitter_title`, `twitter_description`, `twitter_image`, `twitter_site`, `canonical_url`, `robots`, `language`, `theme_color`, `is_active`, `created_at`, `updated_at`) VALUES
+(1, '/', 'Professional CV & Portfolio - Chamrern S.', 'Professional CV and portfolio showcasing software development skills, experience, and achievements. Expert in PHP, MySQL, JavaScript, and modern web technologies.', 'CV, portfolio, resume, software developer, PHP, MySQL, JavaScript, web development, professional', 'Chamrern S.', 'Professional CV & Portfolio - Chamrern S.', 'Professional CV and portfolio showcasing software development skills, experience, and achievements. Expert in PHP, MySQL, JavaScript, and modern web technologies.', '/images/og-home.jpg', 'website', 'Portfolio System', 'en_US', 'summary_large_image', 'Professional CV & Portfolio - Chamrern S.', 'Professional CV and portfolio showcasing software development skills, experience, and achievements.', '/images/twitter-home.jpg', '@portfoliosystem', '/', 'index, follow', 'en', '#007bff', 1, '2025-06-20 13:00:00', '2025-06-20 13:00:00'),
+(2, 'certificates', 'Professional Certifications - Chamrern S.', 'View professional certifications and achievements including AWS, Google Cloud, Microsoft Azure, and other industry-recognized credentials.', 'certifications, AWS, Google Cloud, Microsoft Azure, professional development, skills validation', 'Chamrern S.', 'Professional Certifications - Chamrern S.', 'View professional certifications and achievements including AWS, Google Cloud, Microsoft Azure, and other industry-recognized credentials.', '/images/og-certificates.jpg', 'website', 'Portfolio System', 'en_US', 'summary_large_image', 'Professional Certifications - Chamrern S.', 'View professional certifications and achievements including AWS, Google Cloud, Microsoft Azure, and other industry-recognized credentials.', '/images/twitter-certificates.jpg', '@portfoliosystem', '/certificates.php', 'index, follow', 'en', '#007bff', 1, '2025-06-20 13:00:00', '2025-06-20 13:00:00'),
+(3, 'cover-letter', 'Cover Letter Generator - Professional Templates', 'Generate professional cover letters with customizable templates. Perfect for job applications and career advancement opportunities.', 'cover letter, job application, professional templates, career, employment', 'Chamrern S.', 'Cover Letter Generator - Professional Templates', 'Generate professional cover letters with customizable templates. Perfect for job applications and career advancement opportunities.', '/images/og-cover-letter.jpg', 'website', 'Portfolio System', 'en_US', 'summary_large_image', 'Cover Letter Generator - Professional Templates', 'Generate professional cover letters with customizable templates.', '/images/twitter-cover-letter.jpg', '@portfoliosystem', '/cover-letter.php', 'index, follow', 'en', '#007bff', 1, '2025-06-20 13:00:00', '2025-06-20 13:00:00'),
+(4, 'user_dashboard', 'User Dashboard - Portfolio Management', 'Access your personal portfolio dashboard to manage CV information, certificates, skills, and professional details.', 'dashboard, portfolio management, CV management, user profile, professional details', 'Chamrern S.', 'User Dashboard - Portfolio Management', 'Access your personal portfolio dashboard to manage CV information, certificates, skills, and professional details.', '/images/og-dashboard.jpg', 'website', 'Portfolio System', 'en_US', 'summary_large_image', 'User Dashboard - Portfolio Management', 'Access your personal portfolio dashboard to manage CV information.', '/images/twitter-dashboard.jpg', '@portfoliosystem', '/user_dashboard.php', 'index, follow', 'en', '#007bff', 1, '2025-06-20 13:00:00', '2025-06-20 13:00:00'),
+(5, 'admin', 'Admin Panel - Portfolio System Management', 'Administrative panel for managing portfolio system, users, content, and system settings.', 'admin, management, portfolio system, user management, content management', 'Chamrern S.', 'Admin Panel - Portfolio System Management', 'Administrative panel for managing portfolio system, users, content, and system settings.', '/images/og-admin.jpg', 'website', 'Portfolio System', 'en_US', 'summary_large_image', 'Admin Panel - Portfolio System Management', 'Administrative panel for managing portfolio system.', '/images/twitter-admin.jpg', '@portfoliosystem', '/admin.php', 'noindex, nofollow', 'en', '#007bff', 1, '2025-06-20 13:00:00', '2025-06-20 13:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `seo_analytics`
+--
+
+DROP TABLE IF EXISTS `seo_analytics`;
+CREATE TABLE IF NOT EXISTS `seo_analytics` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `page_url` varchar(500) NOT NULL,
+  `page_views` int(11) DEFAULT '0',
+  `unique_visitors` int(11) DEFAULT '0',
+  `bounce_rate` decimal(5,2) DEFAULT '0.00',
+  `avg_time_on_page` int(11) DEFAULT '0',
+  `search_keywords` text,
+  `referring_domains` text,
+  `social_shares` int(11) DEFAULT '0',
+  `date` date NOT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `page_url` (`page_url`),
+  KEY `date` (`date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `seo_settings`
+--
+
+DROP TABLE IF EXISTS `seo_settings`;
+CREATE TABLE IF NOT EXISTS `seo_settings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `setting_key` varchar(100) NOT NULL,
+  `setting_value` text NOT NULL,
+  `setting_description` text,
+  `is_active` tinyint(1) DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `setting_key` (`setting_key`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `seo_settings`
+--
+
+INSERT INTO `seo_settings` (`id`, `setting_key`, `setting_value`, `setting_description`, `is_active`, `created_at`, `updated_at`) VALUES
+(1, 'site_name', 'Portfolio System', 'Website name for SEO and social media', 1, '2025-06-20 13:00:00', '2025-06-20 13:00:00'),
+(2, 'site_description', 'Professional CV and Portfolio Management System', 'Default site description for SEO', 1, '2025-06-20 13:00:00', '2025-06-20 13:00:00'),
+(3, 'site_keywords', 'CV, portfolio, resume, professional, career, skills, experience', 'Default site keywords for SEO', 1, '2025-06-20 13:00:00', '2025-06-20 13:00:00'),
+(4, 'google_analytics_id', '', 'Google Analytics tracking ID', 1, '2025-06-20 13:00:00', '2025-06-20 13:00:00'),
+(5, 'google_search_console', '', 'Google Search Console verification code', 1, '2025-06-20 13:00:00', '2025-06-20 13:00:00'),
+(6, 'bing_webmaster_tools', '', 'Bing Webmaster Tools verification code', 1, '2025-06-20 13:00:00', '2025-06-20 13:00:00'),
+(7, 'default_og_image', '/images/default-og.jpg', 'Default Open Graph image for social sharing', 1, '2025-06-20 13:00:00', '2025-06-20 13:00:00');
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
