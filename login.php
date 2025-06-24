@@ -29,7 +29,7 @@ if (isset($_GET['logout'])) {
             setcookie('remember_user', '', time() - 3600, '/');
       }
 
-      header("Location: login.php");
+      header("Location: index.php");
       exit();
 }
 
