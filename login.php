@@ -138,6 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <link rel="stylesheet" href="styles/style.css?v=<?php echo time(); ?>">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
       <style>
             .form-check-input:checked {
                   background-color: #0d6efd;
@@ -186,30 +187,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                               <div class="card-body p-4">
                                     <h2 class="text-center mb-4">Login</h2>
 
-                                    <?php if (isset($_GET['logout'])): ?>
-                                          <div class="alert alert-success">You have been successfully logged out.</div>
-                                    <?php endif; ?>
-
-                                    <?php if (isset($_GET['show_saved']) && isset($_COOKIE['remember_user'])): ?>
-                                          <div class="alert alert-info">
-                                                <i class="fas fa-info-circle me-2"></i>
-                                                Showing your saved credentials. You can modify them and login again.
-                                          </div>
-                                    <?php endif; ?>
-
-                                    <?php if (isset($error)): ?>
-                                          <div class="alert alert-danger"><?php echo $error; ?></div>
-                                    <?php endif; ?>
-
-                                    <form method="POST" action="">
+                                    <form method="POST" action="" id="loginForm" onsubmit="return validateLoginForm()">
                                           <div class="mb-3">
                                                 <label class="form-label">Username</label>
-                                                <input type="text" class="form-control" name="username" value="<?php echo htmlspecialchars($saved_username); ?>" required>
+                                                <input type="text" class="form-control" name="username" value="<?php echo htmlspecialchars($saved_username); ?>">
                                           </div>
                                           <div class="mb-3">
                                                 <label class="form-label">Password</label>
                                                 <div class="input-group">
-                                                      <input type="password" class="form-control" name="password" id="password" value="<?php echo htmlspecialchars($saved_password); ?>" required>
+                                                      <input type="password" class="form-control" name="password" id="password" value="<?php echo htmlspecialchars($saved_password); ?>">
                                                       <?php if (isset($_GET['show_saved']) && isset($_COOKIE['remember_user'])): ?>
                                                             <button class="btn btn-outline-secondary" type="button" id="togglePassword">
                                                                   <i class="fas fa-eye" id="toggleIcon"></i>
@@ -271,7 +257,83 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                               }
                         });
                   }
+
+                  // Show success message for logout if present
+                  <?php if (isset($_GET['logout'])): ?>
+                        Swal.fire({
+                              icon: 'success',
+                              title: 'Logged Out Successfully',
+                              text: 'You have been successfully logged out.',
+                              confirmButtonColor: '#28a745',
+                              timer: 3000,
+                              timerProgressBar: true
+                        });
+                  <?php endif; ?>
+
+                  // Show info message for saved credentials if present
+                  <?php if (isset($_GET['show_saved']) && isset($_COOKIE['remember_user'])): ?>
+                        Swal.fire({
+                              icon: 'info',
+                              title: 'Saved Credentials',
+                              text: 'Showing your saved credentials. You can modify them and login again.',
+                              confirmButtonColor: '#17a2b8'
+                        });
+                  <?php endif; ?>
+
+                  // Show error message if login failed
+                  <?php if (isset($error)): ?>
+                        Swal.fire({
+                              icon: 'error',
+                              title: 'Login Failed',
+                              text: '<?php echo addslashes($error); ?>',
+                              confirmButtonColor: '#dc3545'
+                        });
+                  <?php endif; ?>
             });
+
+            // Form validation function
+            function validateLoginForm() {
+                  const username = document.getElementById('username');
+                  const password = document.getElementById('password');
+
+                  // Check for empty fields
+                  if (!username.value.trim()) {
+                        Swal.fire({
+                              icon: 'error',
+                              title: 'Validation Error',
+                              text: 'Username cannot be empty!',
+                              confirmButtonColor: '#dc3545'
+                        });
+                        username.focus();
+                        return false;
+                  }
+
+                  if (!password.value.trim()) {
+                        Swal.fire({
+                              icon: 'error',
+                              title: 'Validation Error',
+                              text: 'Password cannot be empty!',
+                              confirmButtonColor: '#dc3545'
+                        });
+                        password.focus();
+                        return false;
+                  }
+
+                  // Show loading state
+                  Swal.fire({
+                        title: 'Logging in...',
+                        text: 'Please wait while we authenticate your credentials.',
+                        allowOutsideClick: false,
+                        allowEscapeKey: false,
+                        showConfirmButton: false,
+                        didOpen: () => {
+                              Swal.showLoading();
+                        }
+                  });
+
+                  // Allow form submission
+                  return true;
+            }
       </script>
 </body>
 

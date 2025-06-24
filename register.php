@@ -106,6 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <link rel="stylesheet" href="styles/style.css?v=<?php echo time(); ?>">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
       <style>
             .password-field {
                   position: relative;
@@ -291,25 +292,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                   // Check for empty fields sequentially
                   if (!username.value.trim()) {
-                        alert('Username cannot be empty!');
+                        Swal.fire({
+                              icon: 'error',
+                              title: 'Validation Error',
+                              text: 'Username cannot be empty!',
+                              confirmButtonColor: '#dc3545'
+                        });
                         username.focus();
                         return false;
                   }
 
                   if (!email.value.trim()) {
-                        alert('Email cannot be empty!');
+                        Swal.fire({
+                              icon: 'error',
+                              title: 'Validation Error',
+                              text: 'Email cannot be empty!',
+                              confirmButtonColor: '#dc3545'
+                        });
                         email.focus();
                         return false;
                   }
 
                   if (!password.value.trim()) {
-                        alert('Password cannot be empty!');
+                        Swal.fire({
+                              icon: 'error',
+                              title: 'Validation Error',
+                              text: 'Password cannot be empty!',
+                              confirmButtonColor: '#dc3545'
+                        });
                         password.focus();
                         return false;
                   }
 
                   if (!confirmPassword.value.trim()) {
-                        alert('Confirm Password cannot be empty!');
+                        Swal.fire({
+                              icon: 'error',
+                              title: 'Validation Error',
+                              text: 'Confirm Password cannot be empty!',
+                              confirmButtonColor: '#dc3545'
+                        });
                         confirmPassword.focus();
                         return false;
                   }
@@ -317,42 +338,72 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   // Only proceed with format validation if fields are not empty
                   // Validate username format
                   if (!/^[a-zA-Z]+$/.test(username.value)) {
-                        alert('Username must contain only alphabets (letters)`!');
+                        Swal.fire({
+                              icon: 'error',
+                              title: 'Validation Error',
+                              text: 'Username must contain only alphabets (letters)!',
+                              confirmButtonColor: '#dc3545'
+                        });
                         username.focus();
                         return false;
                   }
 
                   // Check username length
                   if (username.value.length < 3) {
-                        alert('Username must be at least 3 characters long!');
+                        Swal.fire({
+                              icon: 'error',
+                              title: 'Validation Error',
+                              text: 'Username must be at least 3 characters long!',
+                              confirmButtonColor: '#dc3545'
+                        });
                         username.focus();
                         return false;
                   }
 
                   // Check username maximum length
                   if (username.value.length > 50) {
-                        alert('Username must not exceed 50 characters!');
+                        Swal.fire({
+                              icon: 'error',
+                              title: 'Validation Error',
+                              text: 'Username must not exceed 50 characters!',
+                              confirmButtonColor: '#dc3545'
+                        });
                         username.focus();
                         return false;
                   }
 
                   // Validate password format
                   if (!/^[a-zA-Z0-9]+$/.test(password.value)) {
-                        alert('Password must contain only letters and numbers!');
+                        Swal.fire({
+                              icon: 'error',
+                              title: 'Validation Error',
+                              text: 'Password must contain only letters and numbers!',
+                              confirmButtonColor: '#dc3545'
+                        });
                         password.focus();
                         return false;
                   }
 
                   // Check password length
                   if (password.value.length < 6) {
-                        alert('Password must be at least 6 characters long!');
+                        Swal.fire({
+                              icon: 'error',
+                              title: 'Validation Error',
+                              text: 'Password must be at least 6 characters long!',
+                              confirmButtonColor: '#dc3545'
+                        });
                         password.focus();
                         return false;
                   }
 
                   // Check if passwords match
                   if (password.value !== confirmPassword.value) {
-                        alert('Passwords do not match!');
+                        Swal.fire({
+                              icon: 'error',
+                              title: 'Validation Error',
+                              text: 'Passwords do not match!',
+                              confirmButtonColor: '#dc3545'
+                        });
                         confirmPassword.focus();
                         return false;
                   }
