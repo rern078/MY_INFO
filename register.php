@@ -101,48 +101,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="<?php echo $current_language; ?>" dir="<?php echo getLanguageDirection(); ?>">
 
 <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title><?php echo t('register'); ?> - Cover Letter Management</title>
-      <link rel="stylesheet" href="styles/style.css?v=<?php echo time(); ?>">
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-      <style>
-            .password-field {
-                  position: relative;
-            }
-
-            .password-toggle {
-                  position: absolute;
-                  right: 10px;
-                  top: 50%;
-                  transform: translateY(-50%);
-                  background: none;
-                  border: none;
-                  color: #6c757d;
-                  cursor: pointer;
-                  z-index: 10;
-            }
-
-            .password-toggle:hover {
-                  color: #495057;
-            }
-
-            .form-control[type="password"] {
-                  padding-right: 40px;
-            }
-
-            .form-control.error {
-                  border-color: #dc3545;
-                  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
-            }
-
-            .form-control.valid {
-                  border-color: #28a745;
-                  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
-            }
-      </style>
+      <?php $page_title = t('register');
+      include 'title.php'; ?>
 </head>
 
 <body class="bg-light">

@@ -44,12 +44,8 @@ $hasData = $personalInfo && $companyInfo && $coverLetter;
 <html lang="<?php echo $current_language; ?>" dir="<?php echo getLanguageDirection(); ?>">
 
 <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Cover Letter - <?php echo htmlspecialchars($personalInfo['name'] ?? 'User'); ?></title>
-      <link rel="stylesheet" href="styles/style.css?v=<?php echo time(); ?>">
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+      <?php $page_title = function_exists('t') ? t('cover_letter') : 'Cover Letter';
+      include 'title.php'; ?>
 </head>
 
 <body class="bg-light">

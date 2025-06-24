@@ -133,51 +133,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="<?php echo $current_language; ?>" dir="<?php echo getLanguageDirection(); ?>">
 
 <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title><?php echo t('login'); ?> - Cover Letter Management</title>
-      <link rel="stylesheet" href="styles/style.css?v=<?php echo time(); ?>">
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-      <style>
-            .form-check-input:checked {
-                  background-color: #0d6efd;
-                  border-color: #0d6efd;
-            }
-
-            .form-check-input:focus {
-                  border-color: #86b7fe;
-                  outline: 0;
-                  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-            }
-
-            .form-check-label {
-                  cursor: pointer;
-                  user-select: none;
-                  font-weight: 500;
-                  color: #495057;
-            }
-
-            .form-check {
-                  margin-bottom: 1rem;
-            }
-
-            .remember-me-container {
-                  display: flex;
-                  align-items: center;
-                  justify-content: space-between;
-                  margin-bottom: 1.5rem;
-            }
-
-            .form-check-input {
-                  width: 1.2em;
-                  height: 1.2em;
-                  margin-top: 0.25em;
-                  margin-right: 0.5em;
-                  cursor: pointer;
-            }
-      </style>
+      <?php $page_title = t('login');
+      include 'title.php'; ?>
 </head>
 
 <body class="bg-light">
