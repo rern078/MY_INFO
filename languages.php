@@ -174,15 +174,15 @@ $translations = [
       'km' => [
             // Header
             'welcome' => 'សូមស្វាគមន៍',
-            'welcome_guest' => 'សូមស្វាគមន៍អ្នកចូលមក!',
-            'login_to_access' => 'សូមចូលគណនីដើម្បីចូលប្រើ CV របស់អ្នក',
+            'welcome_guest' => 'សូមស្វាគមន៍Guest!',
+            'login_to_access' => 'សូមចូលគណនីដើម្បីចូលមើលប្រវត្តិរូបសង្ខេប',
             'successfully_logged_in' => 'អ្នកបានចូលគណនីដោយជោគជ័យ',
             'logout' => 'ចាកចេញ',
             'login' => 'ចូលគណនី',
             'register' => 'ចុះឈ្មោះ',
 
             // Navigation
-            'view_cv' => 'មើល CV',
+            'view_cv' => 'មើលប្រវត្តិរូបសង្ខេប',
             'view_sr1' => 'មើល SR1',
             'view_sr2' => 'មើល SR2',
             'view_certificates' => 'មើលវិញ្ញាបនបត្រ',
@@ -250,7 +250,7 @@ $translations = [
             'email_help_text' => 'បញ្ចូលអាសយដ្ឋានអ៊ីមែលត្រឹមត្រូវ',
             'password_help_text' => 'តែអក្សរ និងលេខ (a-z, A-Z, 0-9) ត្រូវបានអនុញ្ញាត, អប្បបរមា ៦ តួអក្សរ',
             'confirm_password_help_text' => 'បញ្ចូលពាក្យសម្ងាត់របស់អ្នកម្តងទៀតដើម្បីបញ្ជាក់',
-            'cv' => 'CV',
+            'cv' => 'ប្រវត្តិរូបសង្ខេប',
             'user' => 'អ្នកប្រើប្រាស់',
             'no_cv_data_available' => 'គ្មានទិន្នន័យ CV ទេ។ សូមទាក់ទងអ្នកគ្រប់គ្រងដើម្បីរៀបចំ CV របស់អ្នក។',
             'language_test' => 'ការធ្វើតេស្តភាសា',
@@ -263,8 +263,8 @@ $translations = [
             'translation_examples' => 'ឧទាហរណ៍ការបកប្រែ',
             'common_phrases' => 'ឃ្លាទូទៅ',
             'form_labels' => 'ស្លាកទម្រង់',
-            'cv_sections' => 'ផ្នែក CV',
-            'back_to_cv' => 'ត្រឡប់ទៅ CV',
+            'cv_sections' => 'ផ្នែកប្រវត្តិរូបសង្ខេប',
+            'back_to_cv' => 'ត្រឡប់ទៅប្រវត្តិរូបសង្ខេប',
 
             // CV Sections
             'personal_info' => 'ព័ត៌មានផ្ទាល់ខ្លួន',
