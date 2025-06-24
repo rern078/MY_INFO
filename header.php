@@ -1,10 +1,17 @@
 <?php
+// Include language system
+require_once 'languages.php';
+
 // Check if user is logged in
 $isLoggedIn = isset($_SESSION['user_id']);
 $username = $_SESSION['username'] ?? '';
 
 // Get current page name
 $current_page = basename($_SERVER['PHP_SELF'], '.php');
+
+// Get current language info
+$current_lang = getCurrentLanguage();
+$available_langs = getAvailableLanguages();
 ?>
 
 <style>
@@ -12,7 +19,7 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: relative;
-            overflow: hidden;
+            /* overflow: hidden; */
       }
 
       .user-header::before {
@@ -29,6 +36,101 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
       .user-header .container {
             position: relative;
             z-index: 1;
+      }
+
+      /* Language Switcher Styles */
+      .language-switcher {
+            position: relative;
+            display: inline-block;
+      }
+
+      .language-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+      }
+
+      .language-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+      }
+
+      .language-btn .flag {
+            font-size: 16px;
+      }
+
+      .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            min-width: 200px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+
+      .language-dropdown.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+      }
+
+      .language-dropdown-header {
+            padding: 12px 16px;
+            border-bottom: 1px solid #eee;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+      }
+
+      .language-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            color: #333;
+            text-decoration: none;
+      }
+
+      .language-option:hover {
+            background-color: #f8f9fa;
+      }
+
+      .language-option.active {
+            background-color: #e3f2fd;
+            color: #1976d2;
+      }
+
+      .language-option .flag {
+            font-size: 18px;
+      }
+
+      .language-option .name {
+            font-weight: 500;
+      }
+
+      .language-option .native-name {
+            font-size: 12px;
+            color: #666;
+            margin-left: auto;
       }
 
       .nav-buttons {
@@ -251,6 +353,19 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
             .mobile-nav.active {
                   display: flex;
             }
+
+            .language-switcher {
+                  margin-right: 10px;
+            }
+
+            .language-btn {
+                  padding: 6px 10px;
+                  font-size: 12px;
+            }
+
+            .language-btn .flag {
+                  font-size: 14px;
+            }
       }
 
       @media (min-width: 769px) {
@@ -273,13 +388,35 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
                               <div class="d-flex align-items-center">
                                     <i class="fas fa-user-circle me-3 fs-3"></i>
                                     <div>
-                                          <span class="fw-bold fs-5">Welcome, <?php echo htmlspecialchars($username); ?>!</span>
-                                          <div class="small opacity-75">You are successfully logged in</div>
+                                          <span class="fw-bold fs-5"><?php echo t('welcome'); ?>, <?php echo htmlspecialchars($username); ?>!</span>
+                                          <div class="small opacity-75"><?php echo t('successfully_logged_in'); ?></div>
                                     </div>
                               </div>
                         </div>
                         <div class="col-auto">
                               <div class="d-flex justify-content-end align-items-center">
+                                    <!-- Language Switcher -->
+                                    <div class="language-switcher me-3">
+                                          <div class="language-btn" id="languageBtn">
+                                                <span class="flag"><?php echo $current_lang['flag']; ?></span>
+                                                <span class="name"><?php echo $current_lang['native_name']; ?></span>
+                                                <i class="fas fa-chevron-down ms-1"></i>
+                                          </div>
+                                          <div class="language-dropdown" id="languageDropdown">
+                                                <div class="language-dropdown-header">
+                                                      <?php echo t('select_language'); ?>
+                                                </div>
+                                                <?php foreach ($available_langs as $lang_code => $lang_info): ?>
+                                                      <a href="?lang=<?php echo $lang_code; ?>"
+                                                            class="language-option <?php echo ($lang_code === $current_language) ? 'active' : ''; ?>">
+                                                            <span class="flag"><?php echo $lang_info['flag']; ?></span>
+                                                            <span class="name"><?php echo $lang_info['name']; ?></span>
+                                                            <span class="native-name"><?php echo $lang_info['native_name']; ?></span>
+                                                      </a>
+                                                <?php endforeach; ?>
+                                          </div>
+                                    </div>
+
                                     <!-- Hamburger Menu for Mobile -->
                                     <div class="hamburger-menu me-3" id="hamburgerMenu">
                                           <div class="hamburger-line"></div>
@@ -287,7 +424,7 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
                                           <div class="hamburger-line"></div>
                                     </div>
                                     <a href="login.php?logout=1" class="btn btn-outline-light btn-sm">
-                                          <i class="fas fa-sign-out-alt me-1"></i>Logout
+                                          <i class="fas fa-sign-out-alt me-1"></i><?php echo t('logout'); ?>
                                     </a>
                               </div>
                         </div>
@@ -299,24 +436,24 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
       <div class="mobile-nav" id="mobileNav">
             <div class="mobile-close" id="mobileClose"></div>
             <a href="index.php" class="btn <?php echo ($current_page === 'index') ? 'active' : 'btn-outline-primary'; ?>">
-                  <i class="fas fa-file-alt me-2"></i>View SR1
+                  <i class="fas fa-file-alt me-2"></i><?php echo t('view_sr1'); ?>
             </a>
             <a href="cover-letter.php" class="btn <?php echo ($current_page === 'cover-letter') ? 'active' : 'btn-outline-primary'; ?>">
-                  <i class="fas fa-envelope me-2"></i>View SR2
+                  <i class="fas fa-envelope me-2"></i><?php echo t('view_sr2'); ?>
             </a>
             <a href="certificates.php" class="btn <?php echo ($current_page === 'certificates') ? 'active' : 'btn-outline-success'; ?>">
-                  <i class="fas fa-certificate me-2"></i>View Certificates
+                  <i class="fas fa-certificate me-2"></i><?php echo t('view_certificates'); ?>
             </a>
             <a href="generate_pdf.php?type=cv" class="btn btn-outline-success">
-                  <i class="fas fa-download me-2"></i>Download PDF
+                  <i class="fas fa-download me-2"></i><?php echo t('download_pdf'); ?>
             </a>
             <?php if ($username === 'chamrern'): ?>
                   <a href="admin.php" class="btn <?php echo ($current_page === 'admin') ? 'active' : 'btn-outline-primary'; ?>">
-                        <i class="fas fa-cog me-2"></i>Admin Panel
+                        <i class="fas fa-cog me-2"></i><?php echo t('admin_panel'); ?>
                   </a>
             <?php else: ?>
                   <a href="user_dashboard.php" class="btn <?php echo ($current_page === 'user_dashboard') ? 'active' : 'btn-outline-primary'; ?>">
-                        <i class="fas fa-user me-2"></i>Dashboard
+                        <i class="fas fa-user me-2"></i><?php echo t('dashboard'); ?>
                   </a>
             <?php endif; ?>
       </div>
@@ -325,24 +462,24 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
       <div class="container mb-4">
             <div class="nav-buttons text-center">
                   <a href="index.php" class="btn <?php echo ($current_page === 'index') ? 'active' : 'btn-outline-primary'; ?>">
-                        <i class="fas fa-file-alt me-2"></i>View SR1
+                        <i class="fas fa-file-alt me-2"></i><?php echo t('view_sr1'); ?>
                   </a>
                   <a href="cover-letter.php" class="btn <?php echo ($current_page === 'cover-letter') ? 'active' : 'btn-outline-primary'; ?>">
-                        <i class="fas fa-envelope me-2"></i>View SR2
+                        <i class="fas fa-envelope me-2"></i><?php echo t('view_sr2'); ?>
                   </a>
                   <a href="certificates.php" class="btn <?php echo ($current_page === 'certificates') ? 'active' : 'btn-outline-success'; ?>">
-                        <i class="fas fa-certificate me-2"></i>View Certificates
+                        <i class="fas fa-certificate me-2"></i><?php echo t('view_certificates'); ?>
                   </a>
                   <a href="generate_pdf.php?type=cv" class="btn btn-outline-success">
-                        <i class="fas fa-download me-2"></i>Download PDF
+                        <i class="fas fa-download me-2"></i><?php echo t('download_pdf'); ?>
                   </a>
                   <?php if ($username === 'chamrern'): ?>
                         <a href="admin.php" class="btn <?php echo ($current_page === 'admin') ? 'active' : 'btn-outline-primary'; ?>">
-                              <i class="fas fa-cog me-2"></i>Admin Panel
+                              <i class="fas fa-cog me-2"></i><?php echo t('admin_panel'); ?>
                         </a>
                   <?php else: ?>
                         <a href="user_dashboard.php" class="btn <?php echo ($current_page === 'user_dashboard') ? 'active' : 'btn-outline-primary'; ?>">
-                              <i class="fas fa-user me-2"></i>Dashboard
+                              <i class="fas fa-user me-2"></i><?php echo t('dashboard'); ?>
                         </a>
                   <?php endif; ?>
             </div>
@@ -356,13 +493,35 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
                               <div class="d-flex align-items-center">
                                     <i class="fas fa-user-circle me-3 fs-3"></i>
                                     <div>
-                                          <span class="fw-bold fs-5">Welcome Guest!</span>
-                                          <div class="small opacity-75">Please login to access your CV</div>
+                                          <span class="fw-bold fs-5"><?php echo t('welcome_guest'); ?></span>
+                                          <div class="small opacity-75"><?php echo t('login_to_access'); ?></div>
                                     </div>
                               </div>
                         </div>
                         <div class="col-auto">
                               <div class="d-flex justify-content-end align-items-center">
+                                    <!-- Language Switcher -->
+                                    <div class="language-switcher me-3">
+                                          <div class="language-btn" id="languageBtn">
+                                                <span class="flag"><?php echo $current_lang['flag']; ?></span>
+                                                <span class="name"><?php echo $current_lang['native_name']; ?></span>
+                                                <i class="fas fa-chevron-down ms-1"></i>
+                                          </div>
+                                          <div class="language-dropdown" id="languageDropdown">
+                                                <div class="language-dropdown-header">
+                                                      <?php echo t('select_language'); ?>
+                                                </div>
+                                                <?php foreach ($available_langs as $lang_code => $lang_info): ?>
+                                                      <a href="?lang=<?php echo $lang_code; ?>"
+                                                            class="language-option <?php echo ($lang_code === $current_language) ? 'active' : ''; ?>">
+                                                            <span class="flag"><?php echo $lang_info['flag']; ?></span>
+                                                            <span class="name"><?php echo $lang_info['name']; ?></span>
+                                                            <span class="native-name"><?php echo $lang_info['native_name']; ?></span>
+                                                      </a>
+                                                <?php endforeach; ?>
+                                          </div>
+                                    </div>
+
                                     <!-- Hamburger Menu for Mobile -->
                                     <div class="hamburger-menu me-3" id="hamburgerMenu">
                                           <div class="hamburger-line"></div>
@@ -370,7 +529,7 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
                                           <div class="hamburger-line"></div>
                                     </div>
                                     <a href="login.php" class="btn btn-outline-light btn-sm">
-                                          <i class="fas fa-sign-in-alt me-1"></i>Login
+                                          <i class="fas fa-sign-in-alt me-1"></i><?php echo t('login'); ?>
                                     </a>
                               </div>
                         </div>
@@ -382,13 +541,13 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
       <div class="mobile-nav" id="mobileNav">
             <div class="mobile-close" id="mobileClose"></div>
             <a href="index.php" class="btn <?php echo ($current_page === 'index') ? 'active' : 'btn-outline-primary'; ?>">
-                  <i class="fas fa-file-alt me-2"></i>View CV
+                  <i class="fas fa-file-alt me-2"></i><?php echo t('view_cv'); ?>
             </a>
             <a href="login.php" class="btn <?php echo ($current_page === 'login') ? 'active' : 'btn-outline-primary'; ?>">
-                  <i class="fas fa-sign-in-alt me-2"></i>Login
+                  <i class="fas fa-sign-in-alt me-2"></i><?php echo t('login'); ?>
             </a>
             <a href="register.php" class="btn <?php echo ($current_page === 'register') ? 'active' : 'btn-outline-primary'; ?>">
-                  <i class="fas fa-user-plus me-2"></i>Register
+                  <i class="fas fa-user-plus me-2"></i><?php echo t('register'); ?>
             </a>
       </div>
 
@@ -396,10 +555,10 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
       <!-- <div class="container mb-4">
             <div class="nav-buttons text-center">
                   <a href="login.php" class="btn <?php echo ($current_page === 'login') ? 'active' : 'btn-primary'; ?>">
-                        <i class="fas fa-sign-in-alt me-2"></i>Login
+                        <i class="fas fa-sign-in-alt me-2"></i><?php echo t('login'); ?>
                   </a>
                   <a href="register.php" class="btn <?php echo ($current_page === 'register') ? 'active' : 'btn-outline-primary'; ?>">
-                        <i class="fas fa-user-plus me-2"></i>Register
+                        <i class="fas fa-user-plus me-2"></i><?php echo t('register'); ?>
                   </a>
             </div>
       </div> -->
@@ -410,6 +569,30 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
             const hamburgerMenu = document.getElementById('hamburgerMenu');
             const mobileNav = document.getElementById('mobileNav');
             const mobileClose = document.getElementById('mobileClose');
+            const languageBtn = document.getElementById('languageBtn');
+            const languageDropdown = document.getElementById('languageDropdown');
+
+            // Language switcher functionality
+            if (languageBtn && languageDropdown) {
+                  languageBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        languageDropdown.classList.toggle('show');
+                  });
+
+                  // Close language dropdown when clicking outside
+                  document.addEventListener('click', function(e) {
+                        if (!languageBtn.contains(e.target) && !languageDropdown.contains(e.target)) {
+                              languageDropdown.classList.remove('show');
+                        }
+                  });
+
+                  // Close language dropdown when pressing Escape
+                  document.addEventListener('keydown', function(e) {
+                        if (e.key === 'Escape') {
+                              languageDropdown.classList.remove('show');
+                        }
+                  });
+            }
 
             // Check if hamburger menu exists (for both logged-in and non-logged-in users)
             if (hamburgerMenu && mobileNav && mobileClose) {

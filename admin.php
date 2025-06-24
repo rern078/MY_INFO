@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'config.php';
+require_once 'languages.php';
 
 // Check if user is logged in and is the specific admin user
 if (!isset($_SESSION['user_id']) || $_SESSION['username'] !== 'chamrern') {
@@ -435,7 +436,7 @@ if (empty($courses)) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php echo $current_language; ?>" dir="<?php echo getLanguageDirection(); ?>">
 
 <head>
       <meta charset="UTF-8">
@@ -656,6 +657,11 @@ if (empty($courses)) {
             /* Error Alert Specific Styles */
             .custom-alert-error {
                   background: linear-gradient(135deg, #fef2f2 0%, #ffffff 100%);
+            }
+
+            html[lang="km"] body,
+            html[lang="km"] * {
+                  font-family: var(--font-khmer) !important;
             }
       </style>
 </head>

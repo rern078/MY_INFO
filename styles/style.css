@@ -9,6 +9,18 @@
       font-display: swap;
 }
 
+/* Khmer Font Import - Kh Fasthand */
+@font-face {
+      font-family: 'Khmer OS Fasthand';
+      src: url('font/KhmerOSDangrek.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+}
+
+/* Alternative Khmer font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@400;700&display=swap');
+
 :root {
       --primary-color: #2563eb;
       --secondary-color: #1e40af;
@@ -32,6 +44,9 @@
       --font-elegant: 'Guavine', 'Brush Script MT', cursive, serif;
       --font-modern: 'Guavine', 'Brush Script MT', cursive, serif;
       --font-custom: 'Guavine', 'Brush Script MT', cursive, serif;
+
+      /* Khmer font */
+      --font-khmer: 'Khmer OS Dangrek';
 }
 
 * {
@@ -48,6 +63,113 @@ body {
       padding: 0;
       /* Ensure font loading */
       font-display: swap;
+}
+
+html[lang="km"] .fa,
+html[lang="km"] .fas,
+html[lang="km"] .far,
+html[lang="km"] .fab {
+      font-family: "Font Awesome 5 Free" !important;
+      font-weight: 900 !important;
+      /* for .fas */
+}
+
+html[lang="km"] .far {
+      font-weight: 400 !important;
+      /* for .far */
+}
+
+html[lang="km"] .fab {
+      font-family: "Font Awesome 5 Brands" !important;
+      font-weight: 400 !important;
+}
+
+/* Khmer Language Font Override */
+/* html[lang="km"] body,
+html[lang="km"] * {
+      font-family: var(--font-khmer) !important;
+} */
+
+html[lang="km"] body,
+html[lang="km"] *:not(.fa):not(.fas):not(.far):not(.fab) {
+      font-family: var(--font-khmer) !important;
+}
+
+/* Specific Khmer font classes for manual application */
+.font-khmer {
+      font-family: var(--font-khmer) !important;
+}
+
+/* Khmer language specific adjustments */
+html[lang="km"] .cv-header h1 {
+      font-family: var(--font-khmer) !important;
+      font-size: 2.8rem;
+      /* Slightly larger for Khmer characters */
+      line-height: 1.4;
+}
+
+html[lang="km"] .cv-header .title {
+      font-family: var(--font-khmer) !important;
+      font-size: 1.4rem;
+}
+
+html[lang="km"] .section-header h3 {
+      font-family: var(--font-khmer) !important;
+      font-size: 1.6rem;
+}
+
+html[lang="km"] .timeline-item h4 {
+      font-family: var(--font-khmer) !important;
+      font-size: 1.3rem;
+}
+
+html[lang="km"] .timeline-item h5 {
+      font-family: var(--font-khmer) !important;
+      font-size: 1.1rem;
+}
+
+html[lang="km"] .info-card h4 {
+      font-family: var(--font-khmer) !important;
+      font-size: 1.2rem;
+}
+
+html[lang="km"] .skill-category h4 {
+      font-family: var(--font-khmer) !important;
+      font-size: 1.3rem;
+}
+
+html[lang="km"] .language-name {
+      font-family: var(--font-khmer) !important;
+      font-size: 1.1rem;
+}
+
+html[lang="km"] .interest-name {
+      font-family: var(--font-khmer) !important;
+      font-size: 1.1rem;
+}
+
+/* Khmer language button and navigation text */
+html[lang="km"] .nav-buttons .btn,
+html[lang="km"] .language-btn,
+html[lang="km"] .mobile-nav .btn {
+      font-family: var(--font-khmer) !important;
+      /* font-size: 1.1rem; */
+}
+
+/* Khmer language form elements */
+html[lang="km"] input,
+html[lang="km"] textarea,
+html[lang="km"] select,
+html[lang="km"] label,
+html[lang="km"] .form-label {
+      font-family: var(--font-khmer) !important;
+}
+
+/* Khmer language alert and message text */
+html[lang="km"] .alert,
+html[lang="km"] .alert span,
+html[lang="km"] .alert p {
+      font-family: var(--font-khmer) !important;
 }
 
 /* Alternative Font Classes */
@@ -942,6 +1064,11 @@ body {
             box-sizing: border-box;
       }
 
+      html[lang="km"] .hamburger-menu,
+      html[lang="km"] .language-switcher {
+            margin-right: .5rem !important;
+      }
+
       .cv-header {
             padding: 3rem 2rem;
             margin-bottom: 1.5rem;
@@ -951,6 +1078,23 @@ body {
 
       .cv-header h1 {
             font-size: 2rem;
+      }
+
+      /* Khmer font adjustments for mobile */
+      html[lang="km"] .cv-header h1 {
+            font-family: var(--font-khmer) !important;
+            font-size: 2.2rem;
+            line-height: 1.3;
+      }
+
+      html[lang="km"] .cv-header .title {
+            font-family: var(--font-khmer) !important;
+            font-size: 1.2rem;
+      }
+
+      html[lang="km"] .section-header h3 {
+            font-family: var(--font-khmer) !important;
+            font-size: 1.4rem;
       }
 
       .contact-details {
@@ -967,8 +1111,8 @@ body {
 
       .nav-buttons .btn {
             min-width: 120px;
-            padding: 0.75rem 1.25rem;
-            font-size: 0.875rem;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
       }
 
       .cv-content .card-body {
@@ -1092,6 +1236,28 @@ body {
 
       .cv-header h1 {
             font-size: 1.75rem;
+      }
+
+      /* Khmer font adjustments for small mobile */
+      html[lang="km"] .cv-header h1 {
+            font-family: var(--font-khmer) !important;
+            font-size: 1.9rem;
+            line-height: 1.2;
+      }
+
+      html[lang="km"] .cv-header .title {
+            font-family: var(--font-khmer) !important;
+            font-size: 1.1rem;
+      }
+
+      html[lang="km"] .section-header h3 {
+            font-family: var(--font-khmer) !important;
+            font-size: 1.3rem;
+      }
+
+      html[lang="km"] .nav-buttons .btn {
+            font-family: var(--font-khmer) !important;
+            font-size: 0.95rem;
       }
 
       .nav-buttons {
@@ -1220,4 +1386,9 @@ body {
       100% {
             transform: rotate(360deg);
       }
+}
+
+html[lang="km"] .fallback-en {
+      font-family: var(--font-primary) !important;
+      /* Guavine */
 }

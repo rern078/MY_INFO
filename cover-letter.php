@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'config.php';
+require_once 'languages.php';
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -40,7 +41,7 @@ $hasData = $personalInfo && $companyInfo && $coverLetter;
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php echo $current_language; ?>" dir="<?php echo getLanguageDirection(); ?>">
 
 <head>
       <meta charset="UTF-8">

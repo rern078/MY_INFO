@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'config.php';
+require_once 'languages.php';
 
 // Handle logout - clear session and remember me cookie
 if (isset($_GET['logout'])) {
@@ -119,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   exit();
             }
       }
-      $error = "Invalid username or password";
+      $error = t('invalid_credentials');
 
       // If login failed, preserve the entered values
       $saved_username = $username;
@@ -129,12 +130,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php echo $current_language; ?>" dir="<?php echo getLanguageDirection(); ?>">
 
 <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Login - Cover Letter Management</title>
+      <title><?php echo t('login'); ?> - Cover Letter Management</title>
       <link rel="stylesheet" href="styles/style.css?v=<?php echo time(); ?>">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -180,25 +181,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body class="bg-light">
+      <?php include 'header.php'; ?>
+
       <div class="container py-5">
             <div class="row justify-content-center">
                   <div class="col-md-6 col-lg-4">
                         <div class="card shadow-sm">
                               <div class="card-body p-4">
-                                    <h2 class="text-center mb-4">Login</h2>
+                                    <h2 class="text-center mb-4"><?php echo t('login'); ?></h2>
+
+                                    <?php if (isset($error)): ?>
+                                          <div class="alert alert-danger" role="alert">
+                                                <?php echo htmlspecialchars($error); ?>
+                                          </div>
+                                    <?php endif; ?>
 
                                     <form method="POST" action="" id="loginForm" onsubmit="return validateLoginForm()">
                                           <div class="mb-3">
-                                                <label class="form-label">Username</label>
+                                                <label class="form-label"><?php echo t('username'); ?></label>
                                                 <input type="text" class="form-control" name="username" value="<?php echo htmlspecialchars($saved_username); ?>">
                                           </div>
                                           <div class="mb-3">
-                                                <label class="form-label">Password</label>
+                                                <label class="form-label"><?php echo t('password'); ?></label>
                                                 <div class="input-group">
                                                       <input type="password" class="form-control" name="password" id="password" value="<?php echo htmlspecialchars($saved_password); ?>">
                                                       <?php if (isset($_GET['show_saved']) && isset($_COOKIE['remember_user'])): ?>
                                                             <button class="btn btn-outline-secondary" type="button" id="togglePassword">
-                                                                  <i class="fas fa-eye" id="toggleIcon"></i>
+                                                                  <i class="fas fa-eye"></i>
                                                             </button>
                                                       <?php endif; ?>
                                                 </div>
@@ -208,25 +217,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 <div class="form-check">
                                                       <input class="form-check-input" type="checkbox" name="remember_me" id="rememberMe" <?php echo $remember_checked ? 'checked' : ''; ?>>
                                                       <label class="form-check-label" for="rememberMe">
-                                                            <i class="fas fa-user-check me-1"></i>
-                                                            Remember Me
+                                                            <?php echo t('remember_me'); ?>
                                                       </label>
                                                 </div>
+                                                <?php if (isset($_COOKIE['remember_user'])): ?>
+                                                      <a href="?show_saved=1" class="text-decoration-none small">
+                                                            <?php echo t('show_saved_credentials'); ?>
+                                                      </a>
+                                                <?php endif; ?>
                                           </div>
 
-                                          <button type="submit" class="btn btn-primary w-100">Login</button>
-                                    </form>
+                                          <button type="submit" class="btn btn-primary w-100 mb-3">
+                                                <?php echo t('login'); ?>
+                                          </button>
 
-                                    <div class="text-center mt-3">
-                                          <p class="mb-0">Don't have an account? <a href="register.php">Register here</a></p>
-                                          <?php if (isset($_COOKIE['remember_user'])): ?>
-                                                <p class="mt-2 mb-0">
-                                                      <a href="login.php?show_saved=1" class="text-muted small">
-                                                            <i class="fas fa-key me-1"></i>View saved credentials
+                                          <div class="text-center">
+                                                <p class="mb-0">
+                                                      <?php echo t('dont_have_account'); ?>
+                                                      <a href="register.php" class="text-decoration-none">
+                                                            <?php echo t('register_here'); ?>
                                                       </a>
                                                 </p>
-                                          <?php endif; ?>
-                                    </div>
+                                          </div>
+                                    </form>
                               </div>
                         </div>
                   </div>
@@ -234,105 +247,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
       <script>
-            // Password toggle functionality
-            document.addEventListener('DOMContentLoaded', function() {
-                  const togglePassword = document.getElementById('togglePassword');
-                  const password = document.getElementById('password');
-                  const toggleIcon = document.getElementById('toggleIcon');
-
-                  if (togglePassword && password && toggleIcon) {
-                        togglePassword.addEventListener('click', function() {
-                              const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
-                              password.setAttribute('type', type);
-
-                              // Toggle icon
-                              if (type === 'text') {
-                                    toggleIcon.classList.remove('fa-eye');
-                                    toggleIcon.classList.add('fa-eye-slash');
-                              } else {
-                                    toggleIcon.classList.remove('fa-eye-slash');
-                                    toggleIcon.classList.add('fa-eye');
-                              }
-                        });
-                  }
-
-                  // Show success message for logout if present
-                  <?php if (isset($_GET['logout'])): ?>
-                        Swal.fire({
-                              icon: 'success',
-                              title: 'Logged Out Successfully',
-                              text: 'You have been successfully logged out.',
-                              confirmButtonColor: '#28a745',
-                              timer: 3000,
-                              timerProgressBar: true
-                        });
-                  <?php endif; ?>
-
-                  // Show info message for saved credentials if present
-                  <?php if (isset($_GET['show_saved']) && isset($_COOKIE['remember_user'])): ?>
-                        Swal.fire({
-                              icon: 'info',
-                              title: 'Saved Credentials',
-                              text: 'Showing your saved credentials. You can modify them and login again.',
-                              confirmButtonColor: '#17a2b8'
-                        });
-                  <?php endif; ?>
-
-                  // Show error message if login failed
-                  <?php if (isset($error)): ?>
-                        Swal.fire({
-                              icon: 'error',
-                              title: 'Login Failed',
-                              text: '<?php echo addslashes($error); ?>',
-                              confirmButtonColor: '#dc3545'
-                        });
-                  <?php endif; ?>
-            });
-
-            // Form validation function
             function validateLoginForm() {
-                  const username = document.getElementById('username');
-                  const password = document.getElementById('password');
+                  const username = document.querySelector('input[name="username"]').value.trim();
+                  const password = document.querySelector('input[name="password"]').value.trim();
 
-                  // Check for empty fields
-                  if (!username.value.trim()) {
+                  if (!username) {
                         Swal.fire({
                               icon: 'error',
-                              title: 'Validation Error',
-                              text: 'Username cannot be empty!',
-                              confirmButtonColor: '#dc3545'
+                              title: '<?php echo t('error'); ?>',
+                              text: '<?php echo t('username_required'); ?>'
                         });
-                        username.focus();
                         return false;
                   }
 
-                  if (!password.value.trim()) {
+                  if (!password) {
                         Swal.fire({
                               icon: 'error',
-                              title: 'Validation Error',
-                              text: 'Password cannot be empty!',
-                              confirmButtonColor: '#dc3545'
+                              title: '<?php echo t('error'); ?>',
+                              text: '<?php echo t('password_required'); ?>'
                         });
-                        password.focus();
                         return false;
                   }
 
-                  // Show loading state
-                  Swal.fire({
-                        title: 'Logging in...',
-                        text: 'Please wait while we authenticate your credentials.',
-                        allowOutsideClick: false,
-                        allowEscapeKey: false,
-                        showConfirmButton: false,
-                        didOpen: () => {
-                              Swal.showLoading();
-                        }
-                  });
-
-                  // Allow form submission
                   return true;
+            }
+
+            // Toggle password visibility
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+
+            if (togglePassword && passwordInput) {
+                  togglePassword.addEventListener('click', function() {
+                        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                        passwordInput.setAttribute('type', type);
+
+                        const icon = this.querySelector('i');
+                        icon.classList.toggle('fa-eye');
+                        icon.classList.toggle('fa-eye-slash');
+                  });
             }
       </script>
 </body>

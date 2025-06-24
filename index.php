@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'config.php';
+require_once 'languages.php';
 
 // Check if user is logged in (but don't redirect - allow public access)
 $isLoggedIn = isset($_SESSION['user_id']);
@@ -160,12 +161,12 @@ $hasData = $personalInfo;
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php echo $current_language; ?>" dir="<?php echo getLanguageDirection(); ?>">
 
 <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>CV - <?php echo htmlspecialchars($personalInfo['name'] ?? 'User'); ?></title>
+      <title><?php echo t('cv'); ?> - <?php echo htmlspecialchars($personalInfo['name'] ?? t('user')); ?></title>
       <link rel="stylesheet" href="styles/style.css?v=<?php echo time(); ?>">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -178,7 +179,7 @@ $hasData = $personalInfo;
             <?php if (!$hasData): ?>
                   <div class="alert alert-warning fade-in">
                         <i class="fas fa-exclamation-triangle"></i>
-                        <span>No CV data available. Please contact the administrator to set up your CV.</span>
+                        <span><?php echo t('no_cv_data_available'); ?></span>
                   </div>
             <?php else: ?>
                   <div class="cv-header fade-in">

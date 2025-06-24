@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'config.php';
+require_once 'languages.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $username = sanitize_input($_POST['username']);
@@ -12,36 +13,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       // Validate username
       if (strlen($username) < 3) {
-            $errors[] = "Username must be at least 3 characters long";
+            $errors[] = t('username_min_length');
       }
 
       // Validate username maximum length (50 characters to match database field)
       if (strlen($username) > 50) {
-            $errors[] = "Username must not exceed 50 characters";
+            $errors[] = t('username_max_length');
       }
 
       // Validate username contains only alphabets
       if (!preg_match('/^[a-zA-Z]+$/', $username)) {
-            $errors[] = "Username must contain only alphabets (letters)";
+            $errors[] = t('username_alphabets_only');
       }
 
       // Validate email
       if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors[] = "Invalid email format";
+            $errors[] = t('invalid_email_format');
       }
 
       // Validate password
       if (strlen($password) < 6) {
-            $errors[] = "Password must be at least 6 characters long";
+            $errors[] = t('password_min_length');
       }
 
       // Validate password contains only alphanumeric characters
       if (!preg_match('/^[a-zA-Z0-9]+$/', $password)) {
-            $errors[] = "Password must contain only letters and numbers";
+            $errors[] = t('password_alphanumeric_only');
       }
 
       if ($password !== $confirm_password) {
-            $errors[] = "Passwords do not match";
+            $errors[] = t('password_mismatch');
       }
 
       // Check if username or email already exists
@@ -55,11 +56,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   mysqli_stmt_store_result($check_stmt);
 
                   if (mysqli_stmt_num_rows($check_stmt) > 0) {
-                        $errors[] = "Username or email already exists";
+                        $errors[] = t('username_or_email_exists');
                   }
                   mysqli_stmt_close($check_stmt);
             } else {
-                  $errors[] = "Database error occurred. Please try again.";
+                  $errors[] = t('database_error');
             }
       }
 
@@ -84,12 +85,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         }
                         exit();
                   } else {
-                        $errors[] = "Registration failed. Please try again.";
+                        $errors[] = t('registration_failed');
                         error_log("Registration failed: " . mysqli_error($conn));
                   }
                   mysqli_stmt_close($stmt);
             } else {
-                  $errors[] = "Database error occurred. Please try again.";
+                  $errors[] = t('database_error');
                   error_log("Prepare statement failed: " . mysqli_error($conn));
             }
       }
@@ -97,12 +98,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php echo $current_language; ?>" dir="<?php echo getLanguageDirection(); ?>">
 
 <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Register - Cover Letter Management</title>
+      <title><?php echo t('register'); ?> - Cover Letter Management</title>
       <link rel="stylesheet" href="styles/style.css?v=<?php echo time(); ?>">
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -145,13 +146,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body class="bg-light">
+      <?php include 'header.php'; ?>
 
       <div class="container py-5">
             <div class="row justify-content-center">
                   <div class="col-md-6 col-lg-4">
                         <div class="card shadow-sm">
                               <div class="card-body p-4">
-                                    <h2 class="text-center mb-4">Register</h2>
+                                    <h2 class="text-center mb-4"><?php echo t('register'); ?></h2>
 
                                     <?php if (!empty($errors)): ?>
                                           <div class="alert alert-danger">
@@ -165,22 +167,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                                     <form method="POST" action="" id="registerForm" onsubmit="return validateForm()">
                                           <div class="mb-3">
-                                                <label class="form-label">Username</label>
+                                                <label class="form-label"><?php echo t('username'); ?></label>
                                                 <input type="text" class="form-control" name="username" id="username" maxlength="50"
                                                       oninput="validateUsername(this)"
                                                       onfocus="showHelpText('username-help')"
                                                       onblur="hideHelpText('username-help')">
-                                                <small class="text-muted help-text" id="username-help" style="display: none;">Only alphabets (a-z, A-Z) allowed, 3-50 characters</small>
+                                                <small class="text-muted help-text" id="username-help" style="display: none;"><?php echo t('username_help_text'); ?></small>
                                           </div>
                                           <div class="mb-3">
-                                                <label class="form-label">Email</label>
+                                                <label class="form-label"><?php echo t('email'); ?></label>
                                                 <input type="email" class="form-control" name="email" id="email"
                                                       onfocus="showHelpText('email-help')"
                                                       onblur="hideHelpText('email-help')">
-                                                <small class="text-muted help-text" id="email-help" style="display: none;">Enter a valid email address</small>
+                                                <small class="text-muted help-text" id="email-help" style="display: none;"><?php echo t('email_help_text'); ?></small>
                                           </div>
                                           <div class="mb-3">
-                                                <label class="form-label">Password</label>
+                                                <label class="form-label"><?php echo t('password'); ?></label>
                                                 <div class="password-field">
                                                       <input type="password" class="form-control" name="password" id="password"
                                                             oninput="validatePassword(this)"
@@ -190,26 +192,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                             <i class="fas fa-eye" id="password-icon"></i>
                                                       </button>
                                                 </div>
-                                                <small class="text-muted help-text" id="password-help" style="display: none;">Only letters and numbers (a-z, A-Z, 0-9) allowed, minimum 6 characters</small>
+                                                <small class="text-muted help-text" id="password-help" style="display: none;"><?php echo t('password_help_text'); ?></small>
                                           </div>
                                           <div class="mb-3">
-                                                <label class="form-label">Confirm Password</label>
+                                                <label class="form-label"><?php echo t('confirm_password'); ?></label>
                                                 <div class="password-field">
                                                       <input type="password" class="form-control" name="confirm_password" id="confirm_password"
                                                             onfocus="showHelpText('confirm-password-help')"
                                                             onblur="hideHelpText('confirm-password-help')">
                                                       <button type="button" class="password-toggle" onclick="togglePassword('confirm_password')">
-                                                            <i class="fas fa-eye" id="confirm_password-icon"></i>
+                                                            <i class="fas fa-eye" id="confirm-password-icon"></i>
                                                       </button>
                                                 </div>
-                                                <small class="text-muted help-text" id="confirm-password-help" style="display: none;">Re-enter your password to confirm</small>
+                                                <small class="text-muted help-text" id="confirm-password-help" style="display: none;"><?php echo t('confirm_password_help_text'); ?></small>
                                           </div>
-                                          <button type="submit" class="btn btn-primary w-100">Register</button>
-                                    </form>
 
-                                    <div class="text-center mt-3">
-                                          <p class="mb-0">Already have an account? <a href="login.php">Login here</a></p>
-                                    </div>
+                                          <button type="submit" class="btn btn-primary w-100 mb-3">
+                                                <?php echo t('register'); ?>
+                                          </button>
+
+                                          <div class="text-center">
+                                                <p class="mb-0">
+                                                      <?php echo t('already_have_account'); ?>
+                                                      <a href="login.php" class="text-decoration-none">
+                                                            <?php echo t('login_here'); ?>
+                                                      </a>
+                                                </p>
+                                          </div>
+                                    </form>
                               </div>
                         </div>
                   </div>
@@ -218,198 +228,88 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
       <script>
+            function validateForm() {
+                  const username = document.getElementById('username').value.trim();
+                  const email = document.getElementById('email').value.trim();
+                  const password = document.getElementById('password').value.trim();
+                  const confirmPassword = document.getElementById('confirm_password').value.trim();
+
+                  if (!username) {
+                        Swal.fire({
+                              icon: 'error',
+                              title: '<?php echo t('error'); ?>',
+                              text: '<?php echo t('username_required'); ?>'
+                        });
+                        return false;
+                  }
+
+                  if (!email) {
+                        Swal.fire({
+                              icon: 'error',
+                              title: '<?php echo t('error'); ?>',
+                              text: '<?php echo t('email_required'); ?>'
+                        });
+                        return false;
+                  }
+
+                  if (!password) {
+                        Swal.fire({
+                              icon: 'error',
+                              title: '<?php echo t('error'); ?>',
+                              text: '<?php echo t('password_required'); ?>'
+                        });
+                        return false;
+                  }
+
+                  if (!confirmPassword) {
+                        Swal.fire({
+                              icon: 'error',
+                              title: '<?php echo t('error'); ?>',
+                              text: '<?php echo t('confirm_password_required'); ?>'
+                        });
+                        return false;
+                  }
+
+                  return true;
+            }
+
+            function validateUsername(input) {
+                  const value = input.value;
+                  const isValid = /^[a-zA-Z]{3,50}$/.test(value);
+
+                  input.classList.remove('error', 'valid');
+                  input.classList.add(isValid ? 'valid' : 'error');
+            }
+
+            function validatePassword(input) {
+                  const value = input.value;
+                  const isValid = /^[a-zA-Z0-9]{6,}$/.test(value);
+
+                  input.classList.remove('error', 'valid');
+                  input.classList.add(isValid ? 'valid' : 'error');
+            }
+
             function togglePassword(fieldId) {
-                  const passwordField = document.getElementById(fieldId);
+                  const field = document.getElementById(fieldId);
                   const icon = document.getElementById(fieldId + '-icon');
 
-                  if (passwordField.type === 'password') {
-                        passwordField.type = 'text';
+                  if (field.type === 'password') {
+                        field.type = 'text';
                         icon.classList.remove('fa-eye');
                         icon.classList.add('fa-eye-slash');
                   } else {
-                        passwordField.type = 'password';
+                        field.type = 'password';
                         icon.classList.remove('fa-eye-slash');
                         icon.classList.add('fa-eye');
                   }
             }
 
-            function validateUsername(input) {
-                  const value = input.value;
-                  const alphabetOnly = /^[a-zA-Z]*$/;
-
-                  // Truncate if longer than 50 characters
-                  if (value.length > 50) {
-                        input.value = value.substring(0, 50);
-                  }
-
-                  if (value && !alphabetOnly.test(value)) {
-                        input.classList.remove('valid');
-                        input.classList.add('error');
-                        input.value = value.replace(/[^a-zA-Z]/g, '');
-                  } else if (value) {
-                        input.classList.remove('error');
-                        input.classList.add('valid');
-                  } else {
-                        input.classList.remove('error', 'valid');
-                  }
+            function showHelpText(elementId) {
+                  document.getElementById(elementId).style.display = 'block';
             }
 
-            function validatePassword(input) {
-                  const value = input.value;
-                  const alphanumericOnly = /^[a-zA-Z0-9]*$/;
-
-                  if (value && !alphanumericOnly.test(value)) {
-                        input.classList.remove('valid');
-                        input.classList.add('error');
-                        input.value = value.replace(/[^a-zA-Z0-9]/g, '');
-                  } else if (value) {
-                        input.classList.remove('error');
-                        input.classList.add('valid');
-                  } else {
-                        input.classList.remove('error', 'valid');
-                  }
-            }
-
-            function showHelpText(textId) {
-                  const helpText = document.getElementById(textId);
-                  if (helpText) {
-                        helpText.style.display = 'block';
-                  }
-            }
-
-            function hideHelpText(textId) {
-                  const helpText = document.getElementById(textId);
-                  if (helpText) {
-                        helpText.style.display = 'none';
-                  }
-            }
-
-            function validateForm() {
-                  const username = document.getElementById('username');
-                  const email = document.getElementById('email');
-                  const password = document.getElementById('password');
-                  const confirmPassword = document.getElementById('confirm_password');
-
-                  // Check for empty fields sequentially
-                  if (!username.value.trim()) {
-                        Swal.fire({
-                              icon: 'error',
-                              title: 'Validation Error',
-                              text: 'Username cannot be empty!',
-                              confirmButtonColor: '#dc3545'
-                        });
-                        username.focus();
-                        return false;
-                  }
-
-                  if (!email.value.trim()) {
-                        Swal.fire({
-                              icon: 'error',
-                              title: 'Validation Error',
-                              text: 'Email cannot be empty!',
-                              confirmButtonColor: '#dc3545'
-                        });
-                        email.focus();
-                        return false;
-                  }
-
-                  if (!password.value.trim()) {
-                        Swal.fire({
-                              icon: 'error',
-                              title: 'Validation Error',
-                              text: 'Password cannot be empty!',
-                              confirmButtonColor: '#dc3545'
-                        });
-                        password.focus();
-                        return false;
-                  }
-
-                  if (!confirmPassword.value.trim()) {
-                        Swal.fire({
-                              icon: 'error',
-                              title: 'Validation Error',
-                              text: 'Confirm Password cannot be empty!',
-                              confirmButtonColor: '#dc3545'
-                        });
-                        confirmPassword.focus();
-                        return false;
-                  }
-
-                  // Only proceed with format validation if fields are not empty
-                  // Validate username format
-                  if (!/^[a-zA-Z]+$/.test(username.value)) {
-                        Swal.fire({
-                              icon: 'error',
-                              title: 'Validation Error',
-                              text: 'Username must contain only alphabets (letters)!',
-                              confirmButtonColor: '#dc3545'
-                        });
-                        username.focus();
-                        return false;
-                  }
-
-                  // Check username length
-                  if (username.value.length < 3) {
-                        Swal.fire({
-                              icon: 'error',
-                              title: 'Validation Error',
-                              text: 'Username must be at least 3 characters long!',
-                              confirmButtonColor: '#dc3545'
-                        });
-                        username.focus();
-                        return false;
-                  }
-
-                  // Check username maximum length
-                  if (username.value.length > 50) {
-                        Swal.fire({
-                              icon: 'error',
-                              title: 'Validation Error',
-                              text: 'Username must not exceed 50 characters!',
-                              confirmButtonColor: '#dc3545'
-                        });
-                        username.focus();
-                        return false;
-                  }
-
-                  // Validate password format
-                  if (!/^[a-zA-Z0-9]+$/.test(password.value)) {
-                        Swal.fire({
-                              icon: 'error',
-                              title: 'Validation Error',
-                              text: 'Password must contain only letters and numbers!',
-                              confirmButtonColor: '#dc3545'
-                        });
-                        password.focus();
-                        return false;
-                  }
-
-                  // Check password length
-                  if (password.value.length < 6) {
-                        Swal.fire({
-                              icon: 'error',
-                              title: 'Validation Error',
-                              text: 'Password must be at least 6 characters long!',
-                              confirmButtonColor: '#dc3545'
-                        });
-                        password.focus();
-                        return false;
-                  }
-
-                  // Check if passwords match
-                  if (password.value !== confirmPassword.value) {
-                        Swal.fire({
-                              icon: 'error',
-                              title: 'Validation Error',
-                              text: 'Passwords do not match!',
-                              confirmButtonColor: '#dc3545'
-                        });
-                        confirmPassword.focus();
-                        return false;
-                  }
-
-                  // If no errors, allow form submission
-                  return true;
+            function hideHelpText(elementId) {
+                  document.getElementById(elementId).style.display = 'none';
             }
       </script>
 </body>
