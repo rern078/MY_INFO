@@ -8,13 +8,6 @@ if (!isset($_SESSION['user_id'])) {
       exit();
 }
 
-// Handle logout
-if (isset($_GET['logout'])) {
-      session_destroy();
-      header("Location: index.php");
-      exit();
-}
-
 // Fetch user's information
 $user_id = $_SESSION['user_id'];
 $sql = "SELECT username, email FROM users WHERE id = ?";
@@ -63,7 +56,7 @@ $user = mysqli_fetch_assoc($result);
                                           <a href="certificates.php" class="btn btn-outline-success me-2 mb-2">
                                                 <i class="fas fa-certificate me-2"></i>View Certificates
                                           </a>
-                                          <a href="?logout=1" class="btn btn-outline-danger me-2 mb-2">
+                                          <a href="login.php?logout=1" class="btn btn-outline-danger me-2 mb-2">
                                                 <i class="fas fa-sign-out-alt me-2"></i>Logout
                                           </a>
                                     </div>

@@ -2,13 +2,44 @@
 session_start();
 require_once 'config.php';
 
+// Handle logout - clear session and remember me cookie
+if (isset($_GET['logout'])) {
+      // Unset all session variables
+      $_SESSION = array();
+
+      // Destroy the session cookie
+      if (ini_get("session.use_cookies")) {
+            $params = session_get_cookie_params();
+            setcookie(
+                  session_name(),
+                  '',
+                  time() - 42000,
+                  $params["path"],
+                  $params["domain"],
+                  $params["secure"],
+                  $params["httponly"]
+            );
+      }
+
+      // Destroy the session
+      session_destroy();
+
+      // Clear remember me cookie
+      if (isset($_COOKIE['remember_user'])) {
+            setcookie('remember_user', '', time() - 3600, '/');
+      }
+
+      header("Location: login.php");
+      exit();
+}
+
 // Variables to store saved credentials
 $saved_username = '';
 $saved_password = '';
 $remember_checked = false;
 
 // Check for remember me cookie
-if (!isset($_SESSION['user_id']) && isset($_COOKIE['remember_user'])) {
+if (!isset($_SESSION['user_id']) && isset($_COOKIE['remember_user']) && !isset($_GET['show_saved'])) {
       $cookie_data = json_decode($_COOKIE['remember_user'], true);
       if ($cookie_data && isset($cookie_data['username']) && isset($cookie_data['password'])) {
             $saved_username = sanitize_input($cookie_data['username']);
@@ -36,6 +67,16 @@ if (!isset($_SESSION['user_id']) && isset($_COOKIE['remember_user'])) {
                         exit();
                   }
             }
+      }
+}
+
+// If user wants to see saved credentials, load them from cookie
+if (isset($_GET['show_saved']) && isset($_COOKIE['remember_user'])) {
+      $cookie_data = json_decode($_COOKIE['remember_user'], true);
+      if ($cookie_data && isset($cookie_data['username']) && isset($cookie_data['password'])) {
+            $saved_username = sanitize_input($cookie_data['username']);
+            $saved_password = $cookie_data['password'];
+            $remember_checked = true;
       }
 }
 
@@ -145,6 +186,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                               <div class="card-body p-4">
                                     <h2 class="text-center mb-4">Login</h2>
 
+                                    <?php if (isset($_GET['logout'])): ?>
+                                          <div class="alert alert-success">You have been successfully logged out.</div>
+                                    <?php endif; ?>
+
+                                    <?php if (isset($_GET['show_saved']) && isset($_COOKIE['remember_user'])): ?>
+                                          <div class="alert alert-info">
+                                                <i class="fas fa-info-circle me-2"></i>
+                                                Showing your saved credentials. You can modify them and login again.
+                                          </div>
+                                    <?php endif; ?>
+
                                     <?php if (isset($error)): ?>
                                           <div class="alert alert-danger"><?php echo $error; ?></div>
                                     <?php endif; ?>
@@ -156,7 +208,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                           </div>
                                           <div class="mb-3">
                                                 <label class="form-label">Password</label>
-                                                <input type="password" class="form-control" name="password" value="<?php echo htmlspecialchars($saved_password); ?>" required>
+                                                <div class="input-group">
+                                                      <input type="password" class="form-control" name="password" id="password" value="<?php echo htmlspecialchars($saved_password); ?>" required>
+                                                      <?php if (isset($_GET['show_saved']) && isset($_COOKIE['remember_user'])): ?>
+                                                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                                                  <i class="fas fa-eye" id="toggleIcon"></i>
+                                                            </button>
+                                                      <?php endif; ?>
+                                                </div>
                                           </div>
 
                                           <div class="remember-me-container">
@@ -174,6 +233,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                                     <div class="text-center mt-3">
                                           <p class="mb-0">Don't have an account? <a href="register.php">Register here</a></p>
+                                          <?php if (isset($_COOKIE['remember_user'])): ?>
+                                                <p class="mt-2 mb-0">
+                                                      <a href="login.php?show_saved=1" class="text-muted small">
+                                                            <i class="fas fa-key me-1"></i>View saved credentials
+                                                      </a>
+                                                </p>
+                                          <?php endif; ?>
                                     </div>
                               </div>
                         </div>
@@ -182,6 +248,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+      <script>
+            // Password toggle functionality
+            document.addEventListener('DOMContentLoaded', function() {
+                  const togglePassword = document.getElementById('togglePassword');
+                  const password = document.getElementById('password');
+                  const toggleIcon = document.getElementById('toggleIcon');
+
+                  if (togglePassword && password && toggleIcon) {
+                        togglePassword.addEventListener('click', function() {
+                              const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+                              password.setAttribute('type', type);
+
+                              // Toggle icon
+                              if (type === 'text') {
+                                    toggleIcon.classList.remove('fa-eye');
+                                    toggleIcon.classList.add('fa-eye-slash');
+                              } else {
+                                    toggleIcon.classList.remove('fa-eye-slash');
+                                    toggleIcon.classList.add('fa-eye');
+                              }
+                        });
+                  }
+            });
+      </script>
 </body>
 
 </html>

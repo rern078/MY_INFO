@@ -8,13 +8,6 @@ if (!isset($_SESSION['user_id'])) {
       exit();
 }
 
-// Handle logout fdfdf
-if (isset($_GET['logout'])) {
-      session_destroy();
-      header("Location: index.php");
-      exit();
-}
-
 // Check if user is chamrern (admin) for management functions
 $is_admin = isset($_SESSION['username']) && $_SESSION['username'] === 'chamrern';
 
@@ -420,7 +413,7 @@ while ($row = mysqli_fetch_assoc($certificates_result)) {
 <body class="bg-light">
       <?php include 'header.php'; ?>
 
-      <div class="container">
+      <div class="container mb-4">
             <div class="row justify-content-center">
                   <div class="col-lg-12">
                         <div class="card shadow-sm">

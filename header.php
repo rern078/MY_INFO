@@ -286,7 +286,7 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
                                           <div class="hamburger-line"></div>
                                           <div class="hamburger-line"></div>
                                     </div>
-                                    <a href="?logout=1" class="btn btn-outline-light btn-sm">
+                                    <a href="login.php?logout=1" class="btn btn-outline-light btn-sm">
                                           <i class="fas fa-sign-out-alt me-1"></i>Logout
                                     </a>
                               </div>
@@ -348,8 +348,52 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
             </div>
       </div>
 <?php else: ?>
-      <!-- Navigation for non-logged in users -->
-      <div class="container mb-4">
+      <!-- Header for non-logged in users -->
+      <div class="user-header bg-primary text-white py-3 mb-4">
+            <div class="container">
+                  <div class="row align-items-center justify-content-between">
+                        <div class="col-auto">
+                              <div class="d-flex align-items-center">
+                                    <i class="fas fa-user-circle me-3 fs-3"></i>
+                                    <div>
+                                          <span class="fw-bold fs-5">Welcome Guest!</span>
+                                          <div class="small opacity-75">Please login to access your CV</div>
+                                    </div>
+                              </div>
+                        </div>
+                        <div class="col-auto">
+                              <div class="d-flex justify-content-end align-items-center">
+                                    <!-- Hamburger Menu for Mobile -->
+                                    <div class="hamburger-menu me-3" id="hamburgerMenu">
+                                          <div class="hamburger-line"></div>
+                                          <div class="hamburger-line"></div>
+                                          <div class="hamburger-line"></div>
+                                    </div>
+                                    <a href="login.php" class="btn btn-outline-light btn-sm">
+                                          <i class="fas fa-sign-in-alt me-1"></i>Login
+                                    </a>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+      </div>
+
+      <!-- Mobile Navigation Menu for non-logged in users -->
+      <div class="mobile-nav" id="mobileNav">
+            <div class="mobile-close" id="mobileClose"></div>
+            <a href="index.php" class="btn <?php echo ($current_page === 'index') ? 'active' : 'btn-outline-primary'; ?>">
+                  <i class="fas fa-file-alt me-2"></i>View CV
+            </a>
+            <a href="login.php" class="btn <?php echo ($current_page === 'login') ? 'active' : 'btn-outline-primary'; ?>">
+                  <i class="fas fa-sign-in-alt me-2"></i>Login
+            </a>
+            <a href="register.php" class="btn <?php echo ($current_page === 'register') ? 'active' : 'btn-outline-primary'; ?>">
+                  <i class="fas fa-user-plus me-2"></i>Register
+            </a>
+      </div>
+
+      <!-- Desktop Navigation for non-logged in users -->
+      <!-- <div class="container mb-4">
             <div class="nav-buttons text-center">
                   <a href="login.php" class="btn <?php echo ($current_page === 'login') ? 'active' : 'btn-primary'; ?>">
                         <i class="fas fa-sign-in-alt me-2"></i>Login
@@ -358,7 +402,7 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
                         <i class="fas fa-user-plus me-2"></i>Register
                   </a>
             </div>
-      </div>
+      </div> -->
 <?php endif; ?>
 
 <script>
@@ -367,6 +411,7 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
             const mobileNav = document.getElementById('mobileNav');
             const mobileClose = document.getElementById('mobileClose');
 
+            // Check if hamburger menu exists (for both logged-in and non-logged-in users)
             if (hamburgerMenu && mobileNav && mobileClose) {
                   // Open mobile menu
                   hamburgerMenu.addEventListener('click', function() {

@@ -103,7 +103,7 @@ body {
 .container {
       max-width: 1200px !important;
       margin: 0 auto;
-      padding: 2rem 1rem;
+      /* padding: 2rem 1rem; */
       width: 100%;
       box-sizing: border-box;
 }
@@ -929,7 +929,7 @@ body {
       .container-xxl {
             max-width: 1200px !important;
             margin: 0 auto;
-            padding: 2rem 1rem;
+            /* padding: 2rem 1rem; */
             width: 100%;
             box-sizing: border-box;
       }
@@ -937,7 +937,7 @@ body {
 
 @media (max-width: 768px) {
       .container {
-            padding: 2rem 1rem;
+            /* padding: 2rem 1rem; */
             width: 100%;
             box-sizing: border-box;
       }
@@ -1079,7 +1079,7 @@ body {
 
 @media (max-width: 480px) {
       .container {
-            padding: 2rem 1rem;
+            /* padding: 2rem 1rem; */
             width: 100%;
             box-sizing: border-box;
       }

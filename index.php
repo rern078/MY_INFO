@@ -5,13 +5,6 @@ require_once 'config.php';
 // Check if user is logged in (but don't redirect - allow public access)
 $isLoggedIn = isset($_SESSION['user_id']);
 
-// Handle logout
-if (isset($_GET['logout'])) {
-      session_destroy();
-      header("Location: index.php");
-      exit();
-}
-
 // Fetch Personal Information
 $personalInfoQuery = "SELECT * FROM personal_info ORDER BY id DESC LIMIT 1";
 $personalInfoResult = mysqli_query($conn, $personalInfoQuery);
@@ -188,7 +181,6 @@ $hasData = $personalInfo;
                         <span>No CV data available. Please contact the administrator to set up your CV.</span>
                   </div>
             <?php else: ?>
-                  <!-- CV Header -->
                   <div class="cv-header fade-in">
                         <h1><?php echo htmlspecialchars($personalInfo['name']); ?></h1>
                         <div class="title"><?php echo htmlspecialchars($personalInfo['title']); ?></div>

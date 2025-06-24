@@ -11,13 +11,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['username'] !== 'chamrern') {
 // Get user ID from session
 $user_id = $_SESSION['user_id'];
 
-// Handle logout
-if (isset($_GET['logout'])) {
-      session_destroy();
-      header("Location: index.php");
-      exit();
-}
-
 // Initialize message variables
 $success_message = '';
 $error_message = '';
@@ -670,7 +663,7 @@ if (empty($courses)) {
 <body class="bg-light">
       <?php include 'header.php'; ?>
 
-      <div class="container">
+      <div class="container mb-4">
             <div class="row justify-content-center">
                   <div class="col-lg-12">
                         <h1 class="text-center mb-4">School Management</h1>
