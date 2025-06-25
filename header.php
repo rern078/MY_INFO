@@ -1,6 +1,7 @@
 <?php
 // Include language system
 require_once 'languages.php';
+require_once 'global/global.php';
 
 // Check if user is logged in
 $isLoggedIn = isset($_SESSION['user_id']);
@@ -16,6 +17,9 @@ $current_language = $_SESSION['language'] ?? 'en';
 
 // Check if we're on the index page
 $isIndexPage = ($current_page === 'index');
+
+// Get the profile image for current user
+$profileImage = getRandomProfileImage();
 ?>
 
 <!-- User Header -->
@@ -25,7 +29,22 @@ $isIndexPage = ($current_page === 'index');
                   <div class="row align-items-center justify-content-between">
                         <div class="col-auto">
                               <div class="d-flex align-items-center">
-                                    <i class="fas fa-user-circle me-3 fs-3"></i>
+                                    <?php if ($profileImage): ?>
+                                          <div class="profile-image-container me-3">
+                                                <img src="<?php echo htmlspecialchars($profileImage); ?>"
+                                                      alt="Profile"
+                                                      class="profile-image"
+                                                      style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.3);">
+                                                <button type="button"
+                                                      class="profile-image-change-btn"
+                                                      onclick="changeProfileImage()"
+                                                      title="Change Profile Image">
+                                                      <i class="fas fa-sync-alt"></i>
+                                                </button>
+                                          </div>
+                                    <?php else: ?>
+                                          <i class="fas fa-user-circle me-3 fs-3"></i>
+                                    <?php endif; ?>
                                     <div>
                                           <span class="fw-bold fs-5"><?php echo t('welcome'); ?>, <?php echo htmlspecialchars($username); ?>!</span>
                                           <div class="small opacity-75"><?php echo t('successfully_logged_in'); ?></div>
@@ -216,7 +235,22 @@ $isIndexPage = ($current_page === 'index');
                   <div class="row align-items-center justify-content-between">
                         <div class="col-auto">
                               <div class="d-flex align-items-center">
-                                    <i class="fas fa-user-circle me-3 fs-3"></i>
+                                    <?php if ($profileImage): ?>
+                                          <div class="profile-image-container me-3">
+                                                <img src="<?php echo htmlspecialchars($profileImage); ?>"
+                                                      alt="Profile"
+                                                      class="profile-image"
+                                                      style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.3);">
+                                                <button type="button"
+                                                      class="profile-image-change-btn"
+                                                      onclick="changeProfileImage()"
+                                                      title="Change Profile Image">
+                                                      <i class="fas fa-sync-alt"></i>
+                                                </button>
+                                          </div>
+                                    <?php else: ?>
+                                          <i class="fas fa-user-circle me-3 fs-3"></i>
+                                    <?php endif; ?>
                                     <div>
                                           <span class="fw-bold fs-5"><?php echo t('welcome_guest'); ?></span>
                                           <div class="small opacity-75"><?php echo t('login_to_access'); ?></div>
@@ -358,201 +392,4 @@ $isIndexPage = ($current_page === 'index');
                   <i class="fas fa-user-plus me-2"></i><?php echo t('register'); ?>
             </a>
       </div>
-
-      <!-- Desktop Navigation for non-logged in users -->
-      <!-- <div class="container mb-4">
-            <div class="nav-buttons text-center">
-                  <a href="login.php" class="btn <?php echo ($current_page === 'login') ? 'active' : 'btn-primary'; ?>">
-                        <i class="fas fa-sign-in-alt me-2"></i><?php echo t('login'); ?>
-                  </a>
-                  <a href="register.php" class="btn <?php echo ($current_page === 'register') ? 'active' : 'btn-outline-primary'; ?>">
-                        <i class="fas fa-user-plus me-2"></i><?php echo t('register'); ?>
-                  </a>
-            </div>
-      </div> -->
 <?php endif; ?>
-
-<script>
-      document.addEventListener('DOMContentLoaded', function() {
-            const hamburgerMenu = document.getElementById('hamburgerMenu');
-            const mobileNav = document.getElementById('mobileNav');
-            const mobileClose = document.getElementById('mobileClose');
-            const languageBtn = document.getElementById('languageBtn');
-            const languageDropdown = document.getElementById('languageDropdown');
-
-            // Portfolio dropdown functionality
-            const portfolioBtn = document.getElementById('portfolioBtn');
-            const portfolioDropdown = document.getElementById('portfolioDropdown');
-            const mobilePortfolioBtn = document.getElementById('mobilePortfolioBtn');
-            const mobilePortfolioDropdown = document.getElementById('mobilePortfolioDropdown');
-
-            // Header scroll functionality
-            const userHeader = document.querySelector('.user-header');
-            let lastScrollTop = 0;
-            let scrollThreshold = 50; // Reduced threshold for earlier fixed positioning
-            let isHeaderFixed = false;
-            let scrollTimeout;
-
-            function handleScroll() {
-                  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                  const scrollDelta = scrollTop - lastScrollTop;
-
-                  // Add fixed class when scrolling past threshold
-                  if (scrollTop > scrollThreshold && !isHeaderFixed) {
-                        userHeader.classList.add('fixed');
-                        document.body.classList.add('header-fixed');
-                        isHeaderFixed = true;
-                  } else if (scrollTop <= scrollThreshold && isHeaderFixed) {
-                        userHeader.classList.remove('fixed');
-                        document.body.classList.remove('header-fixed');
-                        isHeaderFixed = false;
-                        userHeader.classList.remove('header-hidden'); // Ensure header is visible when returning to top
-                  }
-
-                  // Show header when scrolling (more responsive)
-                  if (isHeaderFixed) {
-                        // Clear any existing timeout
-                        clearTimeout(scrollTimeout);
-
-                        // Always show header when scrolling
-                        userHeader.classList.remove('header-hidden');
-
-                        // Only hide header after user stops scrolling for 1 second
-                        scrollTimeout = setTimeout(() => {
-                              if (scrollTop > 100) {
-                                    userHeader.classList.add('header-hidden');
-                              }
-                        }, 1000);
-                  }
-
-                  lastScrollTop = scrollTop;
-            }
-
-            // Throttle scroll events for better performance
-            let ticking = false;
-
-            function requestTick() {
-                  if (!ticking) {
-                        requestAnimationFrame(function() {
-                              handleScroll();
-                              ticking = false;
-                        });
-                        ticking = true;
-                  }
-            }
-
-            // Add scroll event listener
-            window.addEventListener('scroll', requestTick, {
-                  passive: true
-            });
-
-            // Desktop portfolio dropdown
-            if (portfolioBtn && portfolioDropdown) {
-                  portfolioBtn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        portfolioDropdown.parentElement.classList.toggle('active');
-                  });
-
-                  // Close portfolio dropdown when clicking outside
-                  document.addEventListener('click', function(e) {
-                        if (!portfolioBtn.contains(e.target) && !portfolioDropdown.contains(e.target)) {
-                              portfolioDropdown.parentElement.classList.remove('active');
-                        }
-                  });
-            }
-
-            // Mobile portfolio dropdown
-            if (mobilePortfolioBtn && mobilePortfolioDropdown) {
-                  mobilePortfolioBtn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        mobilePortfolioDropdown.parentElement.classList.toggle('active');
-                  });
-
-                  // Close mobile portfolio dropdown when clicking outside
-                  document.addEventListener('click', function(e) {
-                        if (!mobilePortfolioBtn.contains(e.target) && !mobilePortfolioDropdown.contains(e.target)) {
-                              mobilePortfolioDropdown.parentElement.classList.remove('active');
-                        }
-                  });
-            }
-
-            // Language switcher functionality
-            if (languageBtn && languageDropdown) {
-                  languageBtn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        languageDropdown.classList.toggle('show');
-                  });
-
-                  // Close language dropdown when clicking outside
-                  document.addEventListener('click', function(e) {
-                        if (!languageBtn.contains(e.target) && !languageDropdown.contains(e.target)) {
-                              languageDropdown.classList.remove('show');
-                        }
-                  });
-
-                  // Close language dropdown when pressing Escape
-                  document.addEventListener('keydown', function(e) {
-                        if (e.key === 'Escape') {
-                              languageDropdown.classList.remove('show');
-                        }
-                  });
-            }
-
-            // Check if hamburger menu exists (for both logged-in and non-logged-in users)
-            if (hamburgerMenu && mobileNav && mobileClose) {
-                  // Open mobile menu
-                  hamburgerMenu.addEventListener('click', function() {
-                        hamburgerMenu.classList.add('active');
-                        mobileNav.classList.add('active');
-                        document.body.style.overflow = 'hidden'; // Prevent background scrolling
-                  });
-
-                  // Close mobile menu
-                  function closeMobileMenu() {
-                        hamburgerMenu.classList.remove('active');
-                        mobileNav.classList.remove('active');
-                        document.body.style.overflow = ''; // Restore scrolling
-                  }
-
-                  mobileClose.addEventListener('click', closeMobileMenu);
-
-                  // Close menu when clicking on a link
-                  const mobileNavLinks = mobileNav.querySelectorAll('a');
-                  mobileNavLinks.forEach(link => {
-                        link.addEventListener('click', closeMobileMenu);
-                  });
-
-                  // Close menu when clicking outside
-                  mobileNav.addEventListener('click', function(e) {
-                        if (e.target === mobileNav || e.target.classList.contains('mobile-close')) {
-                              closeMobileMenu();
-                        }
-                  });
-
-                  // Close menu on escape key
-                  document.addEventListener('keydown', function(e) {
-                        if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
-                              closeMobileMenu();
-                        }
-                  });
-            }
-
-            // Add this new script for the dropdown functionality
-            const dropdown = document.querySelector('.portfolio-dropdown');
-            const btn = document.querySelector('.portfolio-btn');
-
-            if (dropdown && btn) {
-                  btn.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        dropdown.classList.toggle('active');
-                  });
-
-                  // Hide dropdown when clicking outside
-                  document.addEventListener('click', function(e) {
-                        if (!dropdown.contains(e.target)) {
-                              dropdown.classList.remove('active');
-                        }
-                  });
-            }
-      });
-</script>

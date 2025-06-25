@@ -893,3 +893,69 @@ html {
             background-color: transparent;
       }
 }
+
+/* Profile Image Styles */
+.profile-image {
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.profile-image:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.profile-image-container {
+      position: relative;
+      display: inline-block;
+}
+
+.profile-image-change-btn {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #007bff;
+      font-size: 10px;
+      line-height: 1;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      opacity: 0.8;
+}
+
+.profile-image-change-btn:hover {
+      opacity: 1;
+      transform: scale(1.1);
+      background: rgba(255, 255, 255, 1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.profile-image-change-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+}
+
+/* Mobile responsive adjustments for profile image */
+@media (max-width: 768px) {
+      .profile-image {
+            width: 40px !important;
+            height: 40px !important;
+      }
+
+      .profile-image-change-btn {
+            width: 18px;
+            height: 18px;
+            font-size: 9px;
+            top: -3px;
+            right: -3px;
+      }
+}
