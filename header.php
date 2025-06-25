@@ -12,6 +12,7 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
 // Get current language info
 $current_lang = getCurrentLanguage();
 $available_langs = getAvailableLanguages();
+$current_language = $_SESSION['language'] ?? 'en';
 
 // Check if we're on the index page
 $isIndexPage = ($current_page === 'index');
@@ -105,9 +106,6 @@ $isIndexPage = ($current_page === 'index');
                                     <a href="login.php?logout=1" class="btn btn-outline-light btn-sm btn-logout">
                                           <i class="fas fa-sign-out-alt me-1"></i><?php echo t('logout'); ?>
                                     </a>
-
-
-
                               </div>
                         </div>
                   </div>
@@ -362,7 +360,7 @@ $isIndexPage = ($current_page === 'index');
       </div>
 
       <!-- Desktop Navigation for non-logged in users -->
-      <!-- <div class="container mb-4">
+      <div class="container mb-4">
             <div class="nav-buttons text-center">
                   <a href="login.php" class="btn <?php echo ($current_page === 'login') ? 'active' : 'btn-primary'; ?>">
                         <i class="fas fa-sign-in-alt me-2"></i><?php echo t('login'); ?>
@@ -371,7 +369,7 @@ $isIndexPage = ($current_page === 'index');
                         <i class="fas fa-user-plus me-2"></i><?php echo t('register'); ?>
                   </a>
             </div>
-      </div> -->
+      </div>
 <?php endif; ?>
 
 <script>
@@ -381,6 +379,102 @@ $isIndexPage = ($current_page === 'index');
             const mobileClose = document.getElementById('mobileClose');
             const languageBtn = document.getElementById('languageBtn');
             const languageDropdown = document.getElementById('languageDropdown');
+
+            // Portfolio dropdown functionality
+            const portfolioBtn = document.getElementById('portfolioBtn');
+            const portfolioDropdown = document.getElementById('portfolioDropdown');
+            const mobilePortfolioBtn = document.getElementById('mobilePortfolioBtn');
+            const mobilePortfolioDropdown = document.getElementById('mobilePortfolioDropdown');
+
+            // Header scroll functionality
+            const userHeader = document.querySelector('.user-header');
+            let lastScrollTop = 0;
+            let scrollThreshold = 50; // Reduced threshold for earlier fixed positioning
+            let isHeaderFixed = false;
+            let scrollTimeout;
+
+            function handleScroll() {
+                  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                  const scrollDelta = scrollTop - lastScrollTop;
+
+                  // Add fixed class when scrolling past threshold
+                  if (scrollTop > scrollThreshold && !isHeaderFixed) {
+                        userHeader.classList.add('fixed');
+                        document.body.classList.add('header-fixed');
+                        isHeaderFixed = true;
+                  } else if (scrollTop <= scrollThreshold && isHeaderFixed) {
+                        userHeader.classList.remove('fixed');
+                        document.body.classList.remove('header-fixed');
+                        isHeaderFixed = false;
+                        userHeader.classList.remove('header-hidden'); // Ensure header is visible when returning to top
+                  }
+
+                  // Show header when scrolling (more responsive)
+                  if (isHeaderFixed) {
+                        // Clear any existing timeout
+                        clearTimeout(scrollTimeout);
+
+                        // Always show header when scrolling
+                        userHeader.classList.remove('header-hidden');
+
+                        // Only hide header after user stops scrolling for 1 second
+                        scrollTimeout = setTimeout(() => {
+                              if (scrollTop > 100) {
+                                    userHeader.classList.add('header-hidden');
+                              }
+                        }, 1000);
+                  }
+
+                  lastScrollTop = scrollTop;
+            }
+
+            // Throttle scroll events for better performance
+            let ticking = false;
+
+            function requestTick() {
+                  if (!ticking) {
+                        requestAnimationFrame(function() {
+                              handleScroll();
+                              ticking = false;
+                        });
+                        ticking = true;
+                  }
+            }
+
+            // Add scroll event listener
+            window.addEventListener('scroll', requestTick, {
+                  passive: true
+            });
+
+            // Desktop portfolio dropdown
+            if (portfolioBtn && portfolioDropdown) {
+                  portfolioBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        portfolioDropdown.parentElement.classList.toggle('active');
+                  });
+
+                  // Close portfolio dropdown when clicking outside
+                  document.addEventListener('click', function(e) {
+                        if (!portfolioBtn.contains(e.target) && !portfolioDropdown.contains(e.target)) {
+                              portfolioDropdown.parentElement.classList.remove('active');
+                        }
+                  });
+            }
+
+            // Mobile portfolio dropdown
+            if (mobilePortfolioBtn && mobilePortfolioDropdown) {
+                  mobilePortfolioBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        mobilePortfolioDropdown.parentElement.classList.toggle('active');
+                  });
+
+                  // Close mobile portfolio dropdown when clicking outside
+                  document.addEventListener('click', function(e) {
+                        if (!mobilePortfolioBtn.contains(e.target) && !mobilePortfolioDropdown.contains(e.target)) {
+                              mobilePortfolioDropdown.parentElement.classList.remove('active');
+                        }
+                  });
+            }
 
             // Language switcher functionality
             if (languageBtn && languageDropdown) {
@@ -430,7 +524,7 @@ $isIndexPage = ($current_page === 'index');
 
                   // Close menu when clicking outside
                   mobileNav.addEventListener('click', function(e) {
-                        if (e.target === mobileNav) {
+                        if (e.target === mobileNav || e.target.classList.contains('mobile-close')) {
                               closeMobileMenu();
                         }
                   });
@@ -439,6 +533,24 @@ $isIndexPage = ($current_page === 'index');
                   document.addEventListener('keydown', function(e) {
                         if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
                               closeMobileMenu();
+                        }
+                  });
+            }
+
+            // Add this new script for the dropdown functionality
+            const dropdown = document.querySelector('.portfolio-dropdown');
+            const btn = document.querySelector('.portfolio-btn');
+
+            if (dropdown && btn) {
+                  btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        dropdown.classList.toggle('active');
+                  });
+
+                  // Hide dropdown when clicking outside
+                  document.addEventListener('click', function(e) {
+                        if (!dropdown.contains(e.target)) {
+                              dropdown.classList.remove('active');
                         }
                   });
             }

@@ -223,7 +223,45 @@ html[lang="km"] * {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       position: relative;
-      /* overflow: hidden; */
+      transition: all 0.3s ease;
+      z-index: 1000;
+}
+
+/* Fixed header when scrolled */
+.user-header.fixed {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      transform: translateY(0);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(15px);
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.98) 0%, rgba(118, 75, 162, 0.98) 100%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Header hidden when scrolling down */
+.user-header.header-hidden {
+      transform: translateY(-100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Header visible when scrolling */
+.user-header.fixed:not(.header-hidden) {
+      transform: translateY(0);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Add padding to body when header is fixed */
+body.header-fixed {
+      padding-top: 80px;
+      /* Adjust based on your header height */
+}
+
+/* Smooth transition for body padding */
+body {
+      transition: padding-top 0.3s ease;
 }
 
 .user-header::before {
@@ -261,6 +299,7 @@ html[lang="km"] * {
       font-size: 14px;
       transition: all 0.3s ease;
       backdrop-filter: blur(10px);
+      white-space: nowrap;
 }
 
 .language-btn:hover {
@@ -344,6 +383,7 @@ html[lang="km"] * {
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.2);
+      margin-top: 15px;
 }
 
 .nav-buttons .btn {
@@ -353,6 +393,7 @@ html[lang="km"] * {
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
+      white-space: nowrap;
 }
 
 .nav-buttons .btn:hover {
@@ -375,17 +416,14 @@ html[lang="km"] * {
       left: 100%;
 }
 
-/* Active page styling */
 .nav-buttons .btn.active {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       color: white;
-      border-color: #667eea;
+      border-color: transparent;
       box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
-      transform: translateY(-1px);
 }
 
 .nav-buttons .btn.active:hover {
-      background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
 }
@@ -402,20 +440,19 @@ html[lang="km"] * {
       border-radius: 2px;
 }
 
-/* Hamburger Menu Styles */
+/* Hamburger Menu */
 .hamburger-menu {
       display: none;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: 40px;
-      height: 40px;
+      justify-content: space-between;
+      width: 30px;
+      height: 25px;
       cursor: pointer;
-      padding: 0;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
       transition: all 0.3s ease;
+      padding: 5px;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
 }
 
 .hamburger-menu:hover {
@@ -423,16 +460,15 @@ html[lang="km"] * {
 }
 
 .hamburger-line {
-      width: 18px;
-      height: 2px;
-      background-color: white;
-      margin: 2.5px 0;
+      width: 100%;
+      height: 3px;
+      background: white;
       border-radius: 2px;
       transition: all 0.3s ease;
 }
 
 .hamburger-menu.active .hamburger-line:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
+      transform: rotate(45deg) translate(5px, 5px);
 }
 
 .hamburger-menu.active .hamburger-line:nth-child(2) {
@@ -440,44 +476,44 @@ html[lang="km"] * {
 }
 
 .hamburger-menu.active .hamburger-line:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
+      transform: rotate(-45deg) translate(7px, -6px);
 }
 
+/* Mobile Navigation */
 .mobile-nav {
-      display: none;
       position: fixed;
       top: 0;
-      left: 0;
-      width: 100%;
+      right: -100%;
+      width: 300px;
       height: 100vh;
-      background: rgba(0, 0, 0, 0.9);
-      z-index: 1000;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      z-index: 2000;
+      transition: right 0.3s ease;
+      overflow-y: auto;
+      padding: 80px 20px 20px;
+      box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+      scrollbar-width: none;
 }
 
 .mobile-nav.active {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      right: 0;
 }
 
 .mobile-nav .btn {
-      margin: 15px 0;
-      padding: 15px 30px;
-      font-size: 18px;
-      border-radius: 30px;
-      min-width: 250px;
-      text-align: center;
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 15px 20px;
+      border-radius: 10px;
+      text-align: left;
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
 }
 
 .mobile-nav .btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      transform: translateX(5px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 .mobile-nav .btn::before {
@@ -487,7 +523,7 @@ html[lang="km"] * {
       left: -100%;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
       transition: left 0.5s;
 }
 
@@ -496,30 +532,30 @@ html[lang="km"] * {
 }
 
 .mobile-nav .btn.active {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: rgba(255, 255, 255, 0.2);
       color: white;
-      border-color: #667eea;
-      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+      border-color: rgba(255, 255, 255, 0.3);
 }
 
+/* Mobile Close Button */
 .mobile-close {
       position: absolute;
       top: 20px;
       right: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.2);
       border-radius: 50%;
-      width: 50px;
-      height: 50px;
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
       transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
 }
 
 .mobile-close:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.3);
       transform: rotate(90deg);
 }
 
@@ -527,10 +563,10 @@ html[lang="km"] * {
 .mobile-close::after {
       content: '';
       position: absolute;
-      width: 25px;
-      height: 3px;
-      background-color: white;
-      border-radius: 2px;
+      width: 20px;
+      height: 2px;
+      background: white;
+      transition: all 0.3s ease;
 }
 
 .mobile-close::before {
@@ -541,11 +577,13 @@ html[lang="km"] * {
       transform: rotate(-45deg);
 }
 
+/* Responsive Design */
 @media (max-width: 768px) {
 
       .btn-login,
       .btn-logout {
-            display: none !important;
+            font-size: 12px;
+            padding: 6px 12px;
       }
 
       .nav-buttons {
@@ -557,11 +595,11 @@ html[lang="km"] * {
       }
 
       .mobile-nav {
-            display: none;
+            width: 280px;
       }
 
       .mobile-nav.active {
-            display: flex;
+            right: 0;
       }
 
       .language-switcher {
@@ -569,12 +607,20 @@ html[lang="km"] * {
       }
 
       .language-btn {
-            padding: 6px 10px;
             font-size: 12px;
+            padding: 6px 10px;
       }
 
       .language-btn .flag {
             font-size: 14px;
+      }
+
+      body.header-fixed {
+            padding-top: 70px;
+      }
+
+      .user-header.fixed {
+            padding: 10px 0;
       }
 }
 
@@ -584,53 +630,49 @@ html[lang="km"] * {
       }
 
       .mobile-nav {
-            display: none !important;
+            display: none;
       }
 }
 
-/* end header  */
-
-/* start login  */
+/* Form Styles */
 .form-check-input:checked {
-      background-color: #0d6efd;
-      border-color: #0d6efd;
+      background-color: #667eea;
+      border-color: #667eea;
 }
 
 .form-check-input:focus {
-      border-color: #86b7fe;
-      outline: 0;
-      box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+      border-color: #667eea;
+      box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.25);
 }
 
 .form-check-label {
+      font-weight: 500;
+      color: #333;
       cursor: pointer;
       user-select: none;
-      font-weight: 500;
-      color: #495057;
 }
 
 .form-check {
-      margin-bottom: 1rem;
+      margin-bottom: 15px;
 }
 
 .remember-me-container {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      margin-bottom: 1.5rem;
+      align-items: center;
+      margin-bottom: 20px;
 }
 
 .form-check-input {
-      width: 1.2em;
-      height: 1.2em;
-      margin-top: 0.25em;
-      margin-right: 0.5em;
+      width: 18px;
+      height: 18px;
+      margin-right: 8px;
       cursor: pointer;
+      border: 2px solid #ddd;
+      border-radius: 3px;
+      transition: all 0.2s ease;
 }
 
-/* end login  */
-
-/* start register  */
 .password-field {
       position: relative;
 }
@@ -642,13 +684,16 @@ html[lang="km"] * {
       transform: translateY(-50%);
       background: none;
       border: none;
-      color: #6c757d;
+      color: #666;
       cursor: pointer;
-      z-index: 10;
+      padding: 5px;
+      border-radius: 3px;
+      transition: all 0.2s ease;
 }
 
 .password-toggle:hover {
-      color: #495057;
+      background: #f8f9fa;
+      color: #333;
 }
 
 .form-control[type="password"] {
@@ -657,42 +702,36 @@ html[lang="km"] * {
 
 .form-control.error {
       border-color: #dc3545;
-      box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
 }
 
 .form-control.valid {
-      border-color: #28a745;
-      box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+      border-color: #198754;
 }
 
-/* end register  */
-
-/* Portfolio Dropdown Styles */
+/* Portfolio Dropdown */
 .portfolio-dropdown {
       position: relative;
       display: inline-block;
 }
 
 .portfolio-btn {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       color: white;
+      padding: 8px 12px;
+      border-radius: 20px;
       cursor: pointer;
       display: flex;
       align-items: center;
-      padding: 8px 16px;
+      gap: 8px;
       font-size: 14px;
-      font-weight: 500;
       transition: all 0.3s ease;
       backdrop-filter: blur(10px);
-      min-width: 160px;
-      justify-content: space-between;
+      white-space: nowrap;
 }
 
 .portfolio-btn:hover {
-      background: rgba(255, 255, 255, 0.2);
-      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.3);
       transform: translateY(-1px);
 }
 
@@ -709,16 +748,17 @@ html[lang="km"] * {
       top: 100%;
       right: 0;
       background: white;
-      border-radius: 12px;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-      min-width: 220px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      min-width: 250px;
+      z-index: 1001;
       opacity: 0;
       visibility: hidden;
       transform: translateY(-10px);
       transition: all 0.3s ease;
-      z-index: 1000;
-      margin-top: 8px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      margin-top: 5px;
 }
 
 .portfolio-dropdown.active .portfolio-dropdown-menu {
@@ -730,76 +770,61 @@ html[lang="km"] * {
 .portfolio-option {
       display: flex;
       align-items: center;
+      gap: 12px;
       padding: 12px 16px;
-      color: #374151;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      color: #333;
       text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      transition: all 0.2s ease;
-      border-bottom: 1px solid #f3f4f6;
-      position: relative;
-      overflow: hidden;
+      border-bottom: 1px solid #f0f0f0;
 }
 
-.portfolio-option:last-child {
-      border-bottom: none;
-}
-
-.portfolio-option:hover {
-      background: #f8fafc;
-      color: #1f2937;
-      transform: translateX(4px);
-}
-
-.portfolio-option::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      height: 100%;
-      width: 3px;
-      background: #3b82f6;
-      transform: scaleY(0);
-      transition: transform 0.2s ease;
-}
-
-.portfolio-option:hover::before {
-      transform: scaleY(1);
+.portfolio-option:hover,
+.portfolio-option:focus {
+      background-color: #f8f9fa;
+      color: #667eea;
 }
 
 .portfolio-option i {
-      color: #6b7280;
       width: 20px;
       text-align: center;
-      margin-right: 12px;
-      transition: color 0.2s ease;
+      color: #667eea;
 }
 
-.portfolio-option:hover i {
-      color: #3b82f6;
-}
-
-.portfolio-option span {
-      flex: 1;
-}
-
-/* Responsive Design for Portfolio Dropdown */
-@media (max-width: 768px) {
+/* Ensure portfolio dropdown is visible on desktop */
+@media (min-width: 769px) {
       .portfolio-dropdown {
+            display: inline-block !important;
+      }
+
+      .portfolio-dropdown-menu {
+            position: absolute !important;
+            top: 100% !important;
+            right: 0 !important;
+      }
+}
+
+/* Mobile styles for portfolio dropdown */
+@media (max-width: 768px) {
+
+      /* Hide desktop portfolio dropdown on mobile */
+      .user-header .portfolio-dropdown {
             display: none;
       }
 
+      /* Show portfolio dropdown in mobile nav */
       .mobile-nav .portfolio-dropdown {
             display: block;
-            width: 100%;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
       }
 
       .mobile-nav .portfolio-btn {
             width: 100%;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            margin-bottom: 10px;
       }
 
       .mobile-nav .portfolio-dropdown-menu {
@@ -807,24 +832,18 @@ html[lang="km"] * {
             opacity: 1;
             visibility: visible;
             transform: none;
-            box-shadow: none;
-            background: transparent;
-            border: none;
-            margin-top: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 10px;
       }
 
       .mobile-nav .portfolio-option {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            margin-bottom: 8px;
             color: white;
-            padding: 12px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       }
 
       .mobile-nav .portfolio-option:hover {
             background: rgba(255, 255, 255, 0.1);
-            transform: none;
       }
 
       .mobile-nav .portfolio-option i {
@@ -836,25 +855,21 @@ html[lang="km"] * {
       }
 }
 
-/* Smooth scrolling for anchor links */
 html {
       scroll-behavior: smooth;
 }
 
-/* Section highlighting for active sections */
 .portfolio-option.active {
-      background: #eff6ff;
-      color: #1d4ed8;
-      border-left: 3px solid #3b82f6;
+      background-color: #e3f2fd;
+      color: #1976d2;
 }
 
 .portfolio-option.active i {
-      color: #3b82f6;
+      color: #1976d2;
 }
 
-/* Animation for section transitions */
 .cv-section {
-      transition: all 0.3s ease;
+      scroll-margin-top: 100px;
 }
 
 .cv-section:target {
@@ -863,10 +878,10 @@ html {
 
 @keyframes highlightSection {
       0% {
-            background: rgba(59, 130, 246, 0.1);
+            background-color: rgba(102, 126, 234, 0.1);
       }
 
       100% {
-            background: transparent;
+            background-color: transparent;
       }
 }
