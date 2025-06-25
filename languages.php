@@ -23,7 +23,7 @@ $available_languages = [
             'name' => 'Chinese',
             'native_name' => '中文',
             'flag' => '🇨🇳'
-      ]
+      ],
 ];
 
 // Default language

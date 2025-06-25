@@ -360,7 +360,7 @@ $isIndexPage = ($current_page === 'index');
       </div>
 
       <!-- Desktop Navigation for non-logged in users -->
-      <div class="container mb-4">
+      <!-- <div class="container mb-4">
             <div class="nav-buttons text-center">
                   <a href="login.php" class="btn <?php echo ($current_page === 'login') ? 'active' : 'btn-primary'; ?>">
                         <i class="fas fa-sign-in-alt me-2"></i><?php echo t('login'); ?>
@@ -369,7 +369,7 @@ $isIndexPage = ($current_page === 'index');
                         <i class="fas fa-user-plus me-2"></i><?php echo t('register'); ?>
                   </a>
             </div>
-      </div>
+      </div> -->
 <?php endif; ?>
 
 <script>

@@ -440,6 +440,7 @@ body {
       border-radius: 2px;
 }
 
+
 /* Hamburger Menu */
 .hamburger-menu {
       display: none;
@@ -476,7 +477,7 @@ body {
 }
 
 .hamburger-menu.active .hamburger-line:nth-child(3) {
-      transform: rotate(-45deg) translate(7px, -6px);
+      transform: rotate(-45deg) translate(.2rem, -.25rem);
 }
 
 /* Mobile Navigation */
@@ -580,10 +581,16 @@ body {
 /* Responsive Design */
 @media (max-width: 768px) {
 
+      .language-dropdown {
+            left: 0;
+            right: unset;
+      }
+
       .btn-login,
       .btn-logout {
             font-size: 12px;
             padding: 6px 12px;
+            /* display: none; */
       }
 
       .nav-buttons {
@@ -828,6 +835,7 @@ body {
       }
 
       .mobile-nav .portfolio-dropdown-menu {
+            min-width: 100% !important;
             position: static;
             opacity: 1;
             visibility: visible;
