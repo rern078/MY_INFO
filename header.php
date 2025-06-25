@@ -12,6 +12,9 @@ $current_page = basename($_SERVER['PHP_SELF'], '.php');
 // Get current language info
 $current_lang = getCurrentLanguage();
 $available_langs = getAvailableLanguages();
+
+// Check if we're on the index page
+$isIndexPage = ($current_page === 'index');
 ?>
 
 <!-- User Header -->
@@ -30,6 +33,47 @@ $available_langs = getAvailableLanguages();
                         </div>
                         <div class="col-auto">
                               <div class="d-flex justify-content-end align-items-center">
+                                    <!-- Portfolio Sections Dropdown - Only show on index page -->
+                                    <?php if ($isIndexPage): ?>
+                                          <div class="portfolio-dropdown me-3">
+                                                <div class="portfolio-btn" id="portfolioBtn">
+                                                      <i class="fas fa-bars me-2"></i>
+                                                      <span><?php echo t('portfolio_sections'); ?></span>
+                                                      <i class="fas fa-chevron-down ms-1"></i>
+                                                </div>
+                                                <div class="portfolio-dropdown-menu" id="portfolioDropdown">
+                                                      <a href="#personal-info" class="portfolio-option" data-section="personal-info">
+                                                            <i class="fas fa-user me-2"></i>
+                                                            <span><?php echo t('personal_information'); ?></span>
+                                                      </a>
+                                                      <a href="#skills" class="portfolio-option" data-section="skills">
+                                                            <i class="fas fa-tools me-2"></i>
+                                                            <span><?php echo t('skills_expertise'); ?></span>
+                                                      </a>
+                                                      <a href="#experience" class="portfolio-option" data-section="experience">
+                                                            <i class="fas fa-briefcase me-2"></i>
+                                                            <span><?php echo t('professional_experience'); ?></span>
+                                                      </a>
+                                                      <a href="#education" class="portfolio-option" data-section="education">
+                                                            <i class="fas fa-graduation-cap me-2"></i>
+                                                            <span><?php echo t('education'); ?></span>
+                                                      </a>
+                                                      <a href="#courses" class="portfolio-option" data-section="courses">
+                                                            <i class="fas fa-book me-2"></i>
+                                                            <span><?php echo t('courses'); ?></span>
+                                                      </a>
+                                                      <a href="#interests" class="portfolio-option" data-section="interests">
+                                                            <i class="fas fa-heart me-2"></i>
+                                                            <span><?php echo t('interests_hobbies'); ?></span>
+                                                      </a>
+                                                      <a href="#connect" class="portfolio-option" data-section="connect">
+                                                            <i class="fas fa-link me-2"></i>
+                                                            <span><?php echo t('connect_with_me'); ?></span>
+                                                      </a>
+                                                </div>
+                                          </div>
+                                    <?php endif; ?>
+
                                     <!-- Language Switcher -->
                                     <div class="language-switcher me-3">
                                           <div class="language-btn" id="languageBtn">
@@ -61,6 +105,9 @@ $available_langs = getAvailableLanguages();
                                     <a href="login.php?logout=1" class="btn btn-outline-light btn-sm btn-logout">
                                           <i class="fas fa-sign-out-alt me-1"></i><?php echo t('logout'); ?>
                                     </a>
+
+
+
                               </div>
                         </div>
                   </div>
@@ -70,6 +117,48 @@ $available_langs = getAvailableLanguages();
       <!-- Mobile Navigation Menu -->
       <div class="mobile-nav" id="mobileNav">
             <div class="mobile-close" id="mobileClose"></div>
+
+            <!-- Portfolio Sections Dropdown for Mobile - Only show on index page -->
+            <?php if ($isIndexPage): ?>
+                  <div class="portfolio-dropdown">
+                        <div class="portfolio-btn" id="mobilePortfolioBtn">
+                              <i class="fas fa-bars me-2"></i>
+                              <span><?php echo t('portfolio_sections'); ?></span>
+                              <i class="fas fa-chevron-down ms-1"></i>
+                        </div>
+                        <div class="portfolio-dropdown-menu" id="mobilePortfolioDropdown">
+                              <a href="#personal-info" class="portfolio-option" data-section="personal-info">
+                                    <i class="fas fa-user me-2"></i>
+                                    <span><?php echo t('personal_information'); ?></span>
+                              </a>
+                              <a href="#skills" class="portfolio-option" data-section="skills">
+                                    <i class="fas fa-tools me-2"></i>
+                                    <span><?php echo t('skills_expertise'); ?></span>
+                              </a>
+                              <a href="#experience" class="portfolio-option" data-section="experience">
+                                    <i class="fas fa-briefcase me-2"></i>
+                                    <span><?php echo t('professional_experience'); ?></span>
+                              </a>
+                              <a href="#education" class="portfolio-option" data-section="education">
+                                    <i class="fas fa-graduation-cap me-2"></i>
+                                    <span><?php echo t('education'); ?></span>
+                              </a>
+                              <a href="#courses" class="portfolio-option" data-section="courses">
+                                    <i class="fas fa-book me-2"></i>
+                                    <span><?php echo t('courses'); ?></span>
+                              </a>
+                              <a href="#interests" class="portfolio-option" data-section="interests">
+                                    <i class="fas fa-heart me-2"></i>
+                                    <span><?php echo t('interests_hobbies'); ?></span>
+                              </a>
+                              <a href="#connect" class="portfolio-option" data-section="connect">
+                                    <i class="fas fa-link me-2"></i>
+                                    <span><?php echo t('connect_with_me'); ?></span>
+                              </a>
+                        </div>
+                  </div>
+            <?php endif; ?>
+
             <a href="index.php" class="btn <?php echo ($current_page === 'index') ? 'active' : 'btn-outline-primary'; ?>">
                   <i class="fas fa-file-alt me-2"></i><?php echo t('view_sr1'); ?>
             </a>
@@ -138,6 +227,47 @@ $available_langs = getAvailableLanguages();
                         </div>
                         <div class="col-auto">
                               <div class="d-flex justify-content-end align-items-center">
+                                    <!-- Portfolio Sections Dropdown - Only show on index page -->
+                                    <?php if ($isIndexPage): ?>
+                                          <div class="portfolio-dropdown me-3">
+                                                <div class="portfolio-btn" id="portfolioBtn">
+                                                      <i class="fas fa-bars me-2"></i>
+                                                      <span><?php echo t('portfolio_sections'); ?></span>
+                                                      <i class="fas fa-chevron-down ms-1"></i>
+                                                </div>
+                                                <div class="portfolio-dropdown-menu" id="portfolioDropdown">
+                                                      <a href="#personal-info" class="portfolio-option" data-section="personal-info">
+                                                            <i class="fas fa-user me-2"></i>
+                                                            <span><?php echo t('personal_information'); ?></span>
+                                                      </a>
+                                                      <a href="#skills" class="portfolio-option" data-section="skills">
+                                                            <i class="fas fa-tools me-2"></i>
+                                                            <span><?php echo t('skills_expertise'); ?></span>
+                                                      </a>
+                                                      <a href="#experience" class="portfolio-option" data-section="experience">
+                                                            <i class="fas fa-briefcase me-2"></i>
+                                                            <span><?php echo t('professional_experience'); ?></span>
+                                                      </a>
+                                                      <a href="#education" class="portfolio-option" data-section="education">
+                                                            <i class="fas fa-graduation-cap me-2"></i>
+                                                            <span><?php echo t('education'); ?></span>
+                                                      </a>
+                                                      <a href="#courses" class="portfolio-option" data-section="courses">
+                                                            <i class="fas fa-book me-2"></i>
+                                                            <span><?php echo t('courses'); ?></span>
+                                                      </a>
+                                                      <a href="#interests" class="portfolio-option" data-section="interests">
+                                                            <i class="fas fa-heart me-2"></i>
+                                                            <span><?php echo t('interests_hobbies'); ?></span>
+                                                      </a>
+                                                      <a href="#connect" class="portfolio-option" data-section="connect">
+                                                            <i class="fas fa-link me-2"></i>
+                                                            <span><?php echo t('connect_with_me'); ?></span>
+                                                      </a>
+                                                </div>
+                                          </div>
+                                    <?php endif; ?>
+
                                     <!-- Language Switcher -->
                                     <div class="language-switcher me-3">
                                           <div class="language-btn" id="languageBtn">
@@ -178,6 +308,48 @@ $available_langs = getAvailableLanguages();
       <!-- Mobile Navigation Menu for non-logged in users -->
       <div class="mobile-nav" id="mobileNav">
             <div class="mobile-close" id="mobileClose"></div>
+
+            <!-- Portfolio Sections Dropdown for Mobile - Only show on index page -->
+            <?php if ($isIndexPage): ?>
+                  <div class="portfolio-dropdown">
+                        <div class="portfolio-btn" id="mobilePortfolioBtn">
+                              <i class="fas fa-bars me-2"></i>
+                              <span><?php echo t('portfolio_sections'); ?></span>
+                              <i class="fas fa-chevron-down ms-1"></i>
+                        </div>
+                        <div class="portfolio-dropdown-menu" id="mobilePortfolioDropdown">
+                              <a href="#personal-info" class="portfolio-option" data-section="personal-info">
+                                    <i class="fas fa-user me-2"></i>
+                                    <span><?php echo t('personal_information'); ?></span>
+                              </a>
+                              <a href="#skills" class="portfolio-option" data-section="skills">
+                                    <i class="fas fa-tools me-2"></i>
+                                    <span><?php echo t('skills_expertise'); ?></span>
+                              </a>
+                              <a href="#experience" class="portfolio-option" data-section="experience">
+                                    <i class="fas fa-briefcase me-2"></i>
+                                    <span><?php echo t('professional_experience'); ?></span>
+                              </a>
+                              <a href="#education" class="portfolio-option" data-section="education">
+                                    <i class="fas fa-graduation-cap me-2"></i>
+                                    <span><?php echo t('education'); ?></span>
+                              </a>
+                              <a href="#courses" class="portfolio-option" data-section="courses">
+                                    <i class="fas fa-book me-2"></i>
+                                    <span><?php echo t('courses'); ?></span>
+                              </a>
+                              <a href="#interests" class="portfolio-option" data-section="interests">
+                                    <i class="fas fa-heart me-2"></i>
+                                    <span><?php echo t('interests_hobbies'); ?></span>
+                              </a>
+                              <a href="#connect" class="portfolio-option" data-section="connect">
+                                    <i class="fas fa-link me-2"></i>
+                                    <span><?php echo t('connect_with_me'); ?></span>
+                              </a>
+                        </div>
+                  </div>
+            <?php endif; ?>
+
             <a href="index.php" class="btn <?php echo ($current_page === 'index') ? 'active' : 'btn-outline-primary'; ?>">
                   <i class="fas fa-file-alt me-2"></i><?php echo t('view_cv'); ?>
             </a>

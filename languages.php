@@ -59,6 +59,16 @@ $translations = [
             'admin_panel' => 'Admin Panel',
             'dashboard' => 'Dashboard',
 
+            // Portfolio Dropdown
+            'portfolio_sections' => 'Portfolio Sections',
+            'personal_information' => 'Personal Information',
+            'skills_expertise' => 'Skills & Expertise',
+            'professional_experience' => 'Professional Experience',
+            'education' => 'Education',
+            'courses' => 'Courses',
+            'interests_hobbies' => 'Interests & Hobbies',
+            'connect_with_me' => 'Connect With Me',
+
             // Language switcher
             'select_language' => 'Select Language',
             'language' => 'Language',
@@ -190,6 +200,16 @@ $translations = [
             'admin_panel' => 'ផ្ទាំងគ្រប់គ្រង',
             'dashboard' => 'ផ្ទាំងគ្រប់គ្រង',
 
+            // Portfolio Dropdown
+            'portfolio_sections' => 'ផ្នែកប្រវត្តិរូបសង្ខេប',
+            'personal_information' => 'ព័ត៌មានផ្ទាល់ខ្លួន',
+            'skills_expertise' => 'ជំនាញ & ប្រសិទ្ធិ',
+            'professional_experience' => 'បទពិសោធន៍បច្ចុប្បន្ន',
+            'education' => 'ការអប់រំ',
+            'courses' => 'កម្រិត',
+            'interests_hobbies' => 'អត្ថបទអត្ថបទ',
+            'connect_with_me' => 'ជួបជាមួយខ្ញុំ',
+
             // Language switcher
             'select_language' => 'ជ្រើសរើសភាសា',
             'language' => 'ភាសា',
@@ -320,6 +340,16 @@ $translations = [
             'download_pdf' => '下载PDF',
             'admin_panel' => '管理面板',
             'dashboard' => '仪表板',
+
+            // Portfolio Dropdown
+            'portfolio_sections' => '简历部分',
+            'personal_information' => '个人信息',
+            'skills_expertise' => '技能',
+            'professional_experience' => '工作经验',
+            'education' => '教育背景',
+            'courses' => '课程',
+            'interests_hobbies' => '兴趣爱好',
+            'connect_with_me' => '联系我',
 
             // Language switcher
             'select_language' => '选择语言',
