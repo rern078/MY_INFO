@@ -1,0 +1,267 @@
+[26-Jun-2025 03:52:06 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 03:52:06 UTC] API Debug - GET parameters: Array
+(
+)
+
+[26-Jun-2025 03:52:06 UTC] API Debug - Defaulting to users table
+[26-Jun-2025 03:52:06 UTC] API Debug - Final endpoint: users
+[26-Jun-2025 03:52:30 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 03:52:30 UTC] API Debug - GET parameters: Array
+(
+)
+
+[26-Jun-2025 03:52:30 UTC] API Debug - Defaulting to users table
+[26-Jun-2025 03:52:30 UTC] API Debug - Final endpoint: users
+[26-Jun-2025 03:53:45 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 03:53:45 UTC] API Debug - GET parameters: Array
+(
+)
+
+[26-Jun-2025 03:53:45 UTC] API Debug - Defaulting to users table
+[26-Jun-2025 03:53:45 UTC] API Debug - Final endpoint: users
+[26-Jun-2025 03:54:45 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 03:54:45 UTC] API Debug - GET parameters: Array
+(
+)
+
+[26-Jun-2025 03:54:45 UTC] API Debug - Defaulting to users table
+[26-Jun-2025 03:54:45 UTC] API Debug - Final endpoint: users
+[26-Jun-2025 03:55:04 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 03:55:04 UTC] API Debug - GET parameters: Array
+(
+)
+
+[26-Jun-2025 03:55:04 UTC] API Debug - Defaulting to users table
+[26-Jun-2025 03:55:04 UTC] API Debug - Final endpoint: users
+[26-Jun-2025 03:55:36 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 03:55:36 UTC] API Debug - GET parameters: Array
+(
+    [table] => personal_info
+)
+
+[26-Jun-2025 03:55:36 UTC] API Debug - Using table parameter: personal_info
+[26-Jun-2025 03:55:36 UTC] API Debug - Final endpoint: personal_info
+[26-Jun-2025 03:55:52 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 03:55:52 UTC] API Debug - GET parameters: Array
+(
+    [table] => users
+)
+
+[26-Jun-2025 03:55:52 UTC] API Debug - Using table parameter: users
+[26-Jun-2025 03:55:52 UTC] API Debug - Final endpoint: users
+[26-Jun-2025 03:55:57 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 03:55:57 UTC] API Debug - GET parameters: Array
+(
+    [table] => experience
+)
+
+[26-Jun-2025 03:55:57 UTC] API Debug - Using table parameter: experience
+[26-Jun-2025 03:55:57 UTC] API Debug - Final endpoint: experience
+[26-Jun-2025 03:56:04 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 03:56:04 UTC] API Debug - GET parameters: Array
+(
+    [table] => education
+)
+
+[26-Jun-2025 03:56:04 UTC] API Debug - Using table parameter: education
+[26-Jun-2025 03:56:04 UTC] API Debug - Final endpoint: education
+[26-Jun-2025 03:56:10 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 03:56:10 UTC] API Debug - GET parameters: Array
+(
+    [table] => skills
+)
+
+[26-Jun-2025 03:56:10 UTC] API Debug - Using table parameter: skills
+[26-Jun-2025 03:56:10 UTC] API Debug - Final endpoint: skills
+[26-Jun-2025 03:57:45 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 03:57:45 UTC] API Debug - GET parameters: Array
+(
+    [table] => company_info
+)
+
+[26-Jun-2025 03:57:45 UTC] API Debug - Using table parameter: company_info
+[26-Jun-2025 03:57:45 UTC] API Debug - Final endpoint: company_info
+[26-Jun-2025 04:00:20 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 04:00:20 UTC] API Debug - GET parameters: Array
+(
+    [table] => company_info
+    [id] => 1
+)
+
+[26-Jun-2025 04:00:20 UTC] API Debug - Using table parameter: company_info
+[26-Jun-2025 04:00:20 UTC] API Debug - Final endpoint: company_info
+[26-Jun-2025 04:00:33 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 04:00:33 UTC] API Debug - GET parameters: Array
+(
+    [table] => company_info
+)
+
+[26-Jun-2025 04:00:33 UTC] API Debug - Using table parameter: company_info
+[26-Jun-2025 04:00:33 UTC] API Debug - Final endpoint: company_info
+[26-Jun-2025 04:01:03 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 04:01:03 UTC] API Debug - GET parameters: Array
+(
+    [table] => company_info
+    [id] => 1
+)
+
+[26-Jun-2025 04:01:03 UTC] API Debug - Using table parameter: company_info
+[26-Jun-2025 04:01:03 UTC] API Debug - Final endpoint: company_info
+[26-Jun-2025 04:04:40 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 04:04:40 UTC] API Debug - GET parameters: Array
+(
+    [table] => company_info
+    [id] => 1
+)
+
+[26-Jun-2025 04:04:40 UTC] API Debug - Using table parameter: company_info
+[26-Jun-2025 04:04:40 UTC] API Debug - Final endpoint: company_info
+[26-Jun-2025 04:04:58 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 04:04:58 UTC] API Debug - GET parameters: Array
+(
+    [table] => company_info
+    [id] => 1
+)
+
+[26-Jun-2025 04:04:58 UTC] API Debug - Using table parameter: company_info
+[26-Jun-2025 04:04:58 UTC] API Debug - Final endpoint: company_info
+[26-Jun-2025 04:05:29 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 04:05:29 UTC] API Debug - GET parameters: Array
+(
+    [table] => company_info
+    [id] => 1
+)
+
+[26-Jun-2025 04:05:29 UTC] API Debug - Using table parameter: company_info
+[26-Jun-2025 04:05:29 UTC] API Debug - Final endpoint: company_info
+[26-Jun-2025 04:06:20 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 04:06:20 UTC] API Debug - GET parameters: Array
+(
+    [table] => company_info
+)
+
+[26-Jun-2025 04:06:20 UTC] API Debug - Using table parameter: company_info
+[26-Jun-2025 04:06:20 UTC] API Debug - Final endpoint: company_info
+[26-Jun-2025 04:07:09 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 04:07:09 UTC] API Debug - GET parameters: Array
+(
+    [table] => company_info
+    [id] => 1
+)
+
+[26-Jun-2025 04:07:09 UTC] API Debug - Using table parameter: company_info
+[26-Jun-2025 04:07:09 UTC] API Debug - Final endpoint: company_info
+[26-Jun-2025 04:09:16 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 04:09:16 UTC] API Debug - GET parameters: Array
+(
+    [table] => company_info
+    [id] => 1
+)
+
+[26-Jun-2025 04:09:16 UTC] API Debug - Using table parameter: company_info
+[26-Jun-2025 04:09:16 UTC] API Debug - Final endpoint: company_info
+[26-Jun-2025 04:09:30 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 04:09:30 UTC] API Debug - GET parameters: Array
+(
+    [table] => company_info
+)
+
+[26-Jun-2025 04:09:30 UTC] API Debug - Using table parameter: company_info
+[26-Jun-2025 04:09:30 UTC] API Debug - Final endpoint: company_info
+[26-Jun-2025 04:09:50 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 04:09:50 UTC] API Debug - GET parameters: Array
+(
+    [table] => company_info
+    [id] => 1
+)
+
+[26-Jun-2025 04:09:50 UTC] API Debug - Using table parameter: company_info
+[26-Jun-2025 04:09:50 UTC] API Debug - Final endpoint: company_info
+[26-Jun-2025 04:10:04 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 04:10:04 UTC] API Debug - GET parameters: Array
+(
+    [table] => users
+)
+
+[26-Jun-2025 04:10:04 UTC] API Debug - Using table parameter: users
+[26-Jun-2025 04:10:04 UTC] API Debug - Final endpoint: users
+[26-Jun-2025 04:10:26 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 04:10:26 UTC] API Debug - GET parameters: Array
+(
+    [table] => users$id=7
+)
+
+[26-Jun-2025 04:10:26 UTC] API Debug - Using table parameter: users$id=7
+[26-Jun-2025 04:10:26 UTC] API Debug - Final endpoint: users$id=7
+[26-Jun-2025 04:10:26 UTC] API Debug - Invalid table requested: users$id=7
+[26-Jun-2025 04:10:26 UTC] PHP Fatal error:  Uncaught Error: Call to private method PortfolioAPI::sendError() from global scope in F:\Coder\Portfolio_INFO\api\api_submitter.php:421
+Stack trace:
+#0 {main}
+  thrown in F:\Coder\Portfolio_INFO\api\api_submitter.php on line 421
+[26-Jun-2025 04:10:38 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 04:10:38 UTC] API Debug - GET parameters: Array
+(
+    [table] => users
+    [id] => 7
+)
+
+[26-Jun-2025 04:10:38 UTC] API Debug - Using table parameter: users
+[26-Jun-2025 04:10:38 UTC] API Debug - Final endpoint: users
+[26-Jun-2025 04:10:45 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 04:10:45 UTC] API Debug - GET parameters: Array
+(
+    [table] => users
+    [id] => 7
+)
+
+[26-Jun-2025 04:10:45 UTC] API Debug - Using table parameter: users
+[26-Jun-2025 04:10:45 UTC] API Debug - Final endpoint: users
+[26-Jun-2025 04:10:59 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 04:10:59 UTC] API Debug - GET parameters: Array
+(
+    [table] => users
+)
+
+[26-Jun-2025 04:10:59 UTC] API Debug - Using table parameter: users
+[26-Jun-2025 04:10:59 UTC] API Debug - Final endpoint: users
+[26-Jun-2025 04:13:25 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 04:13:25 UTC] API Debug - GET parameters: Array
+(
+    [table] => users
+)
+
+[26-Jun-2025 04:13:25 UTC] API Debug - Using table parameter: users
+[26-Jun-2025 04:13:25 UTC] API Debug - Final endpoint: users
+[26-Jun-2025 04:13:35 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 04:13:35 UTC] API Debug - GET parameters: Array
+(
+    [table] => users
+)
+
+[26-Jun-2025 04:13:35 UTC] API Debug - Using table parameter: users
+[26-Jun-2025 04:13:35 UTC] API Debug - Final endpoint: users
+[26-Jun-2025 04:13:50 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 04:13:50 UTC] API Debug - GET parameters: Array
+(
+    [table] => users
+)
+
+[26-Jun-2025 04:13:50 UTC] API Debug - Using table parameter: users
+[26-Jun-2025 04:13:50 UTC] API Debug - Final endpoint: users
+[26-Jun-2025 04:13:59 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 04:13:59 UTC] API Debug - GET parameters: Array
+(
+    [table] => users
+)
+
+[26-Jun-2025 04:13:59 UTC] API Debug - Using table parameter: users
+[26-Jun-2025 04:13:59 UTC] API Debug - Final endpoint: users
+[26-Jun-2025 04:17:09 UTC] API Debug - Original endpoint: api_submitter
+[26-Jun-2025 04:17:09 UTC] API Debug - GET parameters: Array
+(
+    [table] => users
+    [id] => 7
+)
+
+[26-Jun-2025 04:17:09 UTC] API Debug - Using table parameter: users
+[26-Jun-2025 04:17:09 UTC] API Debug - Final endpoint: users

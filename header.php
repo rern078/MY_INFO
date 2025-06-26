@@ -176,28 +176,28 @@ $profileImage = getRandomProfileImage();
                   </div>
             <?php endif; ?>
 
-            <a href="index.php" class="btn <?php echo ($current_page === 'index') ? 'active' : 'btn-outline-primary'; ?>">
+            <a href="index.php" class="btn <?php echo ($current_page === 'index') ? 'active' : 'btn btn-outline-light'; ?>">
                   <i class="fas fa-file-alt me-2"></i><?php echo t('view_sr1'); ?>
             </a>
-            <a href="cover-letter.php" class="btn <?php echo ($current_page === 'cover-letter') ? 'active' : 'btn-outline-primary'; ?>">
+            <a href="cover-letter.php" class="btn <?php echo ($current_page === 'cover-letter') ? 'active' : 'btn btn-outline-light'; ?>">
                   <i class="fas fa-envelope me-2"></i><?php echo t('view_sr2'); ?>
             </a>
-            <a href="certificates.php" class="btn <?php echo ($current_page === 'certificates') ? 'active' : 'btn-outline-success'; ?>">
+            <a href="certificates.php" class="btn <?php echo ($current_page === 'certificates') ? 'active' : 'btn btn-outline-light'; ?>">
                   <i class="fas fa-certificate me-2"></i><?php echo t('view_certificates'); ?>
             </a>
-            <a href="generate_pdf.php?type=cv" class="btn btn-outline-success">
+            <a href="generate_pdf.php?type=cv" class="btn btn-outline-light">
                   <i class="fas fa-download me-2"></i><?php echo t('download_pdf'); ?>
             </a>
             <?php if ($username === 'chamrern'): ?>
-                  <a href="admin.php" class="btn <?php echo ($current_page === 'admin') ? 'active' : 'btn-outline-primary'; ?>">
+                  <a href="admin.php" class="btn <?php echo ($current_page === 'admin') ? 'active' : 'btn btn-outline-light'; ?>">
                         <i class="fas fa-cog me-2"></i><?php echo t('admin_panel'); ?>
                   </a>
             <?php else: ?>
-                  <a href="user_dashboard.php" class="btn <?php echo ($current_page === 'user_dashboard') ? 'active' : 'btn-outline-primary'; ?>">
+                  <a href="user_dashboard.php" class="btn <?php echo ($current_page === 'user_dashboard') ? 'active' : 'btn btn-outline-light'; ?>">
                         <i class="fas fa-user me-2"></i><?php echo t('dashboard'); ?>
                   </a>
             <?php endif; ?>
-            <a href="login.php?logout=1" class="btn btn-outline-light btn-sm">
+            <a href="login.php?logout=1" class="btn btn-outline-light">
                   <i class="fas fa-sign-out-alt me-1"></i><?php echo t('logout'); ?>
             </a>
       </div>
@@ -214,7 +214,7 @@ $profileImage = getRandomProfileImage();
                   <a href="certificates.php" class="btn <?php echo ($current_page === 'certificates') ? 'active' : 'btn-outline-success'; ?>">
                         <i class="fas fa-certificate me-2"></i><?php echo t('view_certificates'); ?>
                   </a>
-                  <a href="generate_pdf.php?type=cv" class="btn btn-outline-success">
+                  <a href="generate_pdf.php?type=cv" class="btn btn-outline-primary">
                         <i class="fas fa-download me-2"></i><?php echo t('download_pdf'); ?>
                   </a>
                   <?php if ($username === 'chamrern'): ?>

@@ -186,7 +186,7 @@
                   <div class="endpoint">
                         <div class="endpoint-header">
                               <span class="method get">GET</span>
-                              <span class="endpoint-url">/api/api_submitter.php/users</span>
+                              <span class="endpoint-url">/api/api_submitter.php?table=users</span>
                               <button class="test-btn" onclick="testGet('users')">Test</button>
                         </div>
                         <div class="response hidden" id="response-users-get"></div>
@@ -195,7 +195,7 @@
                   <div class="endpoint">
                         <div class="endpoint-header">
                               <span class="method get">GET</span>
-                              <span class="endpoint-url">/api/api_submitter.php/users?id=1</span>
+                              <span class="endpoint-url">/api/api_submitter.php?table=users&id=1</span>
                               <button class="test-btn" onclick="testGetById('users', 1)">Test</button>
                         </div>
                         <div class="response hidden" id="response-users-get-id"></div>
@@ -204,7 +204,7 @@
                   <div class="endpoint">
                         <div class="endpoint-header">
                               <span class="method post">POST</span>
-                              <span class="endpoint-url">/api/api_submitter.php/users</span>
+                              <span class="endpoint-url">/api/api_submitter.php?table=users</span>
                               <button class="toggle-form" onclick="toggleForm('users-form')">Show Form</button>
                               <button class="test-btn" onclick="testPost('users', 'users-form')">Test</button>
                         </div>
@@ -224,6 +224,39 @@
                         </div>
                         <div class="response hidden" id="response-users-post"></div>
                   </div>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method put">PUT</span>
+                              <span class="endpoint-url">/api/api_submitter.php?table=users&id=1</span>
+                              <button class="toggle-form" onclick="toggleForm('users-update-form')">Show Form</button>
+                              <button class="test-btn" onclick="testPut('users', 1, 'users-update-form')">Test</button>
+                        </div>
+                        <div class="hidden" id="users-update-form">
+                              <div class="form-group">
+                                    <label>Username:</label>
+                                    <input type="text" id="users-update-username" value="updateduser">
+                              </div>
+                              <div class="form-group">
+                                    <label>Email:</label>
+                                    <input type="email" id="users-update-email" value="updated@example.com">
+                              </div>
+                              <div class="form-group">
+                                    <label>Password (leave empty to keep current):</label>
+                                    <input type="password" id="users-update-password" value="">
+                              </div>
+                        </div>
+                        <div class="response hidden" id="response-users-put"></div>
+                  </div>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method delete">DELETE</span>
+                              <span class="endpoint-url">/api/api_submitter.php?table=users&id=1</span>
+                              <button class="test-btn" onclick="testDelete('users', 1)">Test</button>
+                        </div>
+                        <div class="response hidden" id="response-users-delete"></div>
+                  </div>
             </div>
 
             <!-- Personal Info -->
@@ -233,7 +266,7 @@
                   <div class="endpoint">
                         <div class="endpoint-header">
                               <span class="method get">GET</span>
-                              <span class="endpoint-url">/api/api_submitter.php/personal_info</span>
+                              <span class="endpoint-url">/api/api_submitter.php?table=personal_info</span>
                               <button class="test-btn" onclick="testGet('personal_info')">Test</button>
                         </div>
                         <div class="response hidden" id="response-personal_info-get"></div>
@@ -242,7 +275,7 @@
                   <div class="endpoint">
                         <div class="endpoint-header">
                               <span class="method post">POST</span>
-                              <span class="endpoint-url">/api/api_submitter.php/personal_info</span>
+                              <span class="endpoint-url">/api/api_submitter.php?table=personal_info</span>
                               <button class="toggle-form" onclick="toggleForm('personal_info-form')">Show Form</button>
                               <button class="test-btn"
                                     onclick="testPost('personal_info', 'personal_info-form')">Test</button>
@@ -318,6 +351,45 @@
                               </div>
                         </div>
                         <div class="response hidden" id="response-personal_info-post"></div>
+                  </div>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method put">PUT</span>
+                              <span class="endpoint-url">/api/api_submitter.php?table=personal_info&id=1</span>
+                              <button class="toggle-form" onclick="toggleForm('personal_info-update-form')">Show
+                                    Form</button>
+                              <button class="test-btn"
+                                    onclick="testPut('personal_info', 1, 'personal_info-update-form')">Test</button>
+                        </div>
+                        <div class="hidden" id="personal_info-update-form">
+                              <div class="form-group">
+                                    <label>Name:</label>
+                                    <input type="text" id="personal_info-update-name" value="Updated Name">
+                              </div>
+                              <div class="form-group">
+                                    <label>Title:</label>
+                                    <input type="text" id="personal_info-update-title" value="Updated Title">
+                              </div>
+                              <div class="form-group">
+                                    <label>Email:</label>
+                                    <input type="email" id="personal_info-update-email" value="updated@example.com">
+                              </div>
+                              <div class="form-group">
+                                    <label>Phone:</label>
+                                    <input type="text" id="personal_info-update-phone" value="+1234567890">
+                              </div>
+                        </div>
+                        <div class="response hidden" id="response-personal_info-put"></div>
+                  </div>
+
+                  <div class="endpoint">
+                        <div class="endpoint-header">
+                              <span class="method delete">DELETE</span>
+                              <span class="endpoint-url">/api/api_submitter.php?table=personal_info&id=1</span>
+                              <button class="test-btn" onclick="testDelete('personal_info', 1)">Test</button>
+                        </div>
+                        <div class="response hidden" id="response-personal_info-delete"></div>
                   </div>
             </div>
 
@@ -928,8 +1000,17 @@
                   }
             }
 
-            async function testPut(endpoint, id, data) {
+            async function testPut(endpoint, id, formId) {
                   try {
+                        const form = document.getElementById(formId);
+                        const inputs = form.querySelectorAll('input, textarea, select');
+                        const data = {};
+
+                        inputs.forEach(input => {
+                              const fieldName = input.id.replace(`${endpoint}-update-`, '');
+                              data[fieldName] = input.value;
+                        });
+
                         const response = await fetch(`${API_BASE}?table=${endpoint}&id=${id}`, {
                               method: 'PUT',
                               headers: {

@@ -26,14 +26,26 @@ class PortfolioAPI
       private function sendResponse($data, $statusCode = 200)
       {
             http_response_code($statusCode);
-            echo json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            $response = ['success' => true];
+            if (isset($data['message'])) {
+                  $response['message'] = $data['message'];
+                  unset($data['message']);
+            }
+            $response = array_merge($response, $data);
+            echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
             exit();
       }
 
       // Helper method to send error response
       private function sendError($message, $statusCode = 400)
       {
-            $this->sendResponse(['error' => $message], $statusCode);
+            http_response_code($statusCode);
+            $response = [
+                  'success' => false,
+                  'message' => $message
+            ];
+            echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+            exit();
       }
 
       // Helper method to validate required fields
@@ -370,15 +382,43 @@ $pathParts = explode('/', trim($path, '/'));
 // Extract endpoint from URL
 $endpoint = end($pathParts);
 
-// If the endpoint is the filename itself, check for a table parameter
-if ($endpoint === 'api_submitter.php') {
-      // Check if there's a table parameter in the URL
-      if (isset($_GET['table'])) {
-            $endpoint = $_GET['table'];
-      } else {
-            // Default to users if no table specified
+// Debug information
+error_log("API Debug - Original endpoint: " . $endpoint);
+error_log("API Debug - GET parameters: " . print_r($_GET, true));
+
+// Always check for table parameter first, regardless of the endpoint
+if (isset($_GET['table'])) {
+      $endpoint = $_GET['table'];
+      error_log("API Debug - Using table parameter: " . $endpoint);
+} else {
+      // If no table parameter and endpoint is the filename, default to users
+      if ($endpoint === 'api_submitter.php' || $endpoint === 'api_submitter') {
             $endpoint = 'users';
+            error_log("API Debug - Defaulting to users table");
       }
+}
+
+error_log("API Debug - Final endpoint: " . $endpoint);
+
+// Validate that the endpoint is a valid table name
+$validTables = [
+      'users',
+      'personal_info',
+      'experience',
+      'education',
+      'skills',
+      'social_media',
+      'certificates',
+      'courses',
+      'company_info',
+      'cover_letter',
+      'languages',
+      'interests'
+];
+
+if (!in_array($endpoint, $validTables)) {
+      error_log("API Debug - Invalid table requested: " . $endpoint);
+      $api->sendError("Invalid table: $endpoint", 404);
 }
 
 // Get request body for POST/PUT requests
