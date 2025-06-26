@@ -1127,7 +1127,8 @@ html[lang="km"] .alert p {
       }
 
       .section-header {
-            flex-direction: column;
+            /* flex-direction: column; */
+            margin-top: 1rem;
             align-items: flex-start;
             gap: 0.5rem;
       }

@@ -187,7 +187,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const originalIcon = button.innerHTML;
             button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
             button.disabled = true;
-
       }
 });
 // Portfolio Dropdown Functionality
