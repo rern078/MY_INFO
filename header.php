@@ -39,7 +39,7 @@ $profileImage = getRandomProfileImage();
                                                       class="profile-image-change-btn"
                                                       onclick="changeProfileImage()"
                                                       title="Change Profile Image">
-                                                      <i class="fas fa-sync-alt"></i>
+                                                      <i class="fas fa-sync-alt" id="profileImageIcon"></i>
                                                 </button>
                                           </div>
                                     <?php else: ?>
@@ -81,6 +81,10 @@ $profileImage = getRandomProfileImage();
                                                       <a href="#courses" class="portfolio-option" data-section="courses">
                                                             <i class="fas fa-book me-2"></i>
                                                             <span><?php echo t('courses'); ?></span>
+                                                      </a>
+                                                      <a href="#languages" class="portfolio-option" data-section="languages">
+                                                            <i class="fas fa-language me-2"></i>
+                                                            <span><?php echo t('languages'); ?></span>
                                                       </a>
                                                       <a href="#interests" class="portfolio-option" data-section="interests">
                                                             <i class="fas fa-heart me-2"></i>
@@ -163,6 +167,10 @@ $profileImage = getRandomProfileImage();
                               <a href="#courses" class="portfolio-option" data-section="courses">
                                     <i class="fas fa-book me-2"></i>
                                     <span><?php echo t('courses'); ?></span>
+                              </a>
+                              <a href="#languages" class="portfolio-option" data-section="languages">
+                                    <i class="fas fa-language me-2"></i>
+                                    <span><?php echo t('languages'); ?></span>
                               </a>
                               <a href="#interests" class="portfolio-option" data-section="interests">
                                     <i class="fas fa-heart me-2"></i>
@@ -288,6 +296,10 @@ $profileImage = getRandomProfileImage();
                                                             <i class="fas fa-book me-2"></i>
                                                             <span><?php echo t('courses'); ?></span>
                                                       </a>
+                                                      <a href="#languages" class="portfolio-option" data-section="languages">
+                                                            <i class="fas fa-language me-2"></i>
+                                                            <span><?php echo t('languages'); ?></span>
+                                                      </a>
                                                       <a href="#interests" class="portfolio-option" data-section="interests">
                                                             <i class="fas fa-heart me-2"></i>
                                                             <span><?php echo t('interests_hobbies'); ?></span>
@@ -369,6 +381,10 @@ $profileImage = getRandomProfileImage();
                               <a href="#courses" class="portfolio-option" data-section="courses">
                                     <i class="fas fa-book me-2"></i>
                                     <span><?php echo t('courses'); ?></span>
+                              </a>
+                              <a href="#languages" class="portfolio-option" data-section="languages">
+                                    <i class="fas fa-language me-2"></i>
+                                    <span><?php echo t('languages'); ?></span>
                               </a>
                               <a href="#interests" class="portfolio-option" data-section="interests">
                                     <i class="fas fa-heart me-2"></i>

@@ -66,6 +66,7 @@ $translations = [
             'professional_experience' => 'Professional Experience',
             'education' => 'Education',
             'courses' => 'Courses',
+            'languages' => 'Languages',
             'interests_hobbies' => 'Interests & Hobbies',
             'connect_with_me' => 'Connect With Me',
 
@@ -207,7 +208,8 @@ $translations = [
             'professional_experience' => 'បទពិសោធន៍បច្ចុប្បន្ន',
             'education' => 'ការអប់រំ',
             'courses' => 'កម្រិត',
-            'interests_hobbies' => 'អត្ថបទអត្ថបទ',
+            'languages' => 'ភាសា',
+            'interests_hobbies' => 'ចំណង់ចំណូលចិត្ត',
             'connect_with_me' => 'ជួបជាមួយខ្ញុំ',
 
             // Language switcher
@@ -348,6 +350,7 @@ $translations = [
             'professional_experience' => '工作经验',
             'education' => '教育背景',
             'courses' => '课程',
+            'languages' => '语言',
             'interests_hobbies' => '兴趣爱好',
             'connect_with_me' => '联系我',
 

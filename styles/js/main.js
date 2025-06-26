@@ -286,7 +286,7 @@ document.addEventListener('DOMContentLoaded', function () {
       });
 
       // Observe all portfolio sections
-      const sections = ['personal-info', 'skills', 'experience', 'education', 'courses', 'interests', 'connect'];
+      const sections = ['personal-info', 'skills', 'experience', 'education', 'courses', 'languages', 'interests', 'connect'];
       sections.forEach(sectionId => {
             const section = document.getElementById(sectionId);
             if (section) {

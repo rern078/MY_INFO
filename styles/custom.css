@@ -11,7 +11,7 @@
 }
 
 /* Custom Alert */
-.custom-alert {   
+.custom-alert {
       background: white;
       border-radius: 12px;
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
@@ -896,7 +896,7 @@ html {
 
 /* Profile Image Styles */
 .profile-image {
-      transition: all 0.3s ease;
+      transition: all 0.3s ease, transform 0.2s ease;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -942,6 +942,57 @@ html {
       opacity: 0.5;
       cursor: not-allowed;
       transform: none;
+}
+
+/* Profile image change button animations */
+.profile-image-change-btn i.fa-spinner {
+      animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+      0% {
+            transform: rotate(0deg);
+      }
+
+      100% {
+            transform: rotate(360deg);
+      }
+}
+
+.profile-image-change-btn:not(:disabled):hover i.fa-sync-alt {
+      animation: rotate 0.6s ease-in-out;
+}
+
+@keyframes rotate {
+      0% {
+            transform: rotate(0deg);
+      }
+
+      100% {
+            transform: rotate(180deg);
+      }
+}
+
+/* Profile image change animation */
+.profile-image.changing {
+      animation: imageChange 0.5s ease-in-out;
+}
+
+@keyframes imageChange {
+      0% {
+            opacity: 1;
+            transform: scale(1);
+      }
+
+      50% {
+            opacity: 0.7;
+            transform: scale(0.95);
+      }
+
+      100% {
+            opacity: 1;
+            transform: scale(1);
+      }
 }
 
 /* Mobile responsive adjustments for profile image */

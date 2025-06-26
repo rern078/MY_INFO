@@ -469,7 +469,7 @@ $hasData = $personalInfo;
                                     <h3>Languages</h3>
                               </div>
 
-                              <div class="languages-container">
+                              <div id="languages" class="languages-container">
                                     <?php foreach ($languages as $language): ?>
                                           <div class="language-item">
                                                 <div class="language-info">
