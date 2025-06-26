@@ -161,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                             onfocus="showHelpText('confirm-password-help')"
                                                             onblur="hideHelpText('confirm-password-help')">
                                                       <button type="button" class="password-toggle" onclick="togglePassword('confirm_password')">
-                                                            <i class="fas fa-eye" id="confirm-password-icon"></i>
+                                                            <i class="fas fa-eye" id="confirm_password-icon"></i>
                                                       </button>
                                                 </div>
                                                 <small class="text-muted help-text" id="confirm-password-help" style="display: none;"><?php echo t('confirm_password_help_text'); ?></small>
