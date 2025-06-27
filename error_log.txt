@@ -2652,3 +2652,33 @@ Stack trace:
 [27-Jun-2025 03:54:16 UTC] PHP   1. {main}() F:\Coder\Portfolio_INFO\index.php:0
 [27-Jun-2025 03:54:16 UTC] PHP   2. require_once() F:\Coder\Portfolio_INFO\index.php:4
 [27-Jun-2025 03:54:16 UTC] PHP   3. session_start() F:\Coder\Portfolio_INFO\languages.php:5
+[27-Jun-2025 04:17:04 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in F:\Coder\Portfolio_INFO\languages.php on line 5
+[27-Jun-2025 04:17:04 UTC] PHP Stack trace:
+[27-Jun-2025 04:17:04 UTC] PHP   1. {main}() F:\Coder\Portfolio_INFO\index.php:0
+[27-Jun-2025 04:17:04 UTC] PHP   2. require_once() F:\Coder\Portfolio_INFO\index.php:4
+[27-Jun-2025 04:17:04 UTC] PHP   3. session_start() F:\Coder\Portfolio_INFO\languages.php:5
+[27-Jun-2025 04:19:24 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in F:\Coder\Portfolio_INFO\languages.php on line 5
+[27-Jun-2025 04:19:24 UTC] PHP Stack trace:
+[27-Jun-2025 04:19:24 UTC] PHP   1. {main}() F:\Coder\Portfolio_INFO\index.php:0
+[27-Jun-2025 04:19:24 UTC] PHP   2. require_once() F:\Coder\Portfolio_INFO\index.php:4
+[27-Jun-2025 04:19:24 UTC] PHP   3. session_start() F:\Coder\Portfolio_INFO\languages.php:5
+[27-Jun-2025 04:26:43 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in F:\Coder\Portfolio_INFO\languages.php on line 5
+[27-Jun-2025 04:26:43 UTC] PHP Stack trace:
+[27-Jun-2025 04:26:43 UTC] PHP   1. {main}() F:\Coder\Portfolio_INFO\index.php:0
+[27-Jun-2025 04:26:43 UTC] PHP   2. require_once() F:\Coder\Portfolio_INFO\index.php:4
+[27-Jun-2025 04:26:43 UTC] PHP   3. session_start() F:\Coder\Portfolio_INFO\languages.php:5
+[27-Jun-2025 04:36:47 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in F:\Coder\Portfolio_INFO\languages.php on line 5
+[27-Jun-2025 04:36:47 UTC] PHP Stack trace:
+[27-Jun-2025 04:36:47 UTC] PHP   1. {main}() F:\Coder\Portfolio_INFO\index.php:0
+[27-Jun-2025 04:36:47 UTC] PHP   2. require_once() F:\Coder\Portfolio_INFO\index.php:4
+[27-Jun-2025 04:36:47 UTC] PHP   3. session_start() F:\Coder\Portfolio_INFO\languages.php:5
+[27-Jun-2025 04:36:59 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in F:\Coder\Portfolio_INFO\languages.php on line 5
+[27-Jun-2025 04:36:59 UTC] PHP Stack trace:
+[27-Jun-2025 04:36:59 UTC] PHP   1. {main}() F:\Coder\Portfolio_INFO\index.php:0
+[27-Jun-2025 04:36:59 UTC] PHP   2. require_once() F:\Coder\Portfolio_INFO\index.php:4
+[27-Jun-2025 04:36:59 UTC] PHP   3. session_start() F:\Coder\Portfolio_INFO\languages.php:5
+[27-Jun-2025 04:37:02 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in F:\Coder\Portfolio_INFO\languages.php on line 5
+[27-Jun-2025 04:37:02 UTC] PHP Stack trace:
+[27-Jun-2025 04:37:02 UTC] PHP   1. {main}() F:\Coder\Portfolio_INFO\index.php:0
+[27-Jun-2025 04:37:02 UTC] PHP   2. require_once() F:\Coder\Portfolio_INFO\index.php:4
+[27-Jun-2025 04:37:02 UTC] PHP   3. session_start() F:\Coder\Portfolio_INFO\languages.php:5
