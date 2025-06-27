@@ -1069,6 +1069,7 @@ html[lang="km"] .alert p {
             box-sizing: border-box;
       }
 
+      .mode-switcher,
       .hamburger-menu,
       .language-switcher {
             margin-right: .2rem !important;

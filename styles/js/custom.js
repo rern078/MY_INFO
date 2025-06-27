@@ -188,7 +188,88 @@ document.addEventListener('DOMContentLoaded', function () {
             button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
             button.disabled = true;
       }
+
+      // Dark/Light Mode Switch Functionality
+      const modeBtn = document.getElementById('modeBtn');
+      const mobileModeBtn = document.getElementById('mobileModeBtn');
+
+      // Function to toggle dark mode
+      function toggleDarkMode() {
+            const body = document.body;
+            const isDarkMode = body.classList.contains('dark-mode');
+
+            if (isDarkMode) {
+                  body.classList.remove('dark-mode');
+                  localStorage.setItem('darkMode', 'false');
+            } else {
+                  body.classList.add('dark-mode');
+                  localStorage.setItem('darkMode', 'true');
+            }
+
+            // Update mobile button text
+            updateModeButtonText();
+      }
+
+      // Function to update button text
+      function updateModeButtonText() {
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            const modeTextElements = document.querySelectorAll('.mode-text');
+
+            modeTextElements.forEach(element => {
+                  if (isDarkMode) {
+                        element.textContent = element.getAttribute('data-light-text') || 'Light Mode';
+                  } else {
+                        element.textContent = element.getAttribute('data-dark-text') || 'Dark Mode';
+                  }
+            });
+      }
+
+      // Function to initialize dark mode from localStorage
+      function initializeDarkMode() {
+            const savedMode = localStorage.getItem('darkMode');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            // If no saved preference, use system preference
+            if (savedMode === null) {
+                  if (prefersDark) {
+                        document.body.classList.add('dark-mode');
+                        localStorage.setItem('darkMode', 'true');
+                  }
+            } else if (savedMode === 'true') {
+                  document.body.classList.add('dark-mode');
+            }
+
+            updateModeButtonText();
+      }
+
+      // Add event listeners for mode buttons
+      if (modeBtn) {
+            modeBtn.addEventListener('click', toggleDarkMode);
+      }
+
+      if (mobileModeBtn) {
+            mobileModeBtn.addEventListener('click', toggleDarkMode);
+      }
+
+      // Initialize dark mode on page load
+      initializeDarkMode();
+
+      // Listen for system theme changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+            // Only update if user hasn't set a preference
+            if (localStorage.getItem('darkMode') === null) {
+                  if (e.matches) {
+                        document.body.classList.add('dark-mode');
+                        localStorage.setItem('darkMode', 'true');
+                  } else {
+                        document.body.classList.remove('dark-mode');
+                        localStorage.setItem('darkMode', 'false');
+                  }
+                  updateModeButtonText();
+            }
+      });
 });
+
 // Portfolio Dropdown Functionality
 document.addEventListener('DOMContentLoaded', function () {
       const portfolioBtn = document.getElementById('portfolioBtn');

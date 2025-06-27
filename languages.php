@@ -74,6 +74,11 @@ $translations = [
             'select_language' => 'Select Language',
             'language' => 'Language',
 
+            // Dark Mode
+            'dark_mode' => 'Dark Mode',
+            'light_mode' => 'Light Mode',
+            'toggle_dark_mode' => 'Toggle Dark/Light Mode',
+
             // Common
             'yes' => 'Yes',
             'no' => 'No',
@@ -216,6 +221,11 @@ $translations = [
             'select_language' => 'ជ្រើសរើសភាសា',
             'language' => 'ភាសា',
 
+            // Dark Mode
+            'dark_mode' => 'របៀបងងឹត',
+            'light_mode' => 'របៀបភ្លឺ',
+            'toggle_dark_mode' => 'ប្តូររបៀបងងឹត/ភ្លឺ',
+
             // Common
             'yes' => 'បាទ/ចាស',
             'no' => 'ទេ',
@@ -357,6 +367,11 @@ $translations = [
             // Language switcher
             'select_language' => '选择语言',
             'language' => '语言',
+
+            // Dark Mode
+            'dark_mode' => '暗模式',
+            'light_mode' => '亮模式',
+            'toggle_dark_mode' => '切换暗/亮模式',
 
             // Common
             'yes' => '是',

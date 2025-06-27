@@ -120,6 +120,14 @@ $profileImage = getRandomProfileImage();
                                           </div>
                                     </div>
 
+                                    <!-- Dark/Light Mode Switch -->
+                                    <div class="mode-switcher me-3">
+                                          <button type="button" class="mode-btn" id="modeBtn" title="<?php echo t('toggle_dark_mode'); ?>">
+                                                <i class="fas fa-sun mode-icon-light"></i>
+                                                <i class="fas fa-moon mode-icon-dark"></i>
+                                          </button>
+                                    </div>
+
                                     <!-- Hamburger Menu for Mobile -->
                                     <div class="hamburger-menu me-3" id="hamburgerMenu">
                                           <div class="hamburger-line"></div>
@@ -183,6 +191,15 @@ $profileImage = getRandomProfileImage();
                         </div>
                   </div>
             <?php endif; ?>
+
+            <!-- Dark/Light Mode Switch for Mobile -->
+            <div class="mode-switcher-mobile">
+                  <button type="button" class="mode-btn-mobile" id="mobileModeBtn" title="<?php echo t('toggle_dark_mode'); ?>">
+                        <i class="fas fa-sun mode-icon-light"></i>
+                        <i class="fas fa-moon mode-icon-dark"></i>
+                        <span class="mode-text" data-dark-text="<?php echo t('dark_mode'); ?>" data-light-text="<?php echo t('light_mode'); ?>"><?php echo t('dark_mode'); ?></span>
+                  </button>
+            </div>
 
             <a href="index.php" class="btn <?php echo ($current_page === 'index') ? 'active' : 'btn btn-outline-light'; ?>">
                   <i class="fas fa-file-alt me-2"></i><?php echo t('view_sr1'); ?>
@@ -334,6 +351,14 @@ $profileImage = getRandomProfileImage();
                                           </div>
                                     </div>
 
+                                    <!-- Dark/Light Mode Switch -->
+                                    <div class="mode-switcher me-3">
+                                          <button type="button" class="mode-btn" id="modeBtn" title="<?php echo t('toggle_dark_mode'); ?>">
+                                                <i class="fas fa-sun mode-icon-light"></i>
+                                                <i class="fas fa-moon mode-icon-dark"></i>
+                                          </button>
+                                    </div>
+
                                     <!-- Hamburger Menu for Mobile -->
                                     <div class="hamburger-menu me-3" id="hamburgerMenu">
                                           <div class="hamburger-line"></div>
@@ -397,6 +422,15 @@ $profileImage = getRandomProfileImage();
                         </div>
                   </div>
             <?php endif; ?>
+
+            <!-- Dark/Light Mode Switch for Mobile -->
+            <div class="mode-switcher-mobile">
+                  <button type="button" class="mode-btn-mobile" id="mobileModeBtn" title="<?php echo t('toggle_dark_mode'); ?>">
+                        <i class="fas fa-sun mode-icon-light"></i>
+                        <i class="fas fa-moon mode-icon-dark"></i>
+                        <span class="mode-text" data-dark-text="<?php echo t('dark_mode'); ?>" data-light-text="<?php echo t('light_mode'); ?>"><?php echo t('dark_mode'); ?></span>
+                  </button>
+            </div>
 
             <a href="index.php" class="btn <?php echo ($current_page === 'index') ? 'active' : 'btn-outline-primary'; ?>">
                   <i class="fas fa-file-alt me-2"></i><?php echo t('view_cv'); ?>
