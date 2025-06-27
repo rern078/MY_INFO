@@ -2882,3 +2882,23 @@ Stack trace:
 [27-Jun-2025 09:11:40 UTC] PHP   1. {main}() F:\Coder\Portfolio_INFO\certificates.php:0
 [27-Jun-2025 09:11:40 UTC] PHP   2. require_once() F:\Coder\Portfolio_INFO\certificates.php:4
 [27-Jun-2025 09:11:40 UTC] PHP   3. session_start() F:\Coder\Portfolio_INFO\languages.php:5
+[27-Jun-2025 09:58:33 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in F:\Coder\Portfolio_INFO\languages.php on line 5
+[27-Jun-2025 09:58:33 UTC] PHP Stack trace:
+[27-Jun-2025 09:58:33 UTC] PHP   1. {main}() F:\Coder\Portfolio_INFO\certificates.php:0
+[27-Jun-2025 09:58:33 UTC] PHP   2. require_once() F:\Coder\Portfolio_INFO\certificates.php:4
+[27-Jun-2025 09:58:33 UTC] PHP   3. session_start() F:\Coder\Portfolio_INFO\languages.php:5
+[27-Jun-2025 09:58:41 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in F:\Coder\Portfolio_INFO\languages.php on line 5
+[27-Jun-2025 09:58:41 UTC] PHP Stack trace:
+[27-Jun-2025 09:58:41 UTC] PHP   1. {main}() F:\Coder\Portfolio_INFO\index.php:0
+[27-Jun-2025 09:58:41 UTC] PHP   2. require_once() F:\Coder\Portfolio_INFO\index.php:4
+[27-Jun-2025 09:58:41 UTC] PHP   3. session_start() F:\Coder\Portfolio_INFO\languages.php:5
+[27-Jun-2025 09:59:52 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in F:\Coder\Portfolio_INFO\languages.php on line 5
+[27-Jun-2025 09:59:52 UTC] PHP Stack trace:
+[27-Jun-2025 09:59:52 UTC] PHP   1. {main}() F:\Coder\Portfolio_INFO\index.php:0
+[27-Jun-2025 09:59:52 UTC] PHP   2. require_once() F:\Coder\Portfolio_INFO\index.php:4
+[27-Jun-2025 09:59:52 UTC] PHP   3. session_start() F:\Coder\Portfolio_INFO\languages.php:5
+[27-Jun-2025 10:02:02 UTC] PHP Notice:  session_start(): Ignoring session_start() because a session is already active in F:\Coder\Portfolio_INFO\languages.php on line 5
+[27-Jun-2025 10:02:02 UTC] PHP Stack trace:
+[27-Jun-2025 10:02:02 UTC] PHP   1. {main}() F:\Coder\Portfolio_INFO\index.php:0
+[27-Jun-2025 10:02:02 UTC] PHP   2. require_once() F:\Coder\Portfolio_INFO\index.php:4
+[27-Jun-2025 10:02:02 UTC] PHP   3. session_start() F:\Coder\Portfolio_INFO\languages.php:5
