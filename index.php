@@ -39,30 +39,46 @@ $hasData = $portfolioData['hasData'];
                   </div>
             <?php else: ?>
                   <div class="cv-header fade-in">
-                        <h1><?php echo htmlspecialchars($personalInfo['name']); ?></h1>
-                        <div class="title"><?php echo htmlspecialchars($personalInfo['title']); ?></div>
-                        <div class="contact-details">
-                              <div class="contact-item">
-                                    <i class="fas fa-envelope"></i>
-                                    <span><?php echo htmlspecialchars($personalInfo['email']); ?></span>
-                              </div>
-                              <div class="contact-item">
-                                    <i class="fas fa-phone"></i>
-                                    <span><?php echo htmlspecialchars($personalInfo['phone']); ?></span>
-                              </div>
-                              <div class="contact-item">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span><?php echo htmlspecialchars($personalInfo['location']); ?></span>
-                              </div>
-                              <?php if (!empty($socialMedia)): ?>
-                                    <div class="social-media-links">
-                                          <?php foreach ($socialMedia as $social): ?>
-                                                <a href="<?php echo htmlspecialchars($social['url']); ?>" target="_blank" class="social-link" title="<?php echo htmlspecialchars($social['platform']); ?>">
-                                                      <i class="<?php echo htmlspecialchars($social['icon_class']); ?>"></i>
-                                                </a>
-                                          <?php endforeach; ?>
+                        <div class="cv-header-content">
+                              <div class="profile-section">
+                                    <?php
+                                    // Get profile image using the existing function
+                                    $profileImage = getRandomProfileImage();
+                                    if ($profileImage): ?>
+                                          <div class="cv-profile-image-container">
+                                                <img src="<?php echo htmlspecialchars($profileImage); ?>"
+                                                      alt="<?php echo htmlspecialchars($personalInfo['name']); ?>'s Profile"
+                                                      class="cv-profile-image">
+                                          </div>
+                                    <?php endif; ?>
+                                    <div class="cv-header-text">
+                                          <h1><?php echo htmlspecialchars($personalInfo['name']); ?></h1>
+                                          <div class="title"><?php echo htmlspecialchars($personalInfo['title']); ?></div>
                                     </div>
-                              <?php endif; ?>
+                              </div>
+                              <div class="contact-details">
+                                    <div class="contact-item">
+                                          <i class="fas fa-envelope"></i>
+                                          <span><?php echo htmlspecialchars($personalInfo['email']); ?></span>
+                                    </div>
+                                    <div class="contact-item">
+                                          <i class="fas fa-phone"></i>
+                                          <span><?php echo htmlspecialchars($personalInfo['phone']); ?></span>
+                                    </div>
+                                    <div class="contact-item">
+                                          <i class="fas fa-map-marker-alt"></i>
+                                          <span><?php echo htmlspecialchars($personalInfo['location']); ?></span>
+                                    </div>
+                                    <?php if (!empty($socialMedia)): ?>
+                                          <div class="social-media-links">
+                                                <?php foreach ($socialMedia as $social): ?>
+                                                      <a href="<?php echo htmlspecialchars($social['url']); ?>" target="_blank" class="social-link" title="<?php echo htmlspecialchars($social['platform']); ?>">
+                                                            <i class="<?php echo htmlspecialchars($social['icon_class']); ?>"></i>
+                                                      </a>
+                                                <?php endforeach; ?>
+                                          </div>
+                                    <?php endif; ?>
+                              </div>
                         </div>
                   </div>
 

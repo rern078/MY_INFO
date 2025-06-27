@@ -100,7 +100,7 @@ if (!isset($page_title) || !isset($page_description) || !isset($page_keywords) |
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <link rel="stylesheet" href="styles/style.css?v=<?php echo time(); ?>">
 <link rel="stylesheet" href="styles/custom.css?v=<?php echo time(); ?>">
-<script src="styles/js/main.js?v=<?php echo time(); ?>"></script>
+<script src="styles/js/custom.js?v=<?php echo time(); ?>"></script>
 
 <!-- JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
